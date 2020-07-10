@@ -1,9 +1,9 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 <?php if (session()->getFlashdata('pesan')) : ?>
-    <p class="success-flash">
-        <?= session()->getFlashdata('pesan'); ?>
-    </p>
+    <div class="notif">
+        <div><?= session()->getFlashdata('pesan'); ?></div>
+    </div>
 <?php endif; ?>
 
 <div class="flex">
@@ -70,4 +70,15 @@
     </tr>
 </table>
 <!-- End Table -->
+
+<!-- Notifikasi -->
+<script>
+    const divMuncul = document.querySelector(".notif");
+    divMuncul.classList.add("muncul");
+
+    setInterval(() => {
+        divMuncul.classList.remove("muncul");
+    }, 5000);
+</script>
+<!-- End Notifikasi -->
 <?= $this->endSection(); ?>

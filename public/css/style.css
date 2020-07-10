@@ -84,7 +84,7 @@ button:hover,
   color: grey;
 }
 
-/* -=-=-=-=-=-=-=-=-=-=-=-=- Margin & Padding -=-=-=-=-=-=-=-=-=-=-=-=- */
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Display -=-=-=-=-=-=-=-=-=-=-=-=- */
 .inline {
   display: inline;
 }
@@ -92,6 +92,14 @@ button:hover,
 .flex {
   display: flex;
   justify-content: space-between;
+}
+
+.hidden {
+  display: none;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Margin & Padding -=-=-=-=-=-=-=-=-=-=-=-=- */
@@ -169,6 +177,36 @@ input[name="berat"] {
   /* background-color: salmon; */
   color: red;
   margin-top: 5px;
+}
+
+.notif {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: -5px;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: 1;
+}
+
+.notif div {
+  width: 230px;
+  height: 30px;
+  background-color: #ffffff;
+  color: green;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid azure;
+  box-shadow: 0 2px 2px lightgrey;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.muncul {
+  opacity: 1;
+  top: 10px;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Nav -=-=-=-=-=-=-=-=-=-=-=-=- */

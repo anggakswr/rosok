@@ -10,8 +10,8 @@
         <label for="foto">Foto Barang</label>
         <div class="flex">
             <!-- preview gambar yg akan diupload -->
-            <img src="/img/icon/plus.png" width="100px" class="mb1">
-            <input type="file" name="foto" onchange="previewImg()">
+            <img src="/img/icon/plus.png" width="100px" class="mb1 pointer" onclick="klikImg()">
+            <input type="file" name="foto" onchange="previewImg()" class="hidden">
             <?php if ($validation->hasError('foto')) : ?>
                 <div class="error-flash">
                     <?= $validation->getError('foto'); ?>
@@ -31,7 +31,6 @@
             <?php endif; ?>
         </div>
     </div>
-
 
     <div class="flex mt3">
         <label for="kategori">Kategori</label>
@@ -72,15 +71,22 @@
         $(".js-example-basic-multiple").select2();
     });
 
+    // deklarasi variabel
+    const imgPreview = document.getElementsByClassName('mb1')[0];
+    const inputFoto = document.querySelector("input[type=file]");
+    const fileFoto = new FileReader();
+
     // ganti image preview dg image yg mau diupload
     function previewImg() {
-        const imgPreview = document.getElementsByClassName('mb1')[0];
-        const inputFoto = document.querySelector("input[type=file]");
-        const fileFoto = new FileReader();
         fileFoto.readAsDataURL(inputFoto.files[0]);
         fileFoto.onload = function(e) {
             imgPreview.src = e.target.result;
         }
+    }
+
+    // jika tombol plus diklik, maka gambar akan muncul
+    function klikImg() {
+        inputFoto.click();
     }
 </script>
 <?= $this->endSection(); ?>
