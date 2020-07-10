@@ -1,0 +1,483 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: arial, serif;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: #3d5af1;
+  /* spy bs diubah2 ukuranny */
+  display: inline-block;
+}
+
+a:hover {
+  color: slategray;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Button -=-=-=-=-=-=-=-=-=-=-=-=- */
+input,
+button {
+  border: 1px solid lightgray;
+  padding: 5px;
+}
+
+button,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-warning,
+.btn-success {
+  cursor: pointer;
+  background-color: #3d5af1;
+  color: azure;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-warning,
+.btn-success {
+  padding: 10px;
+}
+
+button:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-danger:hover,
+.btn-warning:hover,
+.btn-success:hover {
+  filter: brightness(80%);
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: darkslategray;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-warning {
+  background-color: brown;
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Warna Font -=-=-=-=-=-=-=-=-=-=-=-=- */
+.maroon {
+  color: maroon;
+}
+
+.green {
+  color: green;
+}
+
+.grey {
+  color: grey;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Margin & Padding -=-=-=-=-=-=-=-=-=-=-=-=- */
+.inline {
+  display: inline;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Margin & Padding -=-=-=-=-=-=-=-=-=-=-=-=- */
+.mt3 {
+  margin-top: 30px;
+}
+
+.mt5 {
+  margin-top: 50px;
+}
+
+.mb1 {
+  margin-bottom: 10px;
+}
+
+.mr1 {
+  margin-right: 10px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Table -=-=-=-=-=-=-=-=-=-=-=-=- */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 30px;
+  color: black;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid lightgrey;
+  /* ini spy tulisan di table jd 1 baris smua*/
+  /* white-space: nowrap; */
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Form -=-=-=-=-=-=-=-=-=-=-=-=- */
+.tambah-barang .flex {
+  justify-content: start;
+  align-items: center;
+}
+
+.tambah-barang label {
+  width: 180px;
+}
+
+textarea {
+  border: 1px solid lightgrey;
+  padding: 5px;
+}
+
+select {
+  width: 204px;
+}
+
+input[name="berat"] {
+  width: 100px;
+}
+
+.flex .flex {
+  flex-direction: column;
+  align-items: start;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Pesan Flash -=-=-=-=-=-=-=-=-=-=-=-=- */
+.success-flash {
+  background-color: lightgreen;
+  color: green;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.error-flash {
+  /* background-color: salmon; */
+  color: red;
+  margin-top: 5px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Nav -=-=-=-=-=-=-=-=-=-=-=-=- */
+nav {
+  padding: 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 1px lightgray;
+  position: fixed;
+  right: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 1;
+}
+
+nav input {
+  width: 400px;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+}
+
+nav img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Container -=-=-=-=-=-=-=-=-=-=-=-=- */
+.container {
+  padding: 80px 5%;
+  max-width: 1280px;
+  margin: auto;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Header -=-=-=-=-=-=-=-=-=-=-=-=- */
+header {
+  display: grid;
+  gap: 10px;
+  grid-template-areas:
+    "slider kategori1 kategori2"
+    "slider kategori3 kategori4";
+  min-height: 300px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Slider -=-=-=-=-=-=-=-=-=-=-=-=- */
+.slider {
+  grid-area: slider;
+  background-color: black;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
+
+.slide {
+  display: flex;
+  min-width: 500%;
+  height: 100%;
+  transition: 0.5s;
+}
+
+.slide > * {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+.img1 {
+  background-image: url(../img/slide/1.jpeg);
+}
+
+.img2 {
+  background-image: url(../img/slide/2.jpeg);
+}
+
+.img3 {
+  background-image: url(../img/slide/3.jpeg);
+}
+
+.img4 {
+  background-image: url(../img/slide/4.jpeg);
+}
+
+.img5 {
+  background-image: url(../img/slide/5.jpeg);
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Radio Button -=-=-=-=-=-=-=-=-=-=-=-=- */
+.slidernav input[type="radio"] {
+  visibility: hidden;
+}
+
+.slidernav {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+}
+
+.slidernav label {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  margin: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.slidernav label:hover {
+  background-color: #fff;
+}
+
+/* kotak hrs berwarna putih ketika gambar tayang */
+.active {
+  background-color: #fff;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Kategori -=-=-=-=-=-=-=-=-=-=-=-=- */
+.kategori {
+  padding: 20px;
+  overflow: hidden;
+}
+
+.kategori img {
+  float: right;
+}
+
+.kategori1 {
+  grid-area: kategori1;
+  background: linear-gradient(
+    to left top,
+    rgb(127, 127, 213) 50%,
+    rgb(145, 234, 228) 50%
+  );
+  color: darkslateblue;
+}
+
+.kategori2 {
+  grid-area: kategori2;
+  background: linear-gradient(
+    to left top,
+    rgb(243, 115, 53) 50%,
+    rgb(253, 200, 48) 50%
+  );
+  color: brown;
+}
+
+.kategori3 {
+  grid-area: kategori3;
+  background: linear-gradient(
+    to left top,
+    rgb(211, 204, 227) 50%,
+    rgb(233, 228, 240) 50%
+  );
+  color: darkslategray;
+}
+
+.kategori4 {
+  grid-area: kategori4;
+  background: linear-gradient(
+    to left top,
+    rgb(238, 156, 167) 50%,
+    rgb(255, 221, 225) 50%
+  );
+  color: maroon;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Product Slider -=-=-=-=-=-=-=-=-=-=-=-=- */
+.product-slider {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-item {
+  flex: 1;
+  padding: 10px;
+}
+
+.product-item img {
+  width: 170px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Header di Product Detail -=-=-=-=-=-=-=-=-=-=-=-=- */
+.product-header {
+  height: 300px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-areas:
+    "foto nama nama"
+    "foto toko toko";
+}
+
+.product-header .foto-product-detail {
+  grid-area: foto;
+  background-color: darkslategray;
+  width: 300px;
+  height: 300px;
+}
+
+.product-header .nama-product-detail {
+  grid-area: nama;
+}
+
+.nama-product-detail > * {
+  margin-top: 10px;
+}
+
+.product-header .foto-product-detail {
+  background-image: url(./img/barang/botol-detail.jpg);
+  cursor: pointer;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Profil Toko di Product Detail -=-=-=-=-=-=-=-=-=-=-=-=- */
+.profil-toko {
+  grid-area: toko;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid lightgrey;
+}
+
+.profil-toko > * {
+  margin-right: 10px;
+}
+
+.foto-profil {
+  border: 1px solid lightgrey;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Footer -=-=-=-=-=-=-=-=-=-=-=-=- */
+footer {
+  padding: 20px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Responsive -=-=-=-=-=-=-=-=-=-=-=-=- */
+@media (max-width: 1024px) {
+  header {
+    grid-template-areas:
+      "slider kategori1"
+      "slider kategori2"
+      "kategori3 kategori4";
+  }
+
+  .slider {
+    min-height: 300px;
+  }
+
+  .kategori {
+    min-height: 150px;
+  }
+
+  .product-item4,
+  .product-item5 {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  a {
+    font-size: 12px;
+  }
+
+  nav {
+    padding: 10px 15px;
+  }
+
+  nav h1 {
+    display: none;
+  }
+
+  nav input {
+    width: 70%;
+  }
+
+  header {
+    grid-template-areas:
+      "slider slider"
+      "kategori1 kategori2"
+      "kategori3 kategori4";
+  }
+
+  .kategori a {
+    margin-top: 10px;
+  }
+
+  .product-item3 {
+    display: none;
+  }
+
+  .product-item img {
+    width: 100px;
+  }
+
+  .product-header {
+    display: grid;
+    grid-template-columns: inherit;
+    grid-template-areas:
+      "foto foto"
+      "nama nama"
+      "toko toko";
+    font-size: 0.8em;
+    margin-bottom: 350px;
+  }
+
+  .profil-toko {
+    grid-template-areas:
+      "kiri"
+      "kanan";
+  }
+}
