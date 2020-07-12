@@ -14,7 +14,7 @@
         <label for="foto">Foto Barang</label>
         <div class="flex">
             <!-- preview gambar yg akan diupload -->
-            <img src="/img/foto-barang-user/<?= $barang['foto']; ?>" width="100px" class="mb1">
+            <img src="/img/uploads/barang/foto.jpg" width="100px" class="mb1">
             <input type="file" name="foto" onchange="previewImg()">
             <?php if ($validation->hasError('foto')) : ?>
                 <div class="error-flash">

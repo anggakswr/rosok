@@ -1,20 +1,47 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 <link rel="stylesheet" href="/css/select2.min.css" />
+
+<?= $validation->listErrors() ?>
+
 <h1>Tambah Barang</h1>
 
 <form action="/barang/save" method="post" class="tambah-barang mt3" enctype="multipart/form-data">
     <?= csrf_field(); ?>
 
     <div class="flex">
-        <label for="foto">Foto Barang</label>
+        <label for="foto[0]">Foto Barang</label>
         <div class="flex">
             <!-- preview gambar yg akan diupload -->
             <img src="/img/icon/plus.png" width="100px" class="mb1 pointer" onclick="klikImg()">
-            <input type="file" name="foto" onchange="previewImg()" class="hidden">
-            <?php if ($validation->hasError('foto')) : ?>
+            <input type="file" name="foto[0]" onchange="previewImg()" class="">
+            <?php if ($validation->hasError('foto[0]')) : ?>
                 <div class="error-flash">
-                    <?= $validation->getError('foto'); ?>
+                    <?= $validation->getError('foto[0]'); ?>
+                </div>
+            <?php endif; ?>
+            <input type="file" name="foto[1]" onchange="previewImg()" class="">
+            <?php if ($validation->hasError('foto[1]')) : ?>
+                <div class="error-flash">
+                    <?= $validation->getError('foto[1]'); ?>
+                </div>
+            <?php endif; ?>
+            <input type="file" name="foto[2]" onchange="previewImg()" class="">
+            <?php if ($validation->hasError('foto[2]')) : ?>
+                <div class="error-flash">
+                    <?= $validation->getError('foto[2]'); ?>
+                </div>
+            <?php endif; ?>
+            <input type="file" name="foto[3]" onchange="previewImg()" class="">
+            <?php if ($validation->hasError('foto[3]')) : ?>
+                <div class="error-flash">
+                    <?= $validation->getError('foto[3]'); ?>
+                </div>
+            <?php endif; ?>
+            <input type="file" name="foto[4]" onchange="previewImg()" class="">
+            <?php if ($validation->hasError('foto[4]')) : ?>
+                <div class="error-flash">
+                    <?= $validation->getError('foto[4]'); ?>
                 </div>
             <?php endif; ?>
         </div>
