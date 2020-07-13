@@ -89,9 +89,17 @@ button:hover,
   display: inline;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
+}
+
+.grid {
+  display: grid;
 }
 
 .hidden {
@@ -117,6 +125,10 @@ button:hover,
 
 .mr1 {
   margin-right: 10px;
+}
+
+.ml1 {
+  margin-left: 10px;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Table -=-=-=-=-=-=-=-=-=-=-=-=- */

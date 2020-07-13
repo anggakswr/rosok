@@ -13,32 +13,38 @@
         <label for="foto[0]">Foto Barang</label>
         <div class="flex">
             <!-- preview gambar yg akan diupload -->
-            <img src="/img/icon/plus.png" width="100px" class="mb1 pointer" onclick="klikImg()">
-            <input type="file" name="foto[0]" onchange="previewImg()" class="">
+            <div>
+                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
+                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
+                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
+                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
+                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
+            </div>
+            <input type="file" name="foto[0]" onchange="previewImg()" class="hidden">
             <?php if ($validation->hasError('foto[0]')) : ?>
                 <div class="error-flash">
                     <?= $validation->getError('foto[0]'); ?>
                 </div>
             <?php endif; ?>
-            <input type="file" name="foto[1]" onchange="previewImg()" class="">
+            <input type="file" name="foto[1]" onchange="previewImg()" class="hidden">
             <?php if ($validation->hasError('foto[1]')) : ?>
                 <div class="error-flash">
                     <?= $validation->getError('foto[1]'); ?>
                 </div>
             <?php endif; ?>
-            <input type="file" name="foto[2]" onchange="previewImg()" class="">
+            <input type="file" name="foto[2]" onchange="previewImg()" class="hidden">
             <?php if ($validation->hasError('foto[2]')) : ?>
                 <div class="error-flash">
                     <?= $validation->getError('foto[2]'); ?>
                 </div>
             <?php endif; ?>
-            <input type="file" name="foto[3]" onchange="previewImg()" class="">
+            <input type="file" name="foto[3]" onchange="previewImg()" class="hidden">
             <?php if ($validation->hasError('foto[3]')) : ?>
                 <div class="error-flash">
                     <?= $validation->getError('foto[3]'); ?>
                 </div>
             <?php endif; ?>
-            <input type="file" name="foto[4]" onchange="previewImg()" class="">
+            <input type="file" name="foto[4]" onchange="previewImg()" class="hidden">
             <?php if ($validation->hasError('foto[4]')) : ?>
                 <div class="error-flash">
                     <?= $validation->getError('foto[4]'); ?>
@@ -99,21 +105,29 @@
     });
 
     // deklarasi variabel
-    const imgPreview = document.getElementsByClassName('mb1')[0];
-    const inputFoto = document.querySelector("input[type=file]");
-    const fileFoto = new FileReader();
+    const imgPreview = document.getElementsByClassName('mb1');
+    const inputFotos = document.querySelectorAll("input[type=file]");
 
     // ganti image preview dg image yg mau diupload
     function previewImg() {
-        fileFoto.readAsDataURL(inputFoto.files[0]);
-        fileFoto.onload = function(e) {
-            imgPreview.src = e.target.result;
+        for (let i = 0; i < inputFotos.length; i++) {
+            const fileFoto = new FileReader();
+            fileFoto.readAsDataURL(inputFotos[i].files[0]);
+            // jika file foto di load, maka imgPreview akan berubah
+            fileFoto.onload = function(e) {
+                imgPreview[i].src = e.target.result;
+            }
         }
     }
 
     // jika tombol plus diklik, maka gambar akan muncul
-    function klikImg() {
-        inputFoto.click();
+    for (let i = 0; i < imgPreview.length; i++) {
+        // function klikImg() {
+        //     inputFotos[i].click();
+        // }
+        imgPreview[i].addEventListener("click", function() {
+            inputFotos[i].click();
+        })
     }
 </script>
 <?= $this->endSection(); ?>
