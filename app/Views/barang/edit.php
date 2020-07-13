@@ -13,14 +13,20 @@
     <div class="flex">
         <label for="foto">Foto Barang</label>
         <div class="flex">
-            <!-- preview gambar yg akan diupload -->
-            <img src="/img/uploads/barang/foto.jpg" width="100px" class="mb1">
-            <input type="file" name="foto" onchange="previewImg()">
-            <?php if ($validation->hasError('foto')) : ?>
-                <div class="error-flash">
-                    <?= $validation->getError('foto'); ?>
-                </div>
-            <?php endif; ?>
+            <div>
+                <!-- preview gambar yg akan diupload -->
+                <?php for ($i = 0; $i < 5; $i++) : ?>
+                    <img src="<?= (!empty($foto[$i]['foto'])) ? '/img/uploads/barang/' . $foto[$i]['foto'] : '/img/icon/plus.png'; ?>" width="100px" class="mb1 pointer">
+                <?php endfor; ?>
+            </div>
+            <?php for ($i = 0; $i < 5; $i++) : ?>
+                <input type="file" name="foto[<?= $i; ?>]" onchange="previewImg()" class="hidden">
+                <?php if ($validation->hasError("foto[$i]")) : ?>
+                    <div class="error-flash">
+                        <?= $validation->getError("foto[$i]"); ?>
+                    </div>
+                <?php endif; ?>
+            <?php endfor; ?>
         </div>
     </div>
 
@@ -40,10 +46,12 @@
     <div class="flex mt3">
         <label for="kategori">Kategori</label>
         <select class="js-example-basic-multiple" name="kategori">
-            <option value="" disabled selected>-- Pilih Kategori --</option>
-            <option value="Botol Plastik">Botol Plastik</option>
-            <option value="Besi Kiloan">Besi Kiloan</option>
-            <option value="Kain Perca">Kain Perca</option>
+            <option value="<?= $barang['kategori']; ?>"><?= $barang['kategori']; ?></option>
+            <?php foreach ($kategori as $k) : ?>
+                <?php if ($barang['kategori'] !== $k['kategori']) : ?>
+                    <option value="<?= $k['kategori']; ?>"><?= $k['kategori']; ?></option>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </select>
     </div>
 
@@ -71,21 +79,5 @@
 
 <script src="/js/jquery-3.5.1.min.js"></script>
 <script src="/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $(".js-example-basic-multiple").select2();
-    });
-
-    // ganti image preview dg image yg mau diupload
-    function previewImg() {
-        const imgPreview = document.getElementsByClassName('mb1')[0];
-        const inputFoto = document.querySelector("input[type=file]");
-        const fileFoto = new FileReader();
-        fileFoto.readAsDataURL(inputFoto.files[0]);
-        fileFoto.onload = function(e) {
-            imgPreview.src = e.target.result;
-        }
-    }
-</script>
-
+<script src="/js/create.js"></script>
 <?= $this->endSection(); ?>

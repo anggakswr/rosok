@@ -2,8 +2,6 @@
 <?= $this->section('content'); ?>
 <link rel="stylesheet" href="/css/select2.min.css" />
 
-<?= $validation->listErrors() ?>
-
 <h1>Tambah Barang</h1>
 
 <form action="/barang/save" method="post" class="tambah-barang mt3" enctype="multipart/form-data">
@@ -12,44 +10,20 @@
     <div class="flex">
         <label for="foto[0]">Foto Barang</label>
         <div class="flex">
-            <!-- preview gambar yg akan diupload -->
             <div>
-                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
-                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
-                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
-                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
-                <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
+                <!-- preview gambar yg akan diupload -->
+                <?php for ($i = 0; $i < 5; $i++) : ?>
+                    <img src="/img/icon/plus.png" width="100px" class="mb1 pointer">
+                <?php endfor; ?>
             </div>
-            <input type="file" name="foto[0]" onchange="previewImg()" class="hidden">
-            <?php if ($validation->hasError('foto[0]')) : ?>
-                <div class="error-flash">
-                    <?= $validation->getError('foto[0]'); ?>
-                </div>
-            <?php endif; ?>
-            <input type="file" name="foto[1]" onchange="previewImg()" class="hidden">
-            <?php if ($validation->hasError('foto[1]')) : ?>
-                <div class="error-flash">
-                    <?= $validation->getError('foto[1]'); ?>
-                </div>
-            <?php endif; ?>
-            <input type="file" name="foto[2]" onchange="previewImg()" class="hidden">
-            <?php if ($validation->hasError('foto[2]')) : ?>
-                <div class="error-flash">
-                    <?= $validation->getError('foto[2]'); ?>
-                </div>
-            <?php endif; ?>
-            <input type="file" name="foto[3]" onchange="previewImg()" class="hidden">
-            <?php if ($validation->hasError('foto[3]')) : ?>
-                <div class="error-flash">
-                    <?= $validation->getError('foto[3]'); ?>
-                </div>
-            <?php endif; ?>
-            <input type="file" name="foto[4]" onchange="previewImg()" class="hidden">
-            <?php if ($validation->hasError('foto[4]')) : ?>
-                <div class="error-flash">
-                    <?= $validation->getError('foto[4]'); ?>
-                </div>
-            <?php endif; ?>
+            <?php for ($i = 0; $i < 5; $i++) : ?>
+                <input type="file" name="foto[<?= $i; ?>]" onchange="previewImg()" class="hidden">
+                <?php if ($validation->hasError("foto[$i]")) : ?>
+                    <div class="error-flash">
+                        <?= $validation->getError("foto[$i]"); ?>
+                    </div>
+                <?php endif; ?>
+            <?php endfor; ?>
         </div>
     </div>
 
@@ -69,9 +43,9 @@
         <label for="kategori">Kategori</label>
         <select class="js-example-basic-multiple" name="kategori">
             <option value="" disabled selected>-- Pilih Kategori --</option>
-            <option value="Botol Plastik">Botol Plastik</option>
-            <option value="Besi Kiloan">Besi Kiloan</option>
-            <option value="Kain Perca">Kain Perca</option>
+            <?php foreach ($kategori as $k) : ?>
+                <option value="<?= $k['kategori']; ?>"><?= $k['kategori']; ?></option>
+            <?php endforeach; ?>
         </select>
     </div>
 
@@ -99,35 +73,5 @@
 
 <script src="/js/jquery-3.5.1.min.js"></script>
 <script src="/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $(".js-example-basic-multiple").select2();
-    });
-
-    // deklarasi variabel
-    const imgPreview = document.getElementsByClassName('mb1');
-    const inputFotos = document.querySelectorAll("input[type=file]");
-
-    // ganti image preview dg image yg mau diupload
-    function previewImg() {
-        for (let i = 0; i < inputFotos.length; i++) {
-            const fileFoto = new FileReader();
-            fileFoto.readAsDataURL(inputFotos[i].files[0]);
-            // jika file foto di load, maka imgPreview akan berubah
-            fileFoto.onload = function(e) {
-                imgPreview[i].src = e.target.result;
-            }
-        }
-    }
-
-    // jika tombol plus diklik, maka gambar akan muncul
-    for (let i = 0; i < imgPreview.length; i++) {
-        // function klikImg() {
-        //     inputFotos[i].click();
-        // }
-        imgPreview[i].addEventListener("click", function() {
-            inputFotos[i].click();
-        })
-    }
-</script>
+<script src="/js/create.js"></script>
 <?= $this->endSection(); ?>

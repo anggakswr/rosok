@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\BarangModel;
 use App\Models\FotoModel;
+use App\Models\KategoriModel;
 
 class Barang extends BaseController
 {
@@ -12,6 +13,7 @@ class Barang extends BaseController
     {
         $this->barangModel = new BarangModel();
         $this->fotoModel = new FotoModel();
+        $this->kategoriModel = new KategoriModel();
     }
 
     public function index()
@@ -42,7 +44,8 @@ class Barang extends BaseController
     {
         $data = [
             'title' => 'Tambah Barang',
-            'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation(),
+            'kategori' => $this->kategoriModel->findAll()
         ];
 
         return view('barang/create', $data);
@@ -108,7 +111,7 @@ class Barang extends BaseController
         $fileFoto = $this->request->getFileMultiple('foto');
         foreach ($fileFoto as $foto) {
             $newName = $foto->getRandomName();
-            $foto->move('img/uploads/barang',$newName);
+            $foto->move('img/uploads/barang', $newName);
             $this->fotoModel->save([
                 'slug' => url_title($this->request->getPost('nama'), '-', true),
                 'foto' => $newName
@@ -149,7 +152,9 @@ class Barang extends BaseController
         $data = [
             'title' => 'Edit Barang',
             'validation' => \Config\Services::validation(),
-            'barang' => $this->barangModel->getBarang($slug)
+            'barang' => $this->barangModel->getBarang($slug),
+            'foto' => $this->fotoModel->getFoto($slug),
+            'kategori' => $this->kategoriModel->findAll()
         ];
 
         return view('barang/edit', $data);

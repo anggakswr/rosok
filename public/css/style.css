@@ -177,6 +177,10 @@ input[name="berat"] {
   align-items: start;
 }
 
+.flex img:hover {
+  background-color: lightgrey;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Pesan Flash -=-=-=-=-=-=-=-=-=-=-=-=- */
 .success-flash {
   background-color: lightgreen;

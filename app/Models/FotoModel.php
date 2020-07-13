@@ -10,12 +10,10 @@ class FotoModel extends Model
     protected $useTimestamps = true;
     protected $allowedFields = ['slug', 'foto'];
 
-    // public function getBarang($slug = false)
-    // {
-    //     if (!$slug) {
-    //         return $this->findAll();
-    //     }
-
-    //     return $this->where(['slug' => $slug])->first();
-    // }
+    public function getFoto($slug)
+    {
+        return $this->select('foto')
+            ->where('slug', $slug)
+            ->findAll();
+    }
 }
