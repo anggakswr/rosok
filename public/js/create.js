@@ -11,10 +11,14 @@ const inputFotos = document.querySelectorAll("input[type=file]");
 function previewImg() {
     for (let i = 0; i < inputFotos.length; i++) {
         const fileFoto = new FileReader();
-        fileFoto.readAsDataURL(inputFotos[i].files[0]);
+
         // jika file foto di load, maka imgPreview akan berubah
         fileFoto.onload = function (e) {
             imgPreview[i].src = e.target.result;
+        }
+
+        if (inputFotos[i].files[0]) {
+            fileFoto.readAsDataURL(inputFotos[i].files[0]);
         }
     }
 }

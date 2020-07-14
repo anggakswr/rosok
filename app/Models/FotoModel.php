@@ -12,8 +12,6 @@ class FotoModel extends Model
 
     public function getFoto($slug)
     {
-        return $this->select('foto')
-            ->where('slug', $slug)
-            ->findAll();
+        return $this->where('slug', $slug)->findAll();
     }
 }
