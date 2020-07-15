@@ -1,7 +1,5 @@
 <?= $this->extend('layout/template'); ?>
-
 <?= $this->section('content'); ?>
-
 <link rel="stylesheet" href="/css/select2.min.css" />
 <link rel="stylesheet" href="/css/create.css" />
 

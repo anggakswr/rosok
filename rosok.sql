@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2020 at 02:48 PM
+-- Generation Time: Jul 15, 2020 at 07:10 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -45,19 +45,66 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id`, `foto`, `nama`, `slug`, `kategori`, `deskripsi`, `harga`, `berat`, `created_at`, `updated_at`) VALUES
-(1, '', 'Botol Plastik Aqua', 'botol-plastik-aqua', '', 'Beli 1 ikat isi 10 botol.\r\nCOD Semarang Utara.', 12000, 1000, '2020-07-07', '2020-07-08'),
-(2, '', 'Selimut Kain Perca', 'selimut-kain-perca', '', 'Ukuran 1,5 m x 1,5 m.\r\nDari kain sisa jahit korden.\r\nAdem, lembut, tebal.', 95000, 2000, '2020-07-08', '2020-07-09'),
-(5, '', 'Sarung Bantal', 'sarung-bantal', '', 'Ukuran 50 cm x 50 cm.\r\nDari kain sisa jahit gorden.\r\nAdem dan nyaman.', 30000, 500, '2020-07-08', '2020-07-08'),
-(7, '', 'Plastik Daur Ulang 2', 'plastik-daur-ulang-2', '', 'Terbuat dari berbagai macam sampah plastik.', 10000, 1000, '2020-07-09', '2020-07-09'),
-(8, 'citosan.jpg', 'Miniatur Motor', 'miniatur-motor', 'Botol Plastik', 'Dari berbagai besi bekas.', 100000, 1200, '2020-07-09', '2020-07-09'),
-(9, 'New Project.jpg', 'Knalpot Racing', 'knalpot-racing', '', 'Dari besi bekas berkualitas.', 120000, 4000, '2020-07-09', '2020-07-09'),
-(10, 'New Project(1)(1).jpg', 'Knalpot Mobil', 'knalpot-mobil', 'Besi Kiloan', 'Bukan kaleng-kaleng.', 190000, 5000, '2020-07-09', '2020-07-09'),
-(11, 'grape.jpg', 'Botol Minum', 'botol-minum', 'Botol Plastik', 'Botol minum anggur.', 10000, 150, '2020-07-10', '2020-07-10'),
-(12, '105945043_2169416189871470_3513695429123377615_o.jpg', 'Poster Kardus', 'poster-kardus', 'Besi Kiloan', 'Poster laundry.', 15000, 150, '2020-07-10', '2020-07-10'),
-(13, 'citosan_1.jpg', 'Botol Miras', 'botol-miras', 'Botol Plastik', 'Congyang cap gomeh.', 50000, 500, '2020-07-10', '2020-07-10'),
-(14, 'krupuk(1).jpg', 'Bungkus Plastik', 'bungkus-plastik', 'Botol Plastik', 'Bungkus krupuk.', 10000, 1000, '2020-07-10', '2020-07-10'),
-(15, '105684456_2169416016538154_852472287609745643_n.jpg', 'Batik Kain Perca', 'batik-kain-perca', 'Kain Perca', 'Batik jahitan uwak.', 50000, 1000, '2020-07-10', '2020-07-10'),
-(16, '73197522_2169416103204812_2326113321266451019_n.jpg', 'Tas Makanan Cantik', 'tas-makanan-cantik', 'Kain Perca', 'Berkualitas, murah, aman.', 20000, 1000, '2020-07-10', '2020-07-10');
+(30, '5.jpeg', '123', '123', 'Kardus', '123', 123123, 123, '2020-07-14', '2020-07-14'),
+(31, '1.jpeg', '321', '321', 'Besi', '321', 321321, 321, '2020-07-14', '2020-07-14'),
+(32, 'portfolio7.jpg', 'jere kriting', 'jere-kriting', 'Kain Perca', 'main pingpong', 123123, 22, '2020-07-14', '2020-07-14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foto`
+--
+
+CREATE TABLE `foto` (
+  `id` int(11) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `foto` varchar(255) NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `foto`
+--
+
+INSERT INTO `foto` (`id`, `slug`, `foto`, `created_at`, `updated_at`) VALUES
+(56, '123', '5.jpeg', '2020-07-14', '2020-07-14'),
+(57, '123', '4.jpeg', '2020-07-14', '2020-07-14'),
+(58, '321', '1.jpeg', '2020-07-14', '2020-07-14'),
+(59, '321', '2.jpeg', '2020-07-14', '2020-07-14'),
+(60, 'jere-kriting', 'portfolio7.jpg', '2020-07-14', '2020-07-14'),
+(61, 'jere-kriting', 'portfolio6.jpg', '2020-07-14', '2020-07-14'),
+(64, 'jere-kriting', 'portfolio5.jpg', '2020-07-14', '2020-07-14'),
+(65, '123', '3.jpeg', '2020-07-14', '2020-07-14'),
+(66, '123', '2.jpeg', '2020-07-14', '2020-07-14'),
+(67, '123', 'Screenshot_2020-07-14 baju celana tidur semarang ( semarangbobok) • Instagram photos and videos.png', '2020-07-14', '2020-07-14'),
+(68, 'jere-kriting', '5.jpeg', '2020-07-14', '2020-07-14'),
+(69, '321', 'portfolio5.jpg', '2020-07-14', '2020-07-14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kategori`
+--
+
+CREATE TABLE `kategori` (
+  `id` int(11) NOT NULL,
+  `kategori` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id`, `kategori`) VALUES
+(1, 'Botol Plastik'),
+(2, 'Kardus'),
+(3, 'Kain Perca'),
+(4, 'Besi'),
+(5, 'Kerajinan Plastik'),
+(6, 'Kerajinan Kardus'),
+(7, 'Kerajinan Kain Perca'),
+(8, 'Kerajinan Besi');
 
 --
 -- Indexes for dumped tables
@@ -70,6 +117,18 @@ ALTER TABLE `barang`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `foto`
+--
+ALTER TABLE `foto`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -77,7 +136,19 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `foto`
+--
+ALTER TABLE `foto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
