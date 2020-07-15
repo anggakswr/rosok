@@ -3,6 +3,7 @@
 <?= $this->section('content'); ?>
 
 <link rel="stylesheet" href="/css/select2.min.css" />
+<link rel="stylesheet" href="/css/create.css" />
 
 <h1>Edit Barang</h1>
 
@@ -16,11 +17,12 @@
             <div>
                 <!-- preview gambar yg akan diupload -->
                 <?php for ($i = 0; $i < 5; $i++) : ?>
-                    <img src="<?= (!empty($foto[$i]['foto'])) ? '/img/uploads/barang/' . $foto[$i]['foto'] : '/img/icon/plus.png'; ?>" width="100px" class="mb1 pointer">
+                    <img src="<?= (!empty($foto[$i]['foto'])) ? '/img/uploads/barang/' . $foto[$i]['foto'] : '/img/icon/plus.png'; ?>" width="100px" height="100px" class="mb1 pointer">
+                    <span class="close">&times;</span>
                 <?php endfor; ?>
             </div>
             <?php for ($i = 0; $i < 5; $i++) : ?>
-                <input type="file" name="foto[<?= $i; ?>]" onchange="previewImg()" class="hidden">
+                <input type="file" name="foto[<?= $i; ?>]" class="hidden">
                 <?php if ($validation->hasError("foto[$i]")) : ?>
                     <div class="error-flash">
                         <?= $validation->getError("foto[$i]"); ?>
