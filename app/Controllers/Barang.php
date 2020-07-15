@@ -8,7 +8,6 @@ use App\Models\KategoriModel;
 
 class Barang extends BaseController
 {
-    protected $barangModel;
     public function __construct()
     {
         $this->barangModel = new BarangModel();
@@ -139,13 +138,20 @@ class Barang extends BaseController
         // ambil data barang
         $barang = $this->barangModel->find($id);
 
-        // hapus file gambar dr server
-        unlink('img/uploads/barang/' . $barang['foto']);
+        // ambil foto barang
+        $fotoBarang = $this->fotoModel->getFoto($barang['slug']);
 
-        // hapus data dr db
+        foreach ($fotoBarang as $foto) {
+            // hapus file gambar
+            unlink('img/uploads/barang/' . $foto['foto']);
+            // hapus nama foto dr db
+            $this->fotoModel->delete($foto['id']);
+        }
+
+        // hapus data barang dr db
         $this->barangModel->delete($id);
-        session()->setFlashdata('pesan', 'Barang berhasil dihapus.');
 
+        session()->setFlashdata('pesan', 'Barang berhasil dihapus.');
         return redirect()->to('/barang');
     }
 
