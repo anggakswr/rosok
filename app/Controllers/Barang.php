@@ -8,12 +8,38 @@ use App\Models\KategoriModel;
 
 class Barang extends BaseController
 {
+    protected $rulesBarang = [
+        'nama' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Nama barang harus diisi.'
+            ]
+        ]
+    ];
+
+    // --------------------------------------------------------
+
     public function __construct()
     {
         $this->barangModel = new BarangModel();
         $this->fotoModel = new FotoModel();
         $this->kategoriModel = new KategoriModel();
+
+        for ($i = 1; $i < 5; $i++) {
+            $this->rulesBarang += [
+                'foto[' . $i . ']' => [
+                    'rules' => 'max_size[foto.' . $i . ',1024]|is_image[foto.' . $i . ']|mime_in[foto.' . $i . ',image/jpg,image/jpeg,image/png]',
+                    'errors' => [
+                        'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
+                        'is_image' => 'File bukan gambar.',
+                        'mime_in' => 'File bukan gambar.'
+                    ]
+                ]
+            ];
+        }
     }
+
+    // --------------------------------------------------------
 
     public function index()
     {
@@ -23,6 +49,8 @@ class Barang extends BaseController
         ];
         return view('barang/index', $data);
     }
+
+    // --------------------------------------------------------
 
     public function detail($slug)
     {
@@ -39,6 +67,8 @@ class Barang extends BaseController
         return view('barang/detail', $data);
     }
 
+    // --------------------------------------------------------
+
     public function create()
     {
         $data = [
@@ -50,10 +80,12 @@ class Barang extends BaseController
         return view('barang/create', $data);
     }
 
+    // --------------------------------------------------------
+
     public function save()
     {
-        // jika field nama tdk diisi
-        if (!$this->validate([
+        $rulesTmbBrg = $this->rulesBarang;
+        $rulesTmbBrg += [
             'foto[0]' => [
                 'rules' => 'uploaded[foto.0]|max_size[foto.0,1024]|is_image[foto.0]|mime_in[foto.0,image/jpg,image/jpeg,image/png]',
                 'errors' => [
@@ -62,47 +94,11 @@ class Barang extends BaseController
                     'is_image' => 'File bukan gambar.',
                     'mime_in' => 'File bukan gambar.'
                 ]
-            ],
-            'foto[1]' => [
-                'rules' => 'max_size[foto.1,1024]|is_image[foto.1]|mime_in[foto.1,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'foto[2]' => [
-                'rules' => 'max_size[foto.2,1024]|is_image[foto.2]|mime_in[foto.2,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'foto[3]' => [
-                'rules' => 'max_size[foto.3,1024]|is_image[foto.3]|mime_in[foto.3,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'foto[4]' => [
-                'rules' => 'max_size[foto.4,1024]|is_image[foto.4]|mime_in[foto.4,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nama barang harus diisi.'
-                ]
             ]
-        ])) {
+        ];
 
+        // jika ada input yg melanggar rules
+        if (!$this->validate($rulesTmbBrg)) {
             return redirect()->to('/barang/create')->withInput();
         }
 
@@ -133,6 +129,8 @@ class Barang extends BaseController
         return redirect()->to('/barang');
     }
 
+    // --------------------------------------------------------
+
     public function delete($id)
     {
         // ambil data barang
@@ -155,6 +153,8 @@ class Barang extends BaseController
         return redirect()->to('/barang');
     }
 
+    // --------------------------------------------------------
+
     public function edit($slug)
     {
         $data = [
@@ -168,58 +168,25 @@ class Barang extends BaseController
         return view('barang/edit', $data);
     }
 
+    // --------------------------------------------------------
+
     public function update($id)
     {
-        // jika field nama tdk diisi
-        if (!$this->validate([
+        $rulesUpdBrg = $this->rulesBarang;
+        $rulesUpdBrg += [
             'foto[0]' => [
                 'rules' => 'max_size[foto.0,1024]|is_image[foto.0]|mime_in[foto.0,image/jpg,image/jpeg,image/png]',
                 'errors' => [
+                    'uploaded' => 'Foto barang harus diisi.',
                     'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
                     'is_image' => 'File bukan gambar.',
                     'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'foto[1]' => [
-                'rules' => 'max_size[foto.1,1024]|is_image[foto.1]|mime_in[foto.1,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'foto[2]' => [
-                'rules' => 'max_size[foto.2,1024]|is_image[foto.2]|mime_in[foto.2,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'foto[3]' => [
-                'rules' => 'max_size[foto.3,1024]|is_image[foto.3]|mime_in[foto.3,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'foto[4]' => [
-                'rules' => 'max_size[foto.4,1024]|is_image[foto.4]|mime_in[foto.4,image/jpg,image/jpeg,image/png]',
-                'errors' => [
-                    'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
-                    'is_image' => 'File bukan gambar.',
-                    'mime_in' => 'File bukan gambar.'
-                ]
-            ],
-            'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Nama barang harus diisi.'
                 ]
             ]
-        ])) {
+        ];
 
+        // jika ada input yg melanggar rules
+        if (!$this->validate($rulesUpdBrg)) {
             return redirect()->to('/barang/edit/' . $this->request->getPost('slug'))->withInput();
         }
 
@@ -236,7 +203,7 @@ class Barang extends BaseController
             // jika tdk ada foto yg dipilih
             if ($fotoInput[$i]->getError() == 4) {
                 // pakai nama foto lama
-                if (!empty($fotoDB[$i]['foto'])) {
+                if (isset($fotoDB[$i]['foto'])) {
                     $upload = $fotoDB[$i]['foto'];
                 } else {
                     break;
@@ -247,13 +214,13 @@ class Barang extends BaseController
                 // pindahkan file foto baru ke folder img/uploads/barang
                 $fotoInput[$i]->move('img/uploads/barang');
                 // hapus file lama jika ada
-                if (!empty($fotoDB[$i]['foto'])) {
+                if (isset($fotoDB[$i]['foto'])) {
                     unlink('img/uploads/barang/' . $fotoDB[$i]['foto']);
                 }
             }
 
             // simpan / update di tbl foto
-            if (!empty($fotoDB[$i]['id'])) {
+            if (isset($fotoDB[$i]['id'])) {
                 $this->fotoModel->save([
                     'id' => $fotoDB[$i]['id'],
                     'slug' => url_title($this->request->getPost('nama'), '-', true),

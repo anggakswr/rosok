@@ -1,10 +1,13 @@
 .login {
     margin: 50px auto;
     width: 30%;
-    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.login >* {
+    margin-bottom: 20px;
 }
 
 .container {

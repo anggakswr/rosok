@@ -35,6 +35,8 @@ $routes->setAutoRoute(true);
 // $routes->get('/', 'Home::index');
 $routes->get('/', 'Pages');
 
+$routes->match(['get', 'post'], '/users/daftar', 'Users::daftar');
+
 // $routes->post('/barang/save', 'Barang::save');
 $routes->get('/barang/create', 'Barang::create');
 $routes->get('/barang/edit/(:segment)', 'Barang::edit/$1');
