@@ -9,6 +9,7 @@ class Pages extends BaseController
         $data = [
             'title' => 'Jual Beli Barang Rosok'
         ];
+
         return view('pages/index', $data);
     }
 

@@ -32,16 +32,20 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-// $routes->get('/', 'Home::index');
 $routes->get('/', 'Pages');
 
-$routes->match(['get', 'post'], '/users/daftar', 'Users::daftar');
+$routes->match(['get', 'post'], 'users', 'Users', ['filter' => 'noauth']);
+$routes->get('users/index', 'Users::index', ['filter' => 'noauth']);
+$routes->match(['get', 'post'], 'users/daftar', 'Users::daftar', ['filter' => 'noauth']);
+$routes->match(['get', 'post'], 'users/profile', 'Users::profile', ['filter' => 'auth']);
 
-// $routes->post('/barang/save', 'Barang::save');
-$routes->get('/barang/create', 'Barang::create');
-$routes->get('/barang/edit/(:segment)', 'Barang::edit/$1');
-$routes->delete('/barang/(:num)', 'Barang::delete/$1');
-$routes->get('/barang/(:any)', 'Barang::detail/$1');
+$routes->match(['get', 'post'], 'barang', 'Barang', ['filter' => 'auth']);
+$routes->match(['get', 'post'], 'barang/index', 'Barang::index', ['filter' => 'auth']);
+
+$routes->get('barang/create', 'Barang::create', ['filter' => 'auth']);
+$routes->get('barang/edit/(:segment)', 'Barang::edit/$1', ['filter' => 'auth']);
+$routes->delete('barang/(:num)', 'Barang::delete/$1', ['filter' => 'auth']);
+$routes->get('barang/(:any)', 'Barang::detail/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
