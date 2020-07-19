@@ -131,6 +131,10 @@ button:hover,
   margin-left: 10px;
 }
 
+.text-center {
+  text-align: center;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Table -=-=-=-=-=-=-=-=-=-=-=-=- */
 table {
   font-family: arial, sans-serif;
@@ -206,7 +210,7 @@ input[name="berat"] {
 }
 
 .notif div {
-  width: 230px;
+  width: 500px;
   height: 30px;
   background-color: #ffffff;
   color: green;
@@ -526,7 +530,7 @@ footer {
       "nama nama"
       "toko toko";
     font-size: 0.8em;
-    margin-bottom: 350px;
+    margin-bottom: 280px;
   }
 
   .profil-toko {

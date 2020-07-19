@@ -43,27 +43,55 @@
 
     <div class="flex mt3">
         <label for="kategori">Kategori</label>
-        <select class="js-example-basic-multiple" name="kategori">
-            <option value="" disabled selected>-- Pilih Kategori --</option>
-            <?php foreach ($kategori as $k) : ?>
-                <option value="<?= $k['kategori']; ?>"><?= $k['kategori']; ?></option>
-            <?php endforeach; ?>
-        </select>
+        <div class="flex">
+            <select class="js-example-basic-multiple" name="kategori">
+                <option value="" disabled selected>-- Pilih Kategori --</option>
+                <?php foreach ($kategori as $k) : ?>
+                    <option value="<?= $k['kategori']; ?>"><?= $k['kategori']; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <?php if ($validation->hasError('kategori')) : ?>
+                <div class="error-flash">
+                    <?= $validation->getError('kategori'); ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 
     <div class="flex mt3">
         <label for="deskripsi">Deskripsi</label>
-        <textarea type="text" name="deskripsi" placeholder="Deskripsi"><?= old('deskripsi'); ?></textarea>
+        <div class="flex">
+            <textarea type="text" name="deskripsi" placeholder="Deskripsi"><?= old('deskripsi'); ?></textarea>
+            <?php if ($validation->hasError('deskripsi')) : ?>
+                <div class="error-flash">
+                    <?= $validation->getError('deskripsi'); ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 
     <div class="flex mt3">
         <label for="harga">Harga</label>
-        <input type="text" name="harga" placeholder="Harga" value="<?= old('harga'); ?>" />
+        <div class="flex">
+            <input type="text" name="harga" placeholder="Harga" value="<?= old('harga'); ?>" />
+            <?php if ($validation->hasError('harga')) : ?>
+                <div class="error-flash">
+                    <?= $validation->getError('harga'); ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 
     <div class="flex mt3">
-        <label for="berat">Berat</label>
-        <input type="text" name="berat" placeholder="Berat" class="mr1" value="<?= old('berat'); ?>" />gram
+        <label for="berat">Berat <span class="grey">(gram)</span></label>
+        <div class="flex">
+            <input type="text" name="berat" placeholder="Berat" class="mr1" value="<?= old('berat'); ?>" />
+            <?php if ($validation->hasError('berat')) : ?>
+                <div class="error-flash">
+                    <?= $validation->getError('berat'); ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 
     <div class="flex mt3">

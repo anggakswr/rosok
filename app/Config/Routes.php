@@ -34,18 +34,26 @@ $routes->setAutoRoute(true);
 
 $routes->get('/', 'Pages');
 
-$routes->match(['get', 'post'], 'users', 'Users', ['filter' => 'noauth']);
-$routes->get('users/index', 'Users::index', ['filter' => 'noauth']);
-$routes->match(['get', 'post'], 'users/daftar', 'Users::daftar', ['filter' => 'noauth']);
+// users
+$routes->group('users', ['filter' => 'noauth'], function ($routes) {
+	$routes->match(['get', 'post'], '/', 'Users');
+	$routes->get('index', 'Users::index');
+	$routes->match(['get', 'post'], 'daftar', 'Users::daftar');
+});
+
 $routes->match(['get', 'post'], 'users/profile', 'Users::profile', ['filter' => 'auth']);
 
-$routes->match(['get', 'post'], 'barang', 'Barang', ['filter' => 'auth']);
-$routes->match(['get', 'post'], 'barang/index', 'Barang::index', ['filter' => 'auth']);
+// barang
+$routes->group('barang', ['filter' => 'auth'], function ($routes) {
+	$routes->match(['get', 'post'], '/', 'Barang', ['filter' => 'auth']);
+	$routes->match(['get', 'post'], 'index', 'Barang::index', ['filter' => 'auth']);
 
-$routes->get('barang/create', 'Barang::create', ['filter' => 'auth']);
-$routes->get('barang/edit/(:segment)', 'Barang::edit/$1', ['filter' => 'auth']);
-$routes->delete('barang/(:num)', 'Barang::delete/$1', ['filter' => 'auth']);
-$routes->get('barang/(:any)', 'Barang::detail/$1', ['filter' => 'auth']);
+	$routes->get('create', 'Barang::create', ['filter' => 'auth']);
+	$routes->get('edit/(:segment)', 'Barang::edit/$1', ['filter' => 'auth']);
+	$routes->delete('(:num)', 'Barang::delete/$1', ['filter' => 'auth']);
+	$routes->get('(:any)', 'Barang::detail/$1', ['filter' => 'auth']);
+});
+
 
 /**
  * --------------------------------------------------------------------

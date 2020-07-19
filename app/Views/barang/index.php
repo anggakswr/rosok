@@ -54,22 +54,13 @@
             </td>
         </tr>
     <?php endforeach; ?>
-    <tr>
-        <td><input type="checkbox" name="" id="" /></td>
-        <td>
-            <img src="./img/kain.png" alt="ipsum" />
-        </td>
-        <td>Ipsum</td>
-        <td>Rp 20.000,-</td>
-        <td>125x</td>
-        <td>
-            <a href="" class="btn-primary">Lihat</a>
-            <a href="" class="btn-secondary">Edit</a>
-            <a href="" class="btn-danger">Hapus</a>
-        </td>
-    </tr>
 </table>
 <!-- End Table -->
+
+<!-- jika users blm menjual barang apapun -->
+<?php if (empty($barang)) : ?>
+    <h3 class="grey text-center mt3">Belum ada barang yang dijual.</h3>
+<?php endif; ?>
 
 <!-- Notifikasi -->
 <script>

@@ -8,7 +8,7 @@ class BarangModel extends Model
 {
     protected $table = 'barang';
     protected $useTimestamps = true;
-    protected $allowedFields = ['foto', 'nama', 'slug', 'kategori', 'deskripsi', 'harga', 'berat'];
+    protected $allowedFields = ['users_id', 'foto', 'nama', 'slug', 'kategori', 'deskripsi', 'harga', 'berat'];
 
     public function getBarang($slug = false)
     {
@@ -17,5 +17,10 @@ class BarangModel extends Model
         }
 
         return $this->where(['slug' => $slug])->first();
+    }
+
+    public function getBarangUser($users_id)
+    {
+        return $this->where('users_id', $users_id)->findAll();
     }
 }

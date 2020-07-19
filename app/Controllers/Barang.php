@@ -14,6 +14,33 @@ class Barang extends BaseController
             'errors' => [
                 'required' => 'Nama barang harus diisi.'
             ]
+        ],
+        'kategori' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Kategori harus diisi.'
+            ]
+        ],
+        'deskripsi' => [
+            'rules' => 'required|min_length[5]',
+            'errors' => [
+                'required' => 'Deskripsi harus diisi.',
+                'min_length' => 'Deskripsi minimal 5 karakter.'
+            ]
+        ],
+        'harga' => [
+            'rules' => 'required|min_length[3]',
+            'errors' => [
+                'required' => 'Harga harus diisi.',
+                'min_length' => 'Harga minimal 3 digit.'
+            ]
+        ],
+        'berat' => [
+            'rules' => 'required|min_length[1]',
+            'errors' => [
+                'required' => 'Berat harus diisi.',
+                'min_length' => 'Berat minimal 1 digit.'
+            ]
         ]
     ];
 
@@ -45,7 +72,7 @@ class Barang extends BaseController
     {
         $data = [
             'title' => 'Daftar Barang',
-            'barang' => $this->barangModel->getBarang()
+            'barang' => $this->barangModel->getBarangUser(session()->get('id'))
         ];
         return view('barang/index', $data);
     }
@@ -97,6 +124,16 @@ class Barang extends BaseController
             ]
         ];
 
+        // cek apa nama barang sdh ad atau blm
+        $cekNama = $this->barangModel->where(['nama' => $this->request->getPost('nama')])->countAllResults();
+        if ($cekNama !== 0) {
+            // jika nama sdh ad, modifikasi slug (ditambah angka)
+            $slug = url_title($this->request->getPost('nama'), '-', true) . '-' . $cekNama;
+        } else {
+            // jika nama blm ada slug tdk dimodifikasi
+            $slug = url_title($this->request->getPost('nama'), '-', true);
+        }
+
         // jika ada input yg melanggar rules
         if (!$this->validate($rulesTmbBrg)) {
             return redirect()->to('/barang/create')->withInput();
@@ -108,16 +145,17 @@ class Barang extends BaseController
             if ($foto->isValid() && !$foto->hasMoved()) {
                 $foto->move('img/uploads/barang');
                 $this->fotoModel->save([
-                    'slug' => url_title($this->request->getPost('nama'), '-', true),
+                    'slug' => $slug,
                     'foto' => $foto->getName()
                 ]);
             }
         }
 
         $this->barangModel->save([
+            'users_id' => session()->get('id'),
             'foto' => $fileFoto[0]->getName(),
             'nama' => $this->request->getPost('nama'),
-            'slug' => url_title($this->request->getPost('nama'), '-', true),
+            'slug' => $slug,
             'kategori' => $this->request->getPost('kategori'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'harga' => $this->request->getPost('harga'),
@@ -146,8 +184,14 @@ class Barang extends BaseController
             $this->fotoModel->delete($foto['id']);
         }
 
-        // hapus data barang dr db
-        $this->barangModel->delete($id);
+        // user hanya boleh menghapus barangnya sendiri
+        if ($barang['users_id'] == session()->get('id')) {
+            // hapus data barang dr db
+            $this->barangModel->delete($id);
+        } else {
+            session()->setFlashdata('pesan', 'Tidak bisa menghapus barang orang lain.');
+            return redirect()->to('/barang');
+        }
 
         session()->setFlashdata('pesan', 'Barang berhasil dihapus.');
         return redirect()->to('/barang');
@@ -246,8 +290,9 @@ class Barang extends BaseController
         $this->barangModel->save([
             'foto' => $foto,
             'id' => $id,
+            'users_id' => session()->get('id'),
             'nama' => $this->request->getPost('nama'),
-            'slug' => url_title($this->request->getPost('nama'), '-', true),
+            'slug' => $barang['slug'],
             'kategori' => $this->request->getPost('kategori'),
             'deskripsi' => $this->request->getPost('deskripsi'),
             'harga' => $this->request->getPost('harga'),
