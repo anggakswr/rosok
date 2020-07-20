@@ -13,7 +13,19 @@
 <!-- Product Header -->
 <div class="product-header mt3">
     <div class="foto-product-detail">
-        <!-- bg img -->
+        <!-- gambar besar -->
+        <div class="gambar-besar" style="background-image: url(/img/uploads/barang/<?= $barang['foto']; ?>);"></div>
+        <!-- end gambar besar -->
+
+        <!-- gambar kecil2 -->
+        <div class="flex mt1">
+            <?php if (isset($foto[1]['foto'])) : ?>
+                <?php foreach ($foto as $f) : ?>
+                    <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $f['foto']; ?>);"></div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+        <!-- end gambar kecil2 -->
     </div>
 
     <div class="nama-product-detail">
@@ -33,7 +45,7 @@
 
     <!-- Profil Toko -->
     <div class="profil-toko">
-        <div class="foto-profil">
+        <div class="foto-profil ml1">
             <img src="./img/botol.png" alt="pengepul-botol-plastik" width="80px">
         </div>
         <div class="nama-profil">
@@ -48,7 +60,7 @@
 </div>
 <!-- End Product Header -->
 
-<div class="deskripsi mt5">
+<div class="deskripsi">
     <h1 class="mb1">Deskripsi barang</h1>
     <?= $barang['deskripsi']; ?>
 </div>
@@ -124,4 +136,15 @@
     </a>
 </div>
 <!-- End Slider dari Kategori Botol Plastik -->
+
+<script>
+    const fotoProduct = document.querySelector('.foto-product-detail');
+    const gambarBesar = document.querySelector('.gambar-besar');
+
+    fotoProduct.addEventListener('click', function(e) {
+        if (e.target.className == 'gambar-kecil') {
+            gambarBesar.style.backgroundImage = e.target.style.backgroundImage;
+        }
+    });
+</script>
 <?= $this->endSection(); ?>

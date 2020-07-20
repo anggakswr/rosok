@@ -111,6 +111,10 @@ button:hover,
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Margin & Padding -=-=-=-=-=-=-=-=-=-=-=-=- */
+.mt1 {
+  margin-top: 10px;
+}
+
 .mt3 {
   margin-top: 30px;
 }
@@ -419,13 +423,35 @@ header {
   grid-template-areas:
     "foto nama nama"
     "foto toko toko";
+  margin-bottom: 140px;
 }
 
 .product-header .foto-product-detail {
   grid-area: foto;
-  background-color: darkslategray;
+}
+
+.gambar-besar {
   width: 300px;
   height: 300px;
+}
+
+.gambar-kecil {
+  width: 75px;
+  height: 75px;
+}
+
+.foto-product-detail .flex {
+  justify-content: start;
+}
+
+.gambar-besar, .gambar-kecil {
+  background-position: center;
+  background-size: cover;
+}
+
+.gambar-besar:hover, .gambar-kecil:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .product-header .nama-product-detail {
@@ -434,11 +460,6 @@ header {
 
 .nama-product-detail > * {
   margin-top: 10px;
-}
-
-.product-header .foto-product-detail {
-  background-image: url(./img/barang/botol-detail.jpg);
-  cursor: pointer;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Profil Toko di Product Detail -=-=-=-=-=-=-=-=-=-=-=-=- */
@@ -530,7 +551,7 @@ footer {
       "nama nama"
       "toko toko";
     font-size: 0.8em;
-    margin-bottom: 280px;
+    margin-bottom: 380px;
   }
 
   .profil-toko {

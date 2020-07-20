@@ -38,7 +38,9 @@
         <tr>
             <td><input type="checkbox" name="" id="" /></td>
             <td>
-                <img src="/img/uploads/barang/<?= $b['foto']; ?>" alt="<?= $b['nama']; ?>" width="100px" />
+                <a href="/barang/<?= $b['slug']; ?>">
+                    <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $b['foto']; ?>);"></div>
+                </a>
             </td>
             <td><?= $b['nama']; ?></td>
             <td>Rp <?= $b['harga']; ?>,-</td>

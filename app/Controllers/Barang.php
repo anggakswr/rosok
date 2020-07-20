@@ -83,7 +83,8 @@ class Barang extends BaseController
     {
         $data = [
             'title' => 'Detail Barang',
-            'barang' => $this->barangModel->getBarang($slug)
+            'barang' => $this->barangModel->getBarang($slug),
+            'foto' => $this->fotoModel->getFoto($slug)
         ];
 
         // jika barang tdk ad di tbl
