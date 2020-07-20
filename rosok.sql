@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 15, 2020 at 07:10 AM
+-- Generation Time: Jul 20, 2020 at 08:59 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `barang` (
   `id` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
   `foto` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
@@ -44,10 +45,10 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id`, `foto`, `nama`, `slug`, `kategori`, `deskripsi`, `harga`, `berat`, `created_at`, `updated_at`) VALUES
-(30, '5.jpeg', '123', '123', 'Kardus', '123', 123123, 123, '2020-07-14', '2020-07-14'),
-(31, '1.jpeg', '321', '321', 'Besi', '321', 321321, 321, '2020-07-14', '2020-07-14'),
-(32, 'portfolio7.jpg', 'jere kriting', 'jere-kriting', 'Kain Perca', 'main pingpong', 123123, 22, '2020-07-14', '2020-07-14');
+INSERT INTO `barang` (`id`, `users_id`, `foto`, `nama`, `slug`, `kategori`, `deskripsi`, `harga`, `berat`, `created_at`, `updated_at`) VALUES
+(43, 3, '6736931_thumb.png', 'asd', 'asd', 'Kerajinan Plastik', 'asd11', 122, 1, '2020-07-19', '2020-07-19'),
+(44, 3, 'unnamed_1.png', 'asd', 'asd-1', 'Besi', '1', 1, 1, '2020-07-19', '2020-07-19'),
+(45, 3, 'unnamed_2.png', 'Bumbum', 'bumbum', 'Besi', 'asd22', 122, 1, '2020-07-19', '2020-07-19');
 
 -- --------------------------------------------------------
 
@@ -68,18 +69,11 @@ CREATE TABLE `foto` (
 --
 
 INSERT INTO `foto` (`id`, `slug`, `foto`, `created_at`, `updated_at`) VALUES
-(56, '123', '5.jpeg', '2020-07-14', '2020-07-14'),
-(57, '123', '4.jpeg', '2020-07-14', '2020-07-14'),
-(58, '321', '1.jpeg', '2020-07-14', '2020-07-14'),
-(59, '321', '2.jpeg', '2020-07-14', '2020-07-14'),
-(60, 'jere-kriting', 'portfolio7.jpg', '2020-07-14', '2020-07-14'),
-(61, 'jere-kriting', 'portfolio6.jpg', '2020-07-14', '2020-07-14'),
-(64, 'jere-kriting', 'portfolio5.jpg', '2020-07-14', '2020-07-14'),
-(65, '123', '3.jpeg', '2020-07-14', '2020-07-14'),
-(66, '123', '2.jpeg', '2020-07-14', '2020-07-14'),
-(67, '123', 'Screenshot_2020-07-14 baju celana tidur semarang ( semarangbobok) • Instagram photos and videos.png', '2020-07-14', '2020-07-14'),
-(68, 'jere-kriting', '5.jpeg', '2020-07-14', '2020-07-14'),
-(69, '321', 'portfolio5.jpg', '2020-07-14', '2020-07-14');
+(98, 'asd', '6736931_thumb.png', '2020-07-19', '2020-07-19'),
+(99, 'asd', 'unnamed.png', '2020-07-19', '2020-07-19'),
+(100, 'asd-1', 'unnamed_1.png', '2020-07-19', '2020-07-19'),
+(101, 'bumbum', 'unnamed_2.png', '2020-07-19', '2020-07-19'),
+(102, 'bumbum', 'unnamed_3.png', '2020-07-19', '2020-07-19');
 
 -- --------------------------------------------------------
 
@@ -106,6 +100,30 @@ INSERT INTO `kategori` (`id`, `kategori`) VALUES
 (7, 'Kerajinan Kain Perca'),
 (8, 'Kerajinan Besi');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `updated_at` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'tokobesiangga', 'asd@asd.com', 'Afolosmua1', '2020-07-16', '2020-07-16'),
+(2, 'asd', 'asd@asdw.com', '$2y$10$mN0nGQwCPwHR/R5ozaICmO0NSsfacrg0oaMVb2PrKSBTgI9V3E4na', '2020-07-16', '2020-07-16'),
+(3, 'jere', 'jere@asd.com', '$2y$10$Ejn4pWDzY0ABe198V7LaJOBMbn6.IZ5lA2203Dj/Ga1TcDuKbB3Cq', '2020-07-16', '2020-07-17');
+
 --
 -- Indexes for dumped tables
 --
@@ -129,6 +147,12 @@ ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -136,19 +160,25 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

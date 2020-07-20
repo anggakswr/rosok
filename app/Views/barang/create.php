@@ -14,7 +14,7 @@
             <div>
                 <!-- preview gambar yg akan diupload -->
                 <?php for ($i = 0; $i < 5; $i++) : ?>
-                    <img src="/img/icon/plus.png" width="100px" height="100px" class="mb1 pointer">
+                    <div class="gambar-kecil inline-block" style="background-image: url(/img/icon/plus.png);"></div>
                     <span class="close">&times;</span>
                 <?php endfor; ?>
             </div>
