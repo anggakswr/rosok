@@ -67,11 +67,13 @@
 <!-- Notifikasi -->
 <script>
     const divMuncul = document.querySelector(".notif");
-    divMuncul.classList.add("muncul");
+    if (divMuncul) {
+        divMuncul.classList.add("muncul");
 
-    setInterval(() => {
-        divMuncul.classList.remove("muncul");
-    }, 5000);
+        setInterval(() => {
+            divMuncul.classList.remove("muncul");
+        }, 5000);
+    }
 </script>
 <!-- End Notifikasi -->
 <?= $this->endSection(); ?>

@@ -4,14 +4,14 @@ $(document).ready(function () {
 });
 
 // tangkap elemen
-const imgPreview = document.getElementsByClassName('mb1');
+const imgPreview = document.getElementsByClassName('gambar-kecil');
 const inputFotos = document.querySelectorAll("input[type=file]");
 const spanClose = document.getElementsByClassName("close");
 
 // jika tdk ada gambar, hilangkan tombol close
 function aturClose() {
     for (let j = 0; j < 5; j++) {
-        if (imgPreview[j].src == 'http://localhost:8080/img/icon/plus.png') {
+        if (imgPreview[j].style.backgroundImage == 'url(\"/img/icon/plus.png\")') {
             spanClose[j].style.display = 'none';
         } else {
             spanClose[j].style.display = 'inline';
@@ -28,7 +28,7 @@ for (let i = 0; i < 5; i++) {
 
             // jika file foto di load, maka imgPreview akan berubah
             fileFoto.onload = function (e) {
-                imgPreview[k].src = e.target.result;
+                imgPreview[k].style.backgroundImage = 'url(' + e.target.result + ')';
                 aturClose();
             }
 
@@ -46,7 +46,7 @@ for (let i = 0; i < 5; i++) {
 
     // jika span close diklik, ganti gambar plus.png
     spanClose[i].onclick = function () {
-        imgPreview[i].src = '/img/icon/plus.png';
+        imgPreview[i].style.backgroundImage = 'url(/img/icon/plus.png)';
         inputFotos[i].value = "";
 
         // jika tdk ada gambar, hilangkan tombol close

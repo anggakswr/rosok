@@ -13,7 +13,7 @@ class BarangModel extends Model
     public function getBarang($slug = false)
     {
         if (!$slug) {
-            return $this->findAll();
+            return $this->orderBy('id', 'desc')->findAll();
         }
 
         return $this->where(['slug' => $slug])->first();
@@ -21,6 +21,6 @@ class BarangModel extends Model
 
     public function getBarangUser($users_id)
     {
-        return $this->where('users_id', $users_id)->findAll();
+        return $this->where('users_id', $users_id)->orderBy('id', 'desc')->findAll();
     }
 }
