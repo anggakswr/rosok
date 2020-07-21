@@ -1,9 +1,10 @@
 // menyeleksi container dr gambar yg akan di slide
-const slide = document.getElementsByClassName("slide")[0];
+const slide = document.querySelector(".slide");
 
-// ambil elemen input dg type radio
+// elemen input dg type radio
 const radios = document.querySelectorAll("input[type=radio]");
 
+// kotak navigasi slider
 const labels = Array.from(document.getElementsByTagName("label"));
 
 // deklarasi variabel utk looping

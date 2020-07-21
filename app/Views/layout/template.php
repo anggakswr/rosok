@@ -24,15 +24,23 @@
             <button type="submit">Cari</button>
         </form>
 
-        <?php if (session()->get('isLoggedIn')) : ?>
-            <!-- Tombol Nama Akun -->
-            <a href="/barang" class="btn-primary">
-                <?= session()->get('nama'); ?>
-            </a>
-        <?php else : ?>
-            <!-- Tombol Daftar -->
-            <a href="/users/index" class="btn-primary">Login</a>
-        <?php endif; ?>
+        <div>
+            <?php if (session()->get('isLoggedIn')) : ?>
+                <!-- Tombol Nama Akun -->
+                <p class="btn-primary tombolnav">
+                    &#128100; <?= session()->get('nama'); ?>
+                </p>
+            <?php else : ?>
+                <!-- Tombol Daftar -->
+                <a href="/users" class="btn-primary">Login</a>
+            <?php endif; ?>
+            <div class="navmenu hidden">
+                <a href="/barang/create">Tambah barang</a>
+                <a href="/barang">Daftar barang</a>
+                <a href="/">Pengaturan</a>
+                <a href="/users/logout">Logout</a>
+            </div>
+        </div>
     </nav>
     <!-- End Nav -->
 
@@ -54,6 +62,10 @@
         </p>
     </footer>
     <!-- End Footer -->
+
+    <!-- JS -->
+    <script src="/js/script.js"></script>
+    <!-- End JS -->
 </body>
 
 </html>

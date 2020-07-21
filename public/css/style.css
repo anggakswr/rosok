@@ -110,6 +110,14 @@ button:hover,
   cursor: pointer;
 }
 
+.fr {
+  float: right;
+}
+
+.fl {
+  float: right;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Margin & Padding -=-=-=-=-=-=-=-=-=-=-=-=- */
 .mt1 {
   margin-top: 10px;
@@ -257,6 +265,17 @@ nav img {
   margin-right: 10px;
 }
 
+.navmenu {
+  position: absolute;
+  right: 10px;
+  background-color: #fff;
+}
+
+.navmenu > * {
+  padding: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Container -=-=-=-=-=-=-=-=-=-=-=-=- */
 .container {
   padding: 80px 5%;
@@ -290,30 +309,64 @@ header {
   transition: 0.5s;
 }
 
-.slide > * {
-  background-size: cover;
-  background-position: center;
+.slide > div {
   width: 100%;
+  padding: 2% 1%;
+}
+
+.slide h1 {
+  font-size: 40px;
+  color: #fff;
+  text-shadow: 1px 0 1px #000;
+}
+
+.slide img {
+  position: absolute;
 }
 
 .img1 {
-  background-image: url(../img/slide/1.jpeg);
+  /* background-image: url(../img/slide/1.jpg); */
+  background: linear-gradient(
+    to left top,
+    rgb(127, 127, 213),
+    rgb(145, 234, 228)
+  );
 }
 
 .img2 {
-  background-image: url(../img/slide/2.jpeg);
+  /* background-image: url(../img/slide/2.jpg); */
+  background: linear-gradient(
+    to left top,
+    rgb(243, 115, 53),
+    rgb(253, 200, 48)
+  );
 }
 
 .img3 {
-  background-image: url(../img/slide/3.jpeg);
+  /* background-image: url(../img/slide/3.jpg); */
+  background: linear-gradient(
+    to left top,
+    rgb(126, 126, 126),
+    rgb(233, 228, 240)
+  );
 }
 
 .img4 {
-  background-image: url(../img/slide/4.jpeg);
+  /* background-image: url(../img/slide/4.jpg); */
+  background: linear-gradient(
+    to left top,
+    rgb(238, 156, 167),
+    rgb(255, 221, 225)
+  );
 }
 
 .img5 {
-  background-image: url(../img/slide/5.jpeg);
+  /* background-image: url(../img/slide/5.jpg); */
+  background: linear-gradient(
+    to left top,
+    rgb(130, 255, 72),
+    rgb(133, 255, 144)
+  );
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Radio Button -=-=-=-=-=-=-=-=-=-=-=-=- */
@@ -554,5 +607,9 @@ footer {
     grid-template-areas:
       "kiri"
       "kanan";
+  }
+
+  .slide h1 {
+    font-size: 25px;
   }
 }

@@ -37,7 +37,7 @@
             <span class="maroon">120 suka</span>
         </h3>
         <div class="tombol">
-            <a href="" class="btn-success">Hubungi penjual</a>
+            <a href="" class="btn-success">&#128222; Hubungi penjual</a>
             <a href="" class="btn-danger">Sukai barang</a>
             <a class="btn-secondary">Share</a>
         </div>

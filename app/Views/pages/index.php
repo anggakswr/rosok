@@ -21,11 +21,25 @@
 
         <!-- Gambar Slide -->
         <div class="slide">
-            <div class="img1"></div>
-            <div class="img2"></div>
-            <div class="img3"></div>
-            <div class="img4"></div>
-            <div class="img5"></div>
+            <div class="img1">
+                <h1>Temukan pengepul sampah di dekatmu.</h1>
+            </div>
+            <div class="img2">
+                <h1>Berkarya lewat sampah.</h1>
+                <img src="/img/slide/2.png" alt="">
+            </div>
+            <div class="img3">
+                <h1>Ubah sampah jadi berkah.</h1>
+                <img src="/img/slide/3.png" alt="" width="400px">
+            </div>
+            <div class="img4">
+                <h1>Pilah sampah dengan benar.</h1>
+                <img src="/img/slide/1.png" alt="" width="150px" class="mt1">
+            </div>
+            <div class="img5">
+                <h1>Daur ulang untuk masa depan.</h1>
+                <img src="/img/slide/5.png" alt="" width="100px" class="mt1">
+            </div>
         </div>
         <!-- End Gambar Slide -->
     </div>
