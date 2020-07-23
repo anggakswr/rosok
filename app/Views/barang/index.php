@@ -9,7 +9,7 @@
 <div class="flex">
     <!-- Kotak Pencarian -->
     <form action="" method="post">
-        <input type="text" placeholder="Cari barang dagangan" />
+        <input type="text" placeholder="Cari barang dagangan" name="keyword" />
         <button>Cari</button>
     </form>
     <!-- End Kotak Pencarian -->
@@ -58,6 +58,8 @@
     <?php endforeach; ?>
 </table>
 <!-- End Table -->
+
+<?= $pager->links(); ?>
 
 <!-- jika users blm menjual barang apapun -->
 <?php if (empty($barang)) : ?>

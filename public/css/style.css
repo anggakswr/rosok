@@ -238,7 +238,7 @@ input[name="berat"] {
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Nav -=-=-=-=-=-=-=-=-=-=-=-=- */
-nav {
+.nav {
   padding: 10px 50px;
   display: flex;
   justify-content: space-between;
@@ -251,16 +251,16 @@ nav {
   z-index: 1;
 }
 
-nav input {
+.nav input {
   width: 400px;
 }
 
-nav a {
+.nav a {
   display: flex;
   align-items: center;
 }
 
-nav img {
+.nav img {
   width: 40px;
   margin-right: 10px;
 }
@@ -526,6 +526,27 @@ header {
 
 .foto-profil {
   border: 1px solid lightgrey;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Footer -=-=-=-=-=-=-=-=-=-=-=-=- */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.pagination a {
+  padding: 10px;
+}
+
+.pagination a:hover {
+  background-color: #ccc;
+}
+
+.pagination-active a {
+  background-color: #ccc;
+  color: grey;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Footer -=-=-=-=-=-=-=-=-=-=-=-=- */

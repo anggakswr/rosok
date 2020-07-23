@@ -70,9 +70,17 @@ class Barang extends BaseController
 
     public function index()
     {
+        $keyword = $this->request->getPost('keyword');
+        if ($keyword) {
+            $barang = $this->barangModel->searchBarangUser($keyword, session()->get('id'));
+        } else {
+            $barang = $this->barangModel->getBarangUser(session()->get('id'));
+        }
+
         $data = [
             'title' => 'Daftar Barang',
-            'barang' => $this->barangModel->getBarangUser(session()->get('id'))
+            'barang' => $barang,
+            'pager' => $this->barangModel->pager
         ];
         return view('barang/index', $data);
     }

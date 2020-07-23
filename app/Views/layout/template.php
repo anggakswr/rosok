@@ -11,7 +11,7 @@
 
 <body>
     <!-- Nav -->
-    <nav>
+    <div class="nav">
         <!-- Logo Brand -->
         <a href="/">
             <img src="/img/rosok-logo.png" alt="rosok-logo" />
@@ -41,7 +41,7 @@
                 <a href="/users/logout">Logout</a>
             </div>
         </div>
-    </nav>
+    </div>
     <!-- End Nav -->
 
     <!-- Container -->
