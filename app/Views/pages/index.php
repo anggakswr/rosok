@@ -22,23 +22,24 @@
         <!-- Gambar Slide -->
         <div class="slide">
             <div class="img1">
-                <h1>Temukan pengepul sampah di dekatmu.</h1>
+                <h1>Temukan pengepul rosok di dekatmu.</h1>
+                <img src="/img/slide/pengepul-rosok.png" alt="pengepul-rosok">
             </div>
             <div class="img2">
-                <h1>Berkarya lewat sampah.</h1>
-                <img src="/img/slide/2.png" alt="">
+                <h1>Berkarya lewat sampah dan go internasional.</h1>
+                <img src="/img/slide/berkarya-sampah.png" alt="berkarya-lewat-sampah">
             </div>
             <div class="img3">
                 <h1>Ubah sampah jadi berkah.</h1>
-                <img src="/img/slide/3.png" alt="" width="400px">
+                <img src="/img/slide/sampah-berkah.png" alt="sampah-jadi-berkah">
             </div>
             <div class="img4">
                 <h1>Pilah sampah dengan benar.</h1>
-                <img src="/img/slide/1.png" alt="" width="150px" class="mt1">
+                <img src="/img/slide/pilah-sampah.png" alt="pilah-sampah">
             </div>
             <div class="img5">
                 <h1>Daur ulang untuk masa depan.</h1>
-                <img src="/img/slide/5.png" alt="" width="100px" class="mt1">
+                <img src="/img/slide/daur-ulang.png" alt="daur-ulang">
             </div>
         </div>
         <!-- End Gambar Slide -->
@@ -74,113 +75,63 @@
 </header>
 <!-- End Slider & Kategori -->
 
+<?php helper('text'); ?>
+
 <!-- Slider Botol -->
 <h1 class="mt5">Botol Plastik Bekas</h1>
-<div class="product-slider">
-    <a class="product-item product-item1" href="./barang.html">
-        <img src="./img/botol/botol1.png" alt="botol-aqua-bekas" />
-        <h4>Botol Aqua Bekas 1kg</h4>
-        <p class="green">Rp5.000,-</p>
-        <p class="grey">Kota Semarang</p>
-    </a>
-    <a class="product-item product-item2" href="">
-        <img src="./img/botol/botol2.png" alt="pot-bunga-dari-botol-bekas" />
-        <h4>Pot Bunga Lucu</h4>
-        <p class="green">Rp15.000,-</p>
-        <p class="grey">Jakarta Barat</p>
-    </a>
-    <a class="product-item product-item3" href="">
-        <img src="./img/botol/botol3.png" alt="wadah-parcel-murah" />
-        <h4>Tempat Parcel Murah</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Papua Barat</p>
-    </a>
-    <a class="product-item product-item4" href="">
-        <img src="./img/botol/botol4.png" alt="lampion-botol-plastik" />
-        <h4>Lampion Botol Plastik</h4>
-        <p class="green">Rp15.000,-</p>
-        <p class="grey">Tangerang Selatan</p>
-    </a>
-    <a class="product-item product-item5" href="">
-        <img src="./img/botol/botol5.png" alt="lampu-tutup-botol" />
-        <h4>Lampu Tutup Botol</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Kab. Semarang</p>
-    </a>
+<div class="product">
+    <?php foreach ($botol as $b) : ?>
+        <a class="product-item" href="/barang/<?= $b['slug']; ?>">
+            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $b['foto']; ?>);"></div>
+            <h4><?= character_limiter($b['nama'], 20); ?></h4>
+            <p class="green">Rp <?= $b['harga']; ?>,-</p>
+            <p class="grey">Kota Semarang</p>
+        </a>
+    <?php endforeach; ?>
 </div>
 <!-- End Slider Botol -->
 
 <!-- Slider Kardus -->
-<h1 class="mt5">Kardus Bekas</h1>
-<div class="product-slider">
-    <a class="product-item product-item1" href="">
-        <img src="./img/kardus/kardus1.png" alt="rumah-kucing-kardus" />
-        <h4>Rumah Kucing Kardus</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Kota Semarang</p>
-    </a>
-    <a class="product-item product-item2" href="">
-        <img src="./img/kardus/kardus2.png" alt="karakter-mini-kardus" />
-        <h4>Karakter Mini Kardus</h4>
-        <p class="green">Rp15.000,-</p>
-        <p class="grey">Jakarta Barat</p>
-    </a>
-    <a class="product-item product-item3" href="">
-        <img src="./img/kardus/kardus3.png" alt="lampu-kardus-elegan" />
-        <h4>Lampu Kardus Elegan</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Papua Barat</p>
-    </a>
-    <a class="product-item product-item4" href="">
-        <img src="./img/kardus/kardus4.png" alt="gundam-kardus-mahal" />
-        <h4>Gundam Kardus Mahal</h4>
-        <p class="green">Rp500.000,-</p>
-        <p class="grey">Tangerang Selatan</p>
-    </a>
-    <a class="product-item product-item5" href="">
-        <img src="./img/kardus/kardus5.png" alt="kardus-bekas-indomie" />
-        <h4>Kardus Bekas Indomie</h4>
-        <p class="green">Rp10.000,-</p>
-        <p class="grey">Kab. Semarang</p>
-    </a>
+<h1 class="mt5">Kardus Indomie</h1>
+<div class="product">
+    <?php foreach ($kardus as $k) : ?>
+        <a class="product-item" href="/barang/<?= $k['slug']; ?>">
+            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $k['foto']; ?>);"></div>
+            <h4><?= character_limiter($k['nama'], 20); ?></h4>
+            <p class="green">Rp <?= $k['harga']; ?>,-</p>
+            <p class="grey">Kota Semarang</p>
+        </a>
+    <?php endforeach; ?>
 </div>
 <!-- End Slider Kardus -->
 
 <!-- Slider Besi -->
-<h1 class="mt5">Besi Bekas</h1>
-<div class="product-slider">
-    <a class="product-item product-item1" href="">
-        <img src="./img/besi/besi1.png" alt="besi-kiloan-scrap" />
-        <h4>Besi Kiloan Scrap</h4>
-        <p class="green">Rp35.000,-</p>
-        <p class="grey">Kota Semarang</p>
-    </a>
-    <a class="product-item product-item2" href="">
-        <img src="./img/besi/besi2.png" alt="mur-baut-bekas" />
-        <h4>Mur dan Baut Bekas</h4>
-        <p class="green">Rp15.000,-</p>
-        <p class="grey">Jakarta Barat</p>
-    </a>
-    <a class="product-item product-item3" href="">
-        <img src="./img/besi/besi3.png" alt="miniatur-motor-besi" />
-        <h4>Miniatur Motor</h4>
-        <p class="green">Rp225.000,-</p>
-        <p class="grey">Papua Barat</p>
-    </a>
-    <a class="product-item product-item4" href="">
-        <img src="./img/besi/besi4.png" alt="sofa-drum-besi" />
-        <h4>Sofa Drum Besi</h4>
-        <p class="green">Rp115.000,-</p>
-        <p class="grey">Tangerang Selatan</p>
-    </a>
-    <a class="product-item product-item5" href="">
-        <img src="./img/besi/besi5.png" alt="besi-bekas-kiloan" />
-        <h4>Paku Bekas Kiloan</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Kab. Semarang</p>
-    </a>
+<h1 class="mt5">Besi Kiloan</h1>
+<div class="product">
+    <?php foreach ($besi as $bes) : ?>
+        <a class="product-item" href="/barang/<?= $bes['slug']; ?>">
+            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $bes['foto']; ?>);"></div>
+            <h4><?= character_limiter($bes['nama'], 20); ?></h4>
+            <p class="green">Rp <?= $bes['harga']; ?>,-</p>
+            <p class="grey">Kota Semarang</p>
+        </a>
+    <?php endforeach; ?>
 </div>
 <!-- End Slider Besi -->
+
+<!-- Slider Kain -->
+<h1 class="mt5">Kain Perca</h1>
+<div class="product">
+    <?php foreach ($kain as $ka) : ?>
+        <a class="product-item" href="/barang/<?= $ka['slug']; ?>">
+            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $ka['foto']; ?>);"></div>
+            <h4><?= character_limiter($ka['nama'], 20); ?></h4>
+            <p class="green">Rp <?= $ka['harga']; ?>,-</p>
+            <p class="grey">Kota Semarang</p>
+        </a>
+    <?php endforeach; ?>
+</div>
+<!-- End Slider Kain -->
 
 <script src="/js/index.js"></script>
 <?= $this->endSection(); ?>

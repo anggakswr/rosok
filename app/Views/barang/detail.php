@@ -61,81 +61,25 @@
 <!-- End Product Header -->
 
 <div class="deskripsi">
-    <h1 class="mb1">Deskripsi barang</h1>
+    <h2 class="mb1">Deskripsi barang</h2>
     <?= $barang['deskripsi']; ?>
 </div>
 
-<!-- Slider Produk dari angga98w -->
-<h1 class="mt5">Botol Plastik Bekas</h1>
-<div class="product-slider">
-    <a class="product-item product-item1" href="./barang.html">
-        <img src="./img/botol/botol1.png" alt="botol-aqua-bekas" />
-        <h4>Botol Aqua Bekas 1kg</h4>
-        <p class="green">Rp5.000,-</p>
-        <p class="grey">Kota Semarang</p>
-    </a>
-    <a class="product-item product-item2" href="">
-        <img src="./img/botol/botol2.png" alt="pot-bunga-dari-botol-bekas" />
-        <h4>Pot Bunga Lucu</h4>
-        <p class="green">Rp15.000,-</p>
-        <p class="grey">Jakarta Barat</p>
-    </a>
-    <a class="product-item product-item3" href="">
-        <img src="./img/botol/botol3.png" alt="wadah-parcel-murah" />
-        <h4>Tempat Parcel Murah</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Papua Barat</p>
-    </a>
-    <a class="product-item product-item4" href="">
-        <img src="./img/botol/botol4.png" alt="lampion-botol-plastik" />
-        <h4>Lampion Botol Plastik</h4>
-        <p class="green">Rp15.000,-</p>
-        <p class="grey">Tangerang Selatan</p>
-    </a>
-    <a class="product-item product-item5" href="">
-        <img src="./img/botol/botol5.png" alt="lampu-tutup-botol" />
-        <h4>Lampu Tutup Botol</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Kab. Semarang</p>
-    </a>
-</div>
-<!-- End Slider Produk dari angga98w -->
+<?php helper('text'); ?>
 
-<!-- Slider dari Kategori Botol Plastik -->
-<h1 class="mt5">Botol Plastik Bekas</h1>
-<div class="product-slider">
-    <a class="product-item product-item1" href="./barang.html">
-        <img src="./img/botol/botol1.png" alt="botol-aqua-bekas" />
-        <h4>Botol Aqua Bekas 1kg</h4>
-        <p class="green">Rp5.000,-</p>
-        <p class="grey">Kota Semarang</p>
-    </a>
-    <a class="product-item product-item2" href="">
-        <img src="./img/botol/botol2.png" alt="pot-bunga-dari-botol-bekas" />
-        <h4>Pot Bunga Lucu</h4>
-        <p class="green">Rp15.000,-</p>
-        <p class="grey">Jakarta Barat</p>
-    </a>
-    <a class="product-item product-item3" href="">
-        <img src="./img/botol/botol3.png" alt="wadah-parcel-murah" />
-        <h4>Tempat Parcel Murah</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Papua Barat</p>
-    </a>
-    <a class="product-item product-item4" href="">
-        <img src="./img/botol/botol4.png" alt="lampion-botol-plastik" />
-        <h4>Lampion Botol Plastik</h4>
-        <p class="green">Rp15.000,-</p>
-        <p class="grey">Tangerang Selatan</p>
-    </a>
-    <a class="product-item product-item5" href="">
-        <img src="./img/botol/botol5.png" alt="lampu-tutup-botol" />
-        <h4>Lampu Tutup Botol</h4>
-        <p class="green">Rp25.000,-</p>
-        <p class="grey">Kab. Semarang</p>
-    </a>
+<!-- Slider Produk dari Penjual -->
+<h2 class="mt5">Barang dari Kategori <?= $barang['kategori']; ?></h2>
+<div class="product">
+    <?php foreach ($barangKategori as $b) : ?>
+        <a class="product-item" href="/barang/<?= $b['slug']; ?>">
+            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $b['foto']; ?>);"></div>
+            <h4><?= character_limiter($b['nama'], 20); ?></h4>
+            <p class="green">Rp <?= $b['harga']; ?>,-</p>
+            <p class="grey">Kota Semarang</p>
+        </a>
+    <?php endforeach; ?>
 </div>
-<!-- End Slider dari Kategori Botol Plastik -->
+<!-- End Slider Produk dari Penjual -->
 
 <script>
     const fotoProduct = document.querySelector('.foto-product-detail');

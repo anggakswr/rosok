@@ -45,14 +45,15 @@ $routes->match(['get', 'post'], 'users/profile', 'Users::profile', ['filter' => 
 
 // barang
 $routes->group('barang', ['filter' => 'auth'], function ($routes) {
-	$routes->match(['get', 'post'], '/', 'Barang', ['filter' => 'auth']);
-	$routes->match(['get', 'post'], 'index', 'Barang::index', ['filter' => 'auth']);
+	$routes->match(['get', 'post'], '/', 'Barang');
+	$routes->match(['get', 'post'], 'index', 'Barang::index');
 
-	$routes->get('create', 'Barang::create', ['filter' => 'auth']);
-	$routes->get('edit/(:segment)', 'Barang::edit/$1', ['filter' => 'auth']);
-	$routes->delete('(:num)', 'Barang::delete/$1', ['filter' => 'auth']);
-	$routes->get('(:any)', 'Barang::detail/$1', ['filter' => 'auth']);
+	$routes->get('create', 'Barang::create');
+	$routes->get('edit/(:segment)', 'Barang::edit/$1');
+	$routes->delete('(:num)', 'Barang::delete/$1');
 });
+
+$routes->get('barang/(:any)', 'Barang::detail/$1');
 
 
 /**

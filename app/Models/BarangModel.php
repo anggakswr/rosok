@@ -21,14 +21,18 @@ class BarangModel extends Model
 
     public function getBarangUser($users_id)
     {
-        return $this->where('users_id', $users_id)->orderBy('id', 'desc')->paginate(10);
+        return $this->where('users_id', $users_id)->orderBy('id', 'desc');
+    }
+
+    public function getBarangKategori($kategori)
+    {
+        return $this->where('kategori', $kategori)->orderBy('id', 'desc');
     }
 
     public function searchBarangUser($keyword, $users_id)
     {
         return $this->where('users_id', $users_id)
             ->like('nama', $keyword)
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+            ->orderBy('id', 'desc');
     }
 }

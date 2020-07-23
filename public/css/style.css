@@ -3,7 +3,7 @@
   margin: 0;
   font-family: arial, serif;
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: 5px;;
 }
 
 a {
@@ -248,7 +248,7 @@ input[name="berat"] {
   right: 0;
   left: 0;
   background-color: #fff;
-  z-index: 1;
+  z-index: 2;
 }
 
 .nav input {
@@ -321,11 +321,10 @@ header {
 }
 
 .slide img {
-  position: absolute;
+  margin-top: 20px;
 }
 
 .img1 {
-  /* background-image: url(../img/slide/1.jpg); */
   background: linear-gradient(
     to left top,
     rgb(127, 127, 213),
@@ -334,7 +333,6 @@ header {
 }
 
 .img2 {
-  /* background-image: url(../img/slide/2.jpg); */
   background: linear-gradient(
     to left top,
     rgb(243, 115, 53),
@@ -343,7 +341,6 @@ header {
 }
 
 .img3 {
-  /* background-image: url(../img/slide/3.jpg); */
   background: linear-gradient(
     to left top,
     rgb(126, 126, 126),
@@ -352,7 +349,6 @@ header {
 }
 
 .img4 {
-  /* background-image: url(../img/slide/4.jpg); */
   background: linear-gradient(
     to left top,
     rgb(238, 156, 167),
@@ -361,7 +357,6 @@ header {
 }
 
 .img5 {
-  /* background-image: url(../img/slide/5.jpg); */
   background: linear-gradient(
     to left top,
     rgb(130, 255, 72),
@@ -449,18 +444,18 @@ header {
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Product Slider -=-=-=-=-=-=-=-=-=-=-=-=- */
-.product-slider {
-  display: flex;
-  justify-content: space-between;
+.product {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .product-item {
-  flex: 1;
   padding: 10px;
 }
 
-.product-item img {
-  width: 170px;
+.product-item .gambar-kecil {
+  width: 150px;
+  height: 150px;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Header di Product Detail -=-=-=-=-=-=-=-=-=-=-=-=- */
@@ -570,11 +565,6 @@ footer {
   .kategori {
     min-height: 150px;
   }
-
-  .product-item4,
-  .product-item5 {
-    display: none;
-  }
 }
 
 @media (max-width: 768px) {
@@ -582,15 +572,15 @@ footer {
     font-size: 12px;
   }
 
-  nav {
+  .nav {
     padding: 10px 15px;
   }
 
-  nav h1 {
+  .nav h1 {
     display: none;
   }
 
-  nav input {
+  .nav input {
     width: 70%;
   }
 
@@ -603,14 +593,6 @@ footer {
 
   .kategori a {
     margin-top: 10px;
-  }
-
-  .product-item3 {
-    display: none;
-  }
-
-  .product-item img {
-    width: 100px;
   }
 
   .product-header {

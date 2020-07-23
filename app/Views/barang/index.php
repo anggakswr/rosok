@@ -59,7 +59,7 @@
 </table>
 <!-- End Table -->
 
-<?= $pager->links(); ?>
+<?= $pager->links('barang', 'barang_pagination'); ?>
 
 <!-- jika users blm menjual barang apapun -->
 <?php if (empty($barang)) : ?>
