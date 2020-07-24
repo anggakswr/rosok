@@ -29,10 +29,8 @@ class BarangModel extends Model
         return $this->where('kategori', $kategori)->orderBy('id', 'desc');
     }
 
-    public function searchBarangUser($keyword, $users_id)
+    public function searchBarang($keyword)
     {
-        return $this->where('users_id', $users_id)
-            ->like('nama', $keyword)
-            ->orderBy('id', 'desc');
+        return $this->like('nama', $keyword)->orderBy('id', 'desc');
     }
 }

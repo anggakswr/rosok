@@ -276,6 +276,11 @@ input[name="berat"] {
   border-bottom: 1px solid lightgrey;
 }
 
+/* -=-=-=-=-=-=-=-=-=-=-=-=- Nav2 -=-=-=-=-=-=-=-=-=-=-=-=- */
+.nav2 > * {
+  margin-top: 20px;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Container -=-=-=-=-=-=-=-=-=-=-=-=- */
 .container {
   padding: 80px 5%;
@@ -568,7 +573,7 @@ footer {
 }
 
 @media (max-width: 768px) {
-  a {
+  a,button {
     font-size: 12px;
   }
 
@@ -615,4 +620,14 @@ footer {
   .slide h1 {
     font-size: 25px;
   }
+
+  .nav2 {
+    display: block;
+  }
+
+  .nav2 form, .nav2 div {
+    display: flex;
+    justify-content: space-between;
+  }
+
 }

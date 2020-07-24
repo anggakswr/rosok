@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= $title; ?> - Rosok.com</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" type="/favicon.ico" href="favicon-16x16.png" sizes="16x16" />
 </head>
 
 <body>
@@ -19,8 +19,8 @@
         </a>
 
         <!-- Kotak Pencarian -->
-        <form action="" method="post">
-            <input type="text" name="cari" placeholder="Cari barang rosok" />
+        <form action="cari" method="get">
+            <input type="text" name="rosok" placeholder="Cari barang rosok" />
             <button type="submit">Cari</button>
         </form>
 
@@ -54,11 +54,11 @@
     <footer class="mt5 flex">
         <p class="grey">Copyright 2020 &copy; Rosok.com</p>
         <p>
-            <a href="">Tentang</a>
+            <a href="/tentang">Tentang</a>
             &middot;
-            <a href="">Kontak</a>
+            <a href="/kontak">Kontak</a>
             &middot;
-            <a href="">Bantuan</a>
+            <a href="/bantuan">Bantuan</a>
         </p>
     </footer>
     <!-- End Footer -->

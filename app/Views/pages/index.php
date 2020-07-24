@@ -55,7 +55,7 @@
     </div>
     <div class="kategori kategori2">
         <h4>Kardus Indomie</h4>
-        <p>Cocok untuk packing.</p>
+        <p>Untuk packing, dll.</p>
         <a href="" class="btn-warning mt5">Beli sekarang</a>
         <img src="./img/kardus.png" alt="jual-kardus-bekas" />
     </div>

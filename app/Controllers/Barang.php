@@ -74,7 +74,8 @@ class Barang extends BaseController
 
         if ($keyword) {
             $barang = $this->barangModel
-                ->searchBarangUser($keyword, session()->get('id'))
+                ->where('users_id', session()->get('id'))
+                ->searchBarang($keyword)
                 ->paginate(10, 'barang');
         } else {
             $barang = $this->barangModel

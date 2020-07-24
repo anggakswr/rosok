@@ -59,12 +59,12 @@
 </table>
 <!-- End Table -->
 
-<?= $pager->links('barang', 'barang_pagination'); ?>
-
 <!-- jika users blm menjual barang apapun -->
 <?php if (empty($barang)) : ?>
     <h3 class="grey text-center mt3">Belum ada barang yang dijual.</h3>
 <?php endif; ?>
+
+<?= $pager->links('barang', 'barang_pagination'); ?>
 
 <!-- Notifikasi -->
 <script>
