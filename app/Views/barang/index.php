@@ -39,7 +39,7 @@
             <td><input type="checkbox" name="" id="" /></td>
             <td>
                 <a href="/barang/<?= $b['slug']; ?>">
-                    <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $b['foto']; ?>);"></div>
+                    <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"></div>
                 </a>
             </td>
             <td><?= $b['nama']; ?></td>

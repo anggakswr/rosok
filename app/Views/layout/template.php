@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= $title; ?> - Rosok.com</title>
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="icon" type="/favicon.ico" href="favicon-16x16.png" sizes="16x16" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -28,7 +28,7 @@
             <?php if (session()->get('isLoggedIn')) : ?>
                 <!-- Tombol Nama Akun -->
                 <p class="btn-primary tombolnav">
-                    &#128100; <?= session()->get('nama'); ?>
+                    &#128100; <?= session()->get('username'); ?>
                 </p>
             <?php else : ?>
                 <!-- Tombol Daftar -->

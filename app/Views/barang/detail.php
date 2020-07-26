@@ -14,14 +14,14 @@
 <div class="product-header mt3">
     <div class="foto-product-detail">
         <!-- gambar besar -->
-        <div class="gambar-besar" style="background-image: url(/img/uploads/barang/<?= $barang['foto']; ?>);"></div>
+        <div class="gambar-besar" style="background-image: url('/img/uploads/barang/<?= $barang['foto']; ?>');"></div>
         <!-- end gambar besar -->
 
         <!-- gambar kecil2 -->
         <div class="flex mt1">
             <?php if (isset($foto[1]['foto'])) : ?>
                 <?php foreach ($foto as $f) : ?>
-                    <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $f['foto']; ?>);"></div>
+                    <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $f['foto']; ?>');"></div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
@@ -72,7 +72,7 @@
 <div class="product">
     <?php foreach ($barangKategori as $b) : ?>
         <a class="product-item" href="/barang/<?= $b['slug']; ?>">
-            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $b['foto']; ?>);"></div>
+            <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"> </div>
             <h4><?= character_limiter($b['nama'], 20); ?></h4>
             <p class="green">Rp <?= $b['harga']; ?>,-</p>
             <p class="grey">Kota Semarang</p>

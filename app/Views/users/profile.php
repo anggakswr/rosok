@@ -10,10 +10,10 @@
 <!-- Daftar -->
 <form action="" method="post" class="login">
     <h3>Profile</h3>
-    <input type="text" name="nama" placeholder="Masukkan nama" autofocus value="<?= old('nama', $user['nama']); ?>" />
-    <?php if ($validation->hasError('nama')) : ?>
+    <input type="text" name="username" placeholder="Masukkan username" autofocus value="<?= old('username', $user['username']); ?>" />
+    <?php if ($validation->hasError('username')) : ?>
         <div class="error-flash">
-            <?= $validation->getError('nama'); ?>
+            <?= $validation->getError('username'); ?>
         </div>
     <?php endif; ?>
     <input type="text" readonly placeholder="Masukkan email" value="<?= $user['email']; ?>" />

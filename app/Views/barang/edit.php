@@ -15,7 +15,7 @@
             <div>
                 <!-- preview gambar yg akan diupload -->
                 <?php for ($i = 0; $i < 5; $i++) : ?>
-                    <div class="gambar-kecil inline-block" style="background-image: url(<?= (!empty($foto[$i]['foto'])) ? '/img/uploads/barang/' . $foto[$i]['foto'] : '/img/icon/plus.png' ?>);"></div>
+                    <div class="gambar-kecil inline-block" style="background-image: url('<?= (!empty($foto[$i]['foto'])) ? '/img/uploads/barang/' . $foto[$i]['foto'] : '/img/icon/plus.png' ?>');"></div>
                     <span class="close">&times;</span>
                 <?php endfor; ?>
             </div>

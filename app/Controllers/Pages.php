@@ -12,10 +12,10 @@ class Pages extends BaseController
 
         $data = [
             'title' => 'Jual Beli Barang Rosok',
-            'botol' => $barangModel->getBarangKategori('Botol Plastik')->findAll(5),
-            'kardus' => $barangModel->getBarangKategori('Kardus Indomie')->findAll(5),
-            'besi' => $barangModel->getBarangKategori('Besi Kiloan')->findAll(5),
-            'kain' => $barangModel->getBarangKategori('Kain Perca')->findAll(5)
+            'botol' => $barangModel->getBarangKategori('Botol Plastik')->findAll(6),
+            'kardus' => $barangModel->getBarangKategori('Kardus Indomie')->findAll(6),
+            'besi' => $barangModel->getBarangKategori('Besi Kiloan')->findAll(6),
+            'kain' => $barangModel->getBarangKategori('Kain Perca')->findAll(6)
         ];
 
         return view('pages/index', $data);

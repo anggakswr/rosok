@@ -3,12 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\UsersModel;
+use App\Models\LokasiModel;
 
 class Users extends BaseController
 {
     public function __construct()
     {
         $this->usersModel = new UsersModel();
+        $this->lokasiModel = new LokasiModel();
     }
 
     // --------------------------------------------------------
@@ -65,7 +67,7 @@ class Users extends BaseController
     {
         $data = [
             'id' => $user['id'],
-            'nama' => $user['nama'],
+            'username' => $user['username'],
             'email' => $user['email'],
             'isLoggedIn' => true
         ];
@@ -81,16 +83,48 @@ class Users extends BaseController
         $data = [
             'title' => 'Daftar',
             'validation' => \Config\Services::validation(),
+            'lokasi' => $this->lokasiModel->findAll()
         ];
 
         if ($this->request->getMethod() == 'post') {
             // validation rules
             $rulesUsers = [
-                'nama' => 'required|min_length[3]|max_length[20]',
+                'foto' => 'max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
+                'username' => 'required|min_length[3]|max_length[20]|is_unique[users.username]',
+                'lokasi' => 'required|is_not_unique[lokasi.nama]',
                 'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
                 'password' => 'required|min_length[8]|max_length[255]',
                 'password2' => 'matches[password]'
             ];
+
+            // ambil foto yg ad diinput jg ad
+            // $foto = $this->request->getFile('foto');
+
+            // jika ada foto yg diupload
+            if ($img = $this->request->getFile('foto')) {
+                if ($img->isValid() && !$img->hasMoved()) {
+                    $img->move(WRITEPATH . 'img/uploads/user');
+                    $namaFoto = $img->getName();
+                }
+            } else {
+                $namaFoto = 'user.png';
+            }
+
+            // jika tdk ad foto profil yg di upload
+            // if ($foto->getError() == 4) {
+            //     $namaFoto = 'user.png';
+            // } else {
+            //     $foto->move('img/uploads/user');
+            //     $namaFoto = $foto->getName();
+            // }
+
+            // taruh gambar ke folder
+            // if (!empty($foto)) {
+            //     $foto->move('img/uploads/user');
+            //     $namaFoto = $foto->getName();
+            // } else {
+            //     $namaFoto = 'user.png';
+            // }
 
             // jika ada input yg melanggar rules
             if (!$this->validate($rulesUsers)) {
@@ -98,7 +132,9 @@ class Users extends BaseController
             } else {
                 // simpan user ke db
                 $data = [
-                    'nama' => $this->request->getPost('nama'),
+                    'foto' => $namaFoto,
+                    'username' => $this->request->getPost('username'),
+                    'lokasi' => $this->request->getPost('lokasi'),
                     'email' => $this->request->getPost('email'),
                     'password' => $this->request->getPost('password')
                 ];
@@ -124,7 +160,7 @@ class Users extends BaseController
         if ($this->request->getMethod() == 'post') {
             // validation rules
             $rulesUsers = [
-                'nama' => 'required|min_length[3]|max_length[20]'
+                'username' => 'required|min_length[3]|max_length[20]'
             ];
 
             // jika password diisi
@@ -141,7 +177,7 @@ class Users extends BaseController
                 // simpan user ke db
                 $data = [
                     'id' => session()->get('id'),
-                    'nama' => $this->request->getPost('nama')
+                    'username' => $this->request->getPost('username')
                 ];
 
                 // jika password diisi

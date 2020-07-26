@@ -5,6 +5,8 @@ const tombolnav = document.querySelector('.tombolnav');
 const navmenu = document.querySelector('.navmenu');
 
 // jika tombolnav diklik
-tombolnav.onclick = function () {
-    navmenu.classList.toggle('hidden');
+if (tombolnav) {
+    tombolnav.onclick = function () {
+        navmenu.classList.toggle('hidden');
+    }
 }

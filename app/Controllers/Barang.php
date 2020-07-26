@@ -59,7 +59,7 @@ class Barang extends BaseController
                     'errors' => [
                         'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
                         'is_image' => 'File bukan gambar.',
-                        'mime_in' => 'File bukan gambar.'
+                        'mime_in' => 'Format gambar harus jpg, jpeg, atau png.'
                     ]
                 ]
             ];
@@ -137,7 +137,7 @@ class Barang extends BaseController
                 'uploaded' => 'Foto barang harus diisi.',
                 'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
                 'is_image' => 'File bukan gambar.',
-                'mime_in' => 'File bukan gambar.'
+                'mime_in' => 'Format gambar harus jpg, jpeg, atau png.'
             ]
         ];
 
@@ -239,7 +239,7 @@ class Barang extends BaseController
                 'uploaded' => 'Foto barang harus diisi.',
                 'max_size' => 'Ukuran foto harus kurang dari 1 MB.',
                 'is_image' => 'File bukan gambar.',
-                'mime_in' => 'File bukan gambar.'
+                'mime_in' => 'Format gambar harus jpg, jpeg, atau png.'
             ]
         ];
 

@@ -26,7 +26,7 @@
                 <img src="/img/slide/pengepul-rosok.png" alt="pengepul-rosok">
             </div>
             <div class="img2">
-                <h1>Berkarya lewat sampah dan go internasional.</h1>
+                <h1>Yuk, berkarya lewat sampah.</h1>
                 <img src="/img/slide/berkarya-sampah.png" alt="berkarya-lewat-sampah">
             </div>
             <div class="img3">
@@ -82,7 +82,7 @@
 <div class="product">
     <?php foreach ($botol as $b) : ?>
         <a class="product-item" href="/barang/<?= $b['slug']; ?>">
-            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $b['foto']; ?>);"></div>
+            <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"></div>
             <h4><?= character_limiter($b['nama'], 20); ?></h4>
             <p class="green">Rp <?= $b['harga']; ?>,-</p>
             <p class="grey">Kota Semarang</p>
@@ -96,7 +96,7 @@
 <div class="product">
     <?php foreach ($kardus as $k) : ?>
         <a class="product-item" href="/barang/<?= $k['slug']; ?>">
-            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $k['foto']; ?>);"></div>
+            <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $k['foto']; ?>');"></div>
             <h4><?= character_limiter($k['nama'], 20); ?></h4>
             <p class="green">Rp <?= $k['harga']; ?>,-</p>
             <p class="grey">Kota Semarang</p>
@@ -110,7 +110,7 @@
 <div class="product">
     <?php foreach ($besi as $bes) : ?>
         <a class="product-item" href="/barang/<?= $bes['slug']; ?>">
-            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $bes['foto']; ?>);"></div>
+            <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $bes['foto']; ?>');"></div>
             <h4><?= character_limiter($bes['nama'], 20); ?></h4>
             <p class="green">Rp <?= $bes['harga']; ?>,-</p>
             <p class="grey">Kota Semarang</p>
@@ -124,7 +124,7 @@
 <div class="product">
     <?php foreach ($kain as $ka) : ?>
         <a class="product-item" href="/barang/<?= $ka['slug']; ?>">
-            <div class="gambar-kecil" style="background-image: url(/img/uploads/barang/<?= $ka['foto']; ?>);"></div>
+            <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $ka['foto']; ?>');"></div>
             <h4><?= character_limiter($ka['nama'], 20); ?></h4>
             <p class="green">Rp <?= $ka['harga']; ?>,-</p>
             <p class="grey">Kota Semarang</p>
