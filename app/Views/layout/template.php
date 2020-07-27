@@ -12,33 +12,36 @@
 <body>
     <!-- Nav -->
     <div class="nav">
-        <!-- Logo Brand -->
-        <a href="/">
-            <img src="/img/rosok-logo.png" alt="rosok-logo" />
-            <h1>Rosok.com</h1>
-        </a>
+        <div class="nav-items">
+            <!-- Logo Brand -->
+            <a href="/">
+                <img src="/img/rosok-logo.png" alt="rosok-logo" />
+                <h1>Rosok.com</h1>
+            </a>
 
-        <!-- Kotak Pencarian -->
-        <form action="cari" method="get">
-            <input type="text" name="rosok" placeholder="Cari barang rosok" />
-            <button type="submit">Cari</button>
-        </form>
+            <!-- Kotak Pencarian -->
+            <form action="cari" method="get">
+                <?= csrf_field(); ?>
+                <input type="text" name="rosok" placeholder="Cari barang rosok" />
+                <button type="submit">Cari</button>
+            </form>
 
-        <div>
-            <?php if (session()->get('isLoggedIn')) : ?>
-                <!-- Tombol Nama Akun -->
-                <p class="btn-primary tombolnav">
-                    &#128100; <?= session()->get('username'); ?>
-                </p>
-            <?php else : ?>
-                <!-- Tombol Daftar -->
-                <a href="/users" class="btn-primary">Login</a>
-            <?php endif; ?>
-            <div class="navmenu hidden">
-                <a href="/barang/create">Tambah barang</a>
-                <a href="/barang">Daftar barang</a>
-                <a href="/">Pengaturan</a>
-                <a href="/users/logout">Logout</a>
+            <div>
+                <?php if (session()->get('isLoggedIn')) : ?>
+                    <!-- Tombol Nama Akun -->
+                    <a class="btn-primary tombolnav">
+                        <img src="/img/uploads/user/<?= session()->get('foto'); ?>" alt="<?= session()->get('username'); ?>"> <?= session()->get('username'); ?>
+                    </a>
+                <?php else : ?>
+                    <!-- Tombol Daftar -->
+                    <a href="/users" class="btn-primary">Login</a>
+                <?php endif; ?>
+                <div class="navmenu hidden">
+                    <a href="/barang/create">Tambah barang</a>
+                    <a href="/barang">Daftar barang</a>
+                    <a href="/users/profile">Edit Profile</a>
+                    <a href="/users/logout">Logout</a>
+                </div>
             </div>
         </div>
     </div>
@@ -51,15 +54,17 @@
     <!-- End Container -->
 
     <!-- Footer -->
-    <footer class="mt5 flex">
-        <p class="grey">Copyright 2020 &copy; Rosok.com</p>
-        <p>
-            <a href="/tentang">Tentang</a>
-            &middot;
-            <a href="/kontak">Kontak</a>
-            &middot;
-            <a href="/bantuan">Bantuan</a>
-        </p>
+    <footer class="mt5">
+        <div class="footer-items flex">
+            <p class="grey">Copyright 2020 &copy; Rosok.com</p>
+            <p>
+                <a href="/tentang">Tentang</a>
+                &middot;
+                <a href="/kontak">Kontak</a>
+                &middot;
+                <a href="/bantuan">Bantuan</a>
+            </p>
+        </div>
     </footer>
     <!-- End Footer -->
 

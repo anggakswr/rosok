@@ -9,6 +9,7 @@
 <div class="flex">
     <!-- Kotak Pencarian -->
     <form action="" method="post">
+        <?= csrf_field(); ?>
         <input type="text" placeholder="Cari barang dagangan" name="keyword" />
         <button>Cari</button>
     </form>
@@ -43,7 +44,7 @@
                 </a>
             </td>
             <td><?= $b['nama']; ?></td>
-            <td>Rp <?= $b['harga']; ?>,-</td>
+            <td>Rp <?= number_format($b['harga'], 2, ',', '.'); ?>,-</td>
             <td>205x</td>
             <td>
                 <a href="/barang/<?= $b['slug']; ?>" class="btn-primary">Lihat</a>

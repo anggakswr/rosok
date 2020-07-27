@@ -4,19 +4,10 @@
 <link rel="stylesheet" href="/css/login.css">
 
 <!-- Daftar -->
-<form action="" method="post" class="login" enctype="multipart/form-data">
+<form action="" method="post" class="login">
     <?= csrf_field(); ?>
 
     <h3>Daftar</h3>
-
-    <div class="gambar-kecil inline-block" style="background-image: url('/img/uploads/user/user.png');"></div>
-
-    <input type="file" name="foto">
-    <?php if ($validation->hasError("foto")) : ?>
-        <div class="error-flash">
-            <?= $validation->getError("foto"); ?>
-        </div>
-    <?php endif; ?>
 
     <input type="text" name="username" placeholder="Masukkan username" autofocus value="<?= old('username'); ?>" />
     <?php if ($validation->hasError('username')) : ?>
@@ -70,29 +61,5 @@
     $(document).ready(function() {
         $(".js-example-basic-multiple").select2();
     });
-
-    // tangkap elemen
-    const imgPreview = document.querySelector('.gambar-kecil');
-    const inputFoto = document.querySelector('input[type=file]');
-
-    // ganti image preview dg image yg mau diupload
-    inputFoto.onchange = function() {
-        const fileFoto = new FileReader();
-
-        // jika file foto di load, maka imgPreview akan berubah
-        fileFoto.onload = function(e) {
-            imgPreview.style.backgroundImage = 'url(' + e.target.result + ')';
-        }
-
-        // ini code dr mozilla
-        if (inputFoto.files[0]) {
-            fileFoto.readAsDataURL(inputFoto.files[0]);
-        }
-    }
-
-    // jika tombol plus diklik, maka gambar akan muncul
-    imgPreview.onclick = function() {
-        inputFoto.click();
-    }
 </script>
 <?= $this->endSection(); ?>

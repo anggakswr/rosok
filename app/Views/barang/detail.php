@@ -2,11 +2,11 @@
 <?= $this->section('content'); ?>
 <!-- Link SEO -->
 <p class="grey">
-    <a href="./index.html">Rosok</a>
+    <a href="/">Rosok</a>
     &raquo;
-    <a href="">Botol</a>
+    <a href="/kategori/<?= $barang['kategori']; ?>"><?= $barang['kategori']; ?></a>
     &raquo;
-    Botol Aqua Bekas 1kg
+    <?= $barang['nama']; ?>
 </p>
 <!-- End Link SEO -->
 
@@ -30,14 +30,14 @@
 
     <div class="nama-product-detail">
         <h2><?= $barang['nama']; ?></h2>
-        <h2 class="green">Rp <?= $barang['harga']; ?>,-</h2>
+        <h2 class="green">Rp <?= number_format($barang['harga'], 2, ',', '.'); ?></h2>
         <h3 class="grey">
-            Kota Semarang <span class="middot">&middot;</span>
+            <?= $user['lokasi']; ?> <span class="middot">&middot;</span>
             1 kg <span class="middot">&middot;</span>
             <span class="maroon">120 suka</span>
         </h3>
         <div class="tombol">
-            <a href="" class="btn-success">&#128222; Hubungi penjual</a>
+            <a href="" class="btn-success">Hubungi penjual</a>
             <a href="" class="btn-danger">Sukai barang</a>
             <a class="btn-secondary">Share</a>
         </div>
@@ -46,13 +46,13 @@
     <!-- Profil Toko -->
     <div class="profil-toko">
         <div class="foto-profil ml1">
-            <img src="./img/botol.png" alt="pengepul-botol-plastik" width="80px">
+            <img src="/img/uploads/user/<?= $user['foto']; ?>" alt="<?= $user['username']; ?>" width="80px">
         </div>
         <div class="nama-profil">
-            <p class="mb1">angga98w</p>
-            <p class="grey mb1">Kota Semarang</p>
+            <p class="mb1"><?= $user['username']; ?></p>
+            <p class="grey mb1"><?= $user['lokasi']; ?></p>
         </div>
-        <a href="" class="btn-danger">Kunjungi penjual</a>
+        <a href="/user/<?= $user['username']; ?>" class="btn-danger">Kunjungi penjual</a>
         <a class="btn-danger">Sukai penjual</a>
         <p class="maroon">50 suka</p>
     </div>

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\BarangModel;
 use App\Models\FotoModel;
 use App\Models\KategoriModel;
+use App\Models\UsersModel;
 
 class Barang extends BaseController
 {
@@ -29,10 +30,11 @@ class Barang extends BaseController
             ]
         ],
         'harga' => [
-            'rules' => 'required|min_length[3]',
+            'rules' => 'required|min_length[3]|numeric',
             'errors' => [
                 'required' => 'Harga harus diisi.',
-                'min_length' => 'Harga minimal 3 digit.'
+                'min_length' => 'Harga minimal 3 digit.',
+                'numeric' => 'Harga harus angka.'
             ]
         ],
         'berat' => [
@@ -50,7 +52,6 @@ class Barang extends BaseController
     {
         $this->barangModel = new BarangModel();
         $this->fotoModel = new FotoModel();
-        $this->kategoriModel = new KategoriModel();
 
         for ($i = 1; $i < 5; $i++) {
             $this->rulesBarang += [
@@ -95,6 +96,8 @@ class Barang extends BaseController
 
     public function detail($slug)
     {
+        $usersModel = new UsersModel();
+
         $data = [
             'title' => 'Detail Barang',
             'foto' => $this->fotoModel->getFoto($slug)
@@ -103,7 +106,8 @@ class Barang extends BaseController
         $data['barang'] = $this->barangModel->getBarang($slug);
         $data['barangKategori'] = $this->barangModel
             ->getBarangKategori($data['barang']['kategori'])
-            ->findAll(5);
+            ->findAll(6);
+        $data['user'] = $usersModel->find($data['barang']['users_id']);
 
         // jika barang tdk ad di tbl
         if (empty($data['barang'])) {
@@ -117,10 +121,12 @@ class Barang extends BaseController
 
     public function create()
     {
+        $kategoriModel = new KategoriModel();
+
         $data = [
             'title' => 'Tambah Barang',
             'validation' => \Config\Services::validation(),
-            'kategori' => $this->kategoriModel->findAll()
+            'kategori' => $kategoriModel->findAll()
         ];
 
         return view('barang/create', $data);
@@ -142,7 +148,7 @@ class Barang extends BaseController
         ];
 
         // cek apa nama barang sdh ad atau blm
-        $cekNama = $this->barangModel->where(['nama' => $this->request->getPost('nama')])->countAllResults();
+        $cekNama = $this->barangModel->where(['nama', $this->request->getPost('nama')])->countAllResults();
         if ($cekNama !== 0) {
             // jika nama sdh ad, modifikasi slug (ditambah angka)
             $slug = url_title($this->request->getPost('nama'), '-', true) . '-' . $cekNama;
@@ -218,12 +224,14 @@ class Barang extends BaseController
 
     public function edit($slug)
     {
+        $kategoriModel = new KategoriModel();
+
         $data = [
             'title' => 'Edit Barang',
             'validation' => \Config\Services::validation(),
             'barang' => $this->barangModel->getBarang($slug),
             'foto' => $this->fotoModel->getFoto($slug),
-            'kategori' => $this->kategoriModel->findAll()
+            'kategori' => $kategoriModel->findAll()
         ];
 
         return view('barang/edit', $data);

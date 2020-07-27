@@ -34,7 +34,7 @@ button,
   background-color: #3d5af1;
   color: azure;
   border: none;
-  transition: 0.3s;
+  transition: 0.1s;
 }
 
 .btn-primary,
@@ -51,7 +51,7 @@ button:hover,
 .btn-danger:hover,
 .btn-warning:hover,
 .btn-success:hover {
-  filter: brightness(80%);
+  filter: brightness(120%);
   color: #fff;
 }
 
@@ -239,16 +239,21 @@ input[name="berat"] {
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Nav -=-=-=-=-=-=-=-=-=-=-=-=- */
 .nav {
-  padding: 10px 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   box-shadow: 0 2px 1px lightgray;
   position: fixed;
   right: 0;
   left: 0;
   background-color: #fff;
   z-index: 2;
+}
+
+.nav-items {
+  margin: auto;
+  max-width: 1280px;
+  padding: 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav input {
@@ -258,11 +263,22 @@ input[name="berat"] {
 .nav a {
   display: flex;
   align-items: center;
+  background-color: inherit;
+  color: #3d5af1;
+}
+
+.nav a:hover {
+  filter: none;
+  color: grey;
 }
 
 .nav img {
   width: 40px;
   margin-right: 10px;
+}
+
+.tombolnav img {
+  width: 15px;
 }
 
 .navmenu {
@@ -548,6 +564,13 @@ header {
   color: grey;
 }
 
+.footer-items {
+  margin: auto;
+  max-width: 1280px;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Footer -=-=-=-=-=-=-=-=-=-=-=-=- */
 footer {
   padding: 20px;
@@ -617,7 +640,11 @@ footer {
   }
 
   .slide h1 {
-    font-size: 25px;
+    font-size: 35px;
+  }
+
+  .slide img {
+    width: 100px;
   }
 
   .nav2 {
@@ -628,5 +655,4 @@ footer {
     display: flex;
     justify-content: space-between;
   }
-
 }

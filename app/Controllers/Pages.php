@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\BarangModel;
+use App\Models\UsersModel;
 
 class Pages extends BaseController
 {
@@ -29,6 +30,9 @@ class Pages extends BaseController
         if ($cari) {
             $barang = $barangModel
                 ->searchBarang($cari)
+                ->paginate(100, 'barang');
+        } else {
+            $barang = $barangModel
                 ->paginate(100, 'barang');
         }
 
@@ -64,5 +68,33 @@ class Pages extends BaseController
             'title' => 'Bantuan Rosok.com'
         ];
         return view('pages/bantuan', $data);
+    }
+
+    public function kategori($kategori)
+    {
+        $barangModel = new BarangModel();
+
+        $data = [
+            'title' => 'Jual ' . $kategori,
+            'barang' => $barangModel->getBarangKategori($kategori)->paginate(100, 'barang'),
+            'pager' => $barangModel->pager
+        ];
+
+        return view('pages/cari', $data);
+    }
+
+    public function user($username)
+    {
+        $barangModel = new BarangModel();
+        $usersModel = new UsersModel();
+
+        $data = [
+            'title' => $username,
+            'user' => $usersModel->where('username', $username)->first()
+        ];
+        $data['barang'] = $barangModel->getBarangUser($data['user']['id'])->paginate(20, 'barang');
+        $data['pager'] = $barangModel->pager;
+
+        return view('pages/user', $data);
     }
 }

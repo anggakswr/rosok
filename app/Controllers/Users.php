@@ -40,7 +40,7 @@ class Users extends BaseController
                     'required' => 'Password harus diisi.',
                     'min_length' => 'Password terlalu pendek.',
                     'max_length' => 'Password terlalu panjang.',
-                    'validateUser' => 'Password tidak atau password salah.'
+                    'validateUser' => 'Username atau password salah.'
                 ]
             ];
 
@@ -67,6 +67,7 @@ class Users extends BaseController
     {
         $data = [
             'id' => $user['id'],
+            'foto' => $user['foto'],
             'username' => $user['username'],
             'email' => $user['email'],
             'isLoggedIn' => true
@@ -89,7 +90,6 @@ class Users extends BaseController
         if ($this->request->getMethod() == 'post') {
             // validation rules
             $rulesUsers = [
-                'foto' => 'max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
                 'username' => 'required|min_length[3]|max_length[20]|is_unique[users.username]',
                 'lokasi' => 'required|is_not_unique[lokasi.nama]',
                 'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[users.email]',
@@ -97,42 +97,40 @@ class Users extends BaseController
                 'password2' => 'matches[password]'
             ];
 
-            // ambil foto yg ad diinput jg ad
-            // $foto = $this->request->getFile('foto');
-
-            // jika ada foto yg diupload
-            if ($img = $this->request->getFile('foto')) {
-                if ($img->isValid() && !$img->hasMoved()) {
-                    $img->move(WRITEPATH . 'img/uploads/user');
-                    $namaFoto = $img->getName();
-                }
-            } else {
-                $namaFoto = 'user.png';
-            }
-
-            // jika tdk ad foto profil yg di upload
-            // if ($foto->getError() == 4) {
-            //     $namaFoto = 'user.png';
-            // } else {
-            //     $foto->move('img/uploads/user');
-            //     $namaFoto = $foto->getName();
-            // }
-
-            // taruh gambar ke folder
-            // if (!empty($foto)) {
-            //     $foto->move('img/uploads/user');
-            //     $namaFoto = $foto->getName();
-            // } else {
-            //     $namaFoto = 'user.png';
-            // }
+            $errors = [
+                'username' => [
+                    'required' => 'Username harus diisi.',
+                    'min_length' => 'Username terlalu pendek.',
+                    'max_length' => 'Username terlalu panjang.',
+                    'is_unique' => 'Username sudah ada.'
+                ],
+                'lokasi' => [
+                    'required' => 'Lokasi harus diisi.',
+                    'is_not_unique' => 'Lokasi tidak ada.'
+                ],
+                'email' => [
+                    'required' => 'Email harus diisi.',
+                    'min_length' => 'Email terlalu pendek.',
+                    'max_length' => 'Email terlalu panjang.',
+                    'valid_email' => 'Email tidak valid.'
+                ],
+                'password' => [
+                    'required' => 'Password harus diisi.',
+                    'min_length' => 'Password terlalu pendek.',
+                    'max_length' => 'Password terlalu panjang.',
+                    'validateUser' => 'Password tidak atau password salah.'
+                ],
+                'password2' => [
+                    'matches' => 'Password tidak cocok.'
+                ]
+            ];
 
             // jika ada input yg melanggar rules
-            if (!$this->validate($rulesUsers)) {
+            if (!$this->validate($rulesUsers, $errors)) {
                 return redirect()->to('/users/daftar')->withInput();
             } else {
                 // simpan user ke db
                 $data = [
-                    'foto' => $namaFoto,
                     'username' => $this->request->getPost('username'),
                     'lokasi' => $this->request->getPost('lokasi'),
                     'email' => $this->request->getPost('email'),
@@ -152,16 +150,30 @@ class Users extends BaseController
     public function profile()
     {
         $data = [
-            'title' => 'Daftar',
+            'title' => 'Edit Profile',
             'user' => $this->usersModel->where('id', session()->get('id'))->first(),
-            'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation(),
+            'lokasi' => $this->lokasiModel->findAll()
         ];
 
         if ($this->request->getMethod() == 'post') {
             // validation rules
             $rulesUsers = [
-                'username' => 'required|min_length[3]|max_length[20]'
+                'foto' => 'max_size[foto,1024]|is_image[foto]',
+                'username' => 'required|min_length[3]|max_length[20]',
+                'lokasi' => 'required|is_not_unique[lokasi.nama]'
             ];
+
+            // ambil foto yg ad diinput jg ad
+            $foto = $this->request->getFile('foto');
+
+            // jika ada foto yg diupload
+            if ($foto->isValid() && !$foto->hasMoved()) {
+                $namaFoto = $foto->getName();
+                $foto->move('img/uploads/user');
+            } else {
+                $namaFoto = $data['user']['foto'];
+            }
 
             // jika password diisi
             if ($this->request->getPost('password') != '') {
@@ -170,14 +182,44 @@ class Users extends BaseController
                 $rulesUsers['password2'] = 'matches[password]';
             }
 
+            $errors = [
+                'username' => [
+                    'required' => 'Username harus diisi.',
+                    'min_length' => 'Username terlalu pendek.',
+                    'max_length' => 'Username terlalu panjang.',
+                    'is_unique' => 'Username sudah ada.'
+                ],
+                'lokasi' => [
+                    'required' => 'Lokasi harus diisi.',
+                    'is_not_unique' => 'Lokasi tidak ada.'
+                ],
+                'email' => [
+                    'required' => 'Email harus diisi.',
+                    'min_length' => 'Email terlalu pendek.',
+                    'max_length' => 'Email terlalu panjang.',
+                    'valid_email' => 'Email tidak valid.'
+                ],
+                'password' => [
+                    'required' => 'Password harus diisi.',
+                    'min_length' => 'Password terlalu pendek.',
+                    'max_length' => 'Password terlalu panjang.',
+                    'validateUser' => 'Password tidak atau password salah.'
+                ],
+                'password2' => [
+                    'matches' => 'Password tidak cocok.'
+                ]
+            ];
+
             // jika ada input yg melanggar rules
-            if (!$this->validate($rulesUsers)) {
-                return redirect()->to('/users/daftar')->withInput();
+            if (!$this->validate($rulesUsers, $errors)) {
+                return redirect()->to('/users/profile')->withInput();
             } else {
                 // simpan user ke db
                 $data = [
                     'id' => session()->get('id'),
-                    'username' => $this->request->getPost('username')
+                    'foto' => $namaFoto,
+                    'username' => $this->request->getPost('username'),
+                    'lokasi' => $this->request->getPost('lokasi')
                 ];
 
                 // jika password diisi
