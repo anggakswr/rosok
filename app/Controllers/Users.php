@@ -117,8 +117,7 @@ class Users extends BaseController
                 'password' => [
                     'required' => 'Password harus diisi.',
                     'min_length' => 'Password terlalu pendek.',
-                    'max_length' => 'Password terlalu panjang.',
-                    'validateUser' => 'Password tidak atau password salah.'
+                    'max_length' => 'Password terlalu panjang.'
                 ],
                 'password2' => [
                     'matches' => 'Password tidak cocok.'
@@ -164,17 +163,6 @@ class Users extends BaseController
                 'lokasi' => 'required|is_not_unique[lokasi.nama]'
             ];
 
-            // ambil foto yg ad diinput jg ad
-            $foto = $this->request->getFile('foto');
-
-            // jika ada foto yg diupload
-            if ($foto->isValid() && !$foto->hasMoved()) {
-                $namaFoto = $foto->getName();
-                $foto->move('img/uploads/user');
-            } else {
-                $namaFoto = $data['user']['foto'];
-            }
-
             // jika password diisi
             if ($this->request->getPost('password') != '') {
                 // tambahkan rules utk password
@@ -183,6 +171,10 @@ class Users extends BaseController
             }
 
             $errors = [
+                'foto' => [
+                    'max_size' => 'Ukuran foto harus dibawah 1MB.',
+                    'is_image' => 'File bukan gambar.'
+                ],
                 'username' => [
                     'required' => 'Username harus diisi.',
                     'min_length' => 'Username terlalu pendek.',
@@ -202,8 +194,7 @@ class Users extends BaseController
                 'password' => [
                     'required' => 'Password harus diisi.',
                     'min_length' => 'Password terlalu pendek.',
-                    'max_length' => 'Password terlalu panjang.',
-                    'validateUser' => 'Password tidak atau password salah.'
+                    'max_length' => 'Password terlalu panjang.'
                 ],
                 'password2' => [
                     'matches' => 'Password tidak cocok.'
@@ -214,6 +205,17 @@ class Users extends BaseController
             if (!$this->validate($rulesUsers, $errors)) {
                 return redirect()->to('/users/profile')->withInput();
             } else {
+                // ambil foto yg ad diinput jg ad
+                $foto = $this->request->getFile('foto');
+
+                // jika ada foto yg diupload
+                if ($foto->isValid() && !$foto->hasMoved()) {
+                    $namaFoto = $foto->getName();
+                    $foto->move('img/uploads/user');
+                } else {
+                    $namaFoto = session()->get('foto');
+                }
+
                 // simpan user ke db
                 $data = [
                     'id' => session()->get('id'),
