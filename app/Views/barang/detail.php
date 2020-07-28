@@ -1,5 +1,11 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
+<?php if (session()->getFlashdata('pesan')) : ?>
+    <div class="notif">
+        <div><?= session()->getFlashdata('pesan'); ?></div>
+    </div>
+<?php endif; ?>
+
 <!-- Link SEO -->
 <p class="grey">
     <a href="/">Rosok</a>
@@ -32,14 +38,17 @@
         <h2><?= $barang['nama']; ?></h2>
         <h2 class="green">Rp <?= number_format($barang['harga'], 2, ',', '.'); ?></h2>
         <h3 class="grey">
-            <?= $user['lokasi']; ?> <span class="middot">&middot;</span>
-            1 kg <span class="middot">&middot;</span>
-            <span class="maroon">120 suka</span>
+            <?= $user['lokasi']; ?> &middot; 1 kg
         </h3>
         <div class="tombol">
             <a href="" class="btn-success">Hubungi penjual</a>
-            <a href="" class="btn-danger">Sukai barang</a>
             <a class="btn-secondary">Share</a>
+            <form action="/barang/sukaBarang/<?= $barang['id']; ?>" method="post" class="inline">
+                <?= csrf_field(); ?>
+                <input type="hidden" name="slug" value="<?= $barang['slug']; ?>">
+                <button type="submit" class="btn-danger">Sukai barang</button>
+            </form>
+            <span class="maroon">120 suka</span>
         </div>
     </div>
 
@@ -82,6 +91,17 @@
 <!-- End Slider Produk dari Penjual -->
 
 <script>
+    // notifikasi
+    const divMuncul = document.querySelector(".notif");
+    if (divMuncul) {
+        divMuncul.classList.add("muncul");
+
+        setInterval(() => {
+            divMuncul.classList.remove("muncul");
+        }, 5000);
+    }
+
+    // jika gambar kecil diklik, jadilah besar
     const fotoProduct = document.querySelector('.foto-product-detail');
     const gambarBesar = document.querySelector('.gambar-besar');
 

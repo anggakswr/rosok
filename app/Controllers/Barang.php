@@ -6,6 +6,7 @@ use App\Models\BarangModel;
 use App\Models\FotoModel;
 use App\Models\KategoriModel;
 use App\Models\UsersModel;
+use App\Models\SukaBarangModel;
 
 class Barang extends BaseController
 {
@@ -186,7 +187,6 @@ class Barang extends BaseController
         ]);
 
         session()->setFlashdata('pesan', 'Barang berhasil ditambahkan.');
-
         return redirect()->to('/barang');
     }
 
@@ -322,7 +322,17 @@ class Barang extends BaseController
         ]);
 
         session()->setFlashdata('pesan', 'Barang berhasil diupdate.');
-
         return redirect()->to('/barang');
+    }
+
+    public function sukaBarang($barang_id)
+    {
+        $sukaBarangModel = new SukaBarangModel();
+        $sukaBarangModel->save([
+            'barang_id' => $barang_id,
+            'users_id' => session()->get('id')
+        ]);
+        session()->setFlashdata('pesan', 'Barang telah disukai.');
+        return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
     }
 }
