@@ -158,7 +158,7 @@ class Users extends BaseController
         if ($this->request->getMethod() == 'post') {
             // validation rules
             $rulesUsers = [
-                'foto' => 'max_size[foto,1024]|is_image[foto]',
+                'foto' => 'max_size[foto,1024]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]',
                 'username' => 'required|min_length[3]|max_length[20]',
                 'lokasi' => 'required|is_not_unique[lokasi.nama]'
             ];
@@ -173,7 +173,8 @@ class Users extends BaseController
             $errors = [
                 'foto' => [
                     'max_size' => 'Ukuran foto harus dibawah 1MB.',
-                    'is_image' => 'File bukan gambar.'
+                    'is_image' => 'File bukan gambar.',
+                    'mime_in' => 'Format gambar harus jpg, jpeg, atau png.'
                 ],
                 'username' => [
                     'required' => 'Username harus diisi.',

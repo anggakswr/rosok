@@ -53,6 +53,7 @@ button:hover,
 .btn-success:hover {
   filter: brightness(120%);
   color: #fff;
+  cursor: pointer;
 }
 
 .btn-secondary {
@@ -277,13 +278,16 @@ input[name="berat"] {
   margin-right: 10px;
 }
 
+.tombolnav {
+  min-width: 120px;
+}
+
 .tombolnav img {
   width: 15px;
 }
 
 .navmenu {
   position: absolute;
-  /* right: 10px; */
   background-color: #fff;
 }
 
@@ -293,6 +297,7 @@ input[name="berat"] {
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Nav2 -=-=-=-=-=-=-=-=-=-=-=-=- */
+/* Nav untuk mengatur harga max, harga min, sorting di daftar brg */
 .nav2 > * {
   margin-top: 20px;
 }
