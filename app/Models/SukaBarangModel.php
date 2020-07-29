@@ -7,6 +7,5 @@ use CodeIgniter\Model;
 class SukaBarangModel extends Model
 {
     protected $table = 'suka_barang';
-    protected $useTimestamps = true;
-    protected $allowedFields = ['barang_id', 'users_id', 'updated_at'];
+    protected $allowedFields = ['barang_id', 'users_id'];
 }

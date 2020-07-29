@@ -43,12 +43,20 @@
         <div class="tombol">
             <a href="" class="btn-success">Hubungi penjual</a>
             <a class="btn-secondary">Share</a>
-            <form action="/barang/sukaBarang/<?= $barang['id']; ?>" method="post" class="inline">
-                <?= csrf_field(); ?>
-                <input type="hidden" name="slug" value="<?= $barang['slug']; ?>">
-                <button type="submit" class="btn-danger">Sukai barang</button>
-            </form>
-            <span class="maroon">120 suka</span>
+            <?php if (isset($cekSuka)) : ?>
+                <form action="/barang/unsukaBarang/<?= $cekSuka['id']; ?>" method="post" class="inline">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="slug" value="<?= $barang['slug']; ?>">
+                    <button type="submit" class="btn-danger">Batal suka barang</button>
+                </form>
+            <?php else : ?>
+                <form action="/barang/sukaBarang/<?= $barang['id']; ?>" method="post" class="inline">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="slug" value="<?= $barang['slug']; ?>">
+                    <button type="submit" class="btn-danger">Sukai barang</button>
+                </form>
+            <?php endif; ?>
+            <span class="maroon"><?= $jumlahSuka; ?> suka</span>
         </div>
     </div>
 

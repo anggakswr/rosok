@@ -98,6 +98,7 @@ class Barang extends BaseController
     public function detail($slug)
     {
         $usersModel = new UsersModel();
+        $sukaBarangModel = new SukaBarangModel();
 
         $data = [
             'title' => 'Detail Barang',
@@ -105,15 +106,24 @@ class Barang extends BaseController
         ];
 
         $data['barang'] = $this->barangModel->getBarang($slug);
+
+        // jika barang tdk ad di db
+        if (empty($data['barang'])) {
+            return view('errors/error', [
+                'error' => "Barang {$slug} tidak ditemukan.",
+                'title' => "Barang {$slug} tidak ditemukan.",
+                'barang' => $this->barangModel->findAll(6)
+            ]);
+        }
+
         $data['barangKategori'] = $this->barangModel
             ->getBarangKategori($data['barang']['kategori'])
             ->findAll(6);
         $data['user'] = $usersModel->find($data['barang']['users_id']);
-
-        // jika barang tdk ad di tbl
-        if (empty($data['barang'])) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException("Barang {$slug} tidak ditemukan.");
-        }
+        $data['cekSuka'] = $sukaBarangModel
+            ->where('barang_id', $data['barang']['id'])
+            ->where('users_id', session()->get('id'))->first();
+        $data['jumlahSuka'] = $sukaBarangModel->where('barang_id', $data['barang']['id'])->countAllResults();
 
         return view('barang/detail', $data);
     }
@@ -327,12 +337,24 @@ class Barang extends BaseController
 
     public function sukaBarang($barang_id)
     {
+        if (session()->get('id') != null) {
+            $sukaBarangModel = new SukaBarangModel();
+            $sukaBarangModel->save([
+                'barang_id' => $barang_id,
+                'users_id' => session()->get('id')
+            ]);
+            session()->setFlashdata('pesan', 'Barang telah disukai.');
+            return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
+        } else {
+            return redirect()->to('/users');
+        }
+    }
+
+    public function unsukaBarang($cekSuka_id)
+    {
         $sukaBarangModel = new SukaBarangModel();
-        $sukaBarangModel->save([
-            'barang_id' => $barang_id,
-            'users_id' => session()->get('id')
-        ]);
-        session()->setFlashdata('pesan', 'Barang telah disukai.');
+        $sukaBarangModel->delete($cekSuka_id);
+        session()->setFlashdata('pesan', 'Batal suka barang.');
         return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
     }
 }

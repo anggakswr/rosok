@@ -20,7 +20,7 @@
             </a>
 
             <!-- Kotak Pencarian -->
-            <form action="cari" method="get">
+            <form action="/cari" method="get">
                 <?= csrf_field(); ?>
                 <input type="text" name="rosok" placeholder="Cari barang rosok" />
                 <button type="submit">Cari</button>
@@ -30,7 +30,10 @@
                 <?php if (session()->get('isLoggedIn')) : ?>
                     <!-- Tombol Nama Akun -->
                     <a class="btn-primary tombolnav">
-                        <img src="/img/uploads/user/<?= session()->get('foto'); ?>" alt="<?= session()->get('username'); ?>"> <?= session()->get('username'); ?>
+                        <?php if (session()->get('foto') != null) : ?>
+                            <img src="/img/uploads/user/<?= session()->get('foto'); ?>" alt="<?= session()->get('username'); ?>">
+                        <?php endif; ?>
+                        <?= session()->get('username'); ?>
                     </a>
                 <?php else : ?>
                     <!-- Tombol Daftar -->
