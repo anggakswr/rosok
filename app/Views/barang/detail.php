@@ -5,6 +5,11 @@
         <div><?= session()->getFlashdata('pesan'); ?></div>
     </div>
 <?php endif; ?>
+<?php if (session()->getFlashdata('error')) : ?>
+    <div class="notif">
+        <div class="maroon"><?= session()->getFlashdata('error'); ?></div>
+    </div>
+<?php endif; ?>
 
 <!-- Link SEO -->
 <p class="grey">

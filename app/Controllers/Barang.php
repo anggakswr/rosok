@@ -335,20 +335,39 @@ class Barang extends BaseController
         return redirect()->to('/barang');
     }
 
+    // --------------------------------------------------------
+
     public function sukaBarang($barang_id)
     {
+        // jika user sdh login
         if (session()->get('id') != null) {
             $sukaBarangModel = new SukaBarangModel();
-            $sukaBarangModel->save([
-                'barang_id' => $barang_id,
-                'users_id' => session()->get('id')
-            ]);
-            session()->setFlashdata('pesan', 'Barang telah disukai.');
-            return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
+            // cek apa brg sdh disukai / blm
+            $cekSuka = $sukaBarangModel
+                ->where('barang_id', $barang_id)
+                ->where('users_id', session()->get('id'))->first();
+
+            // jika user sdh pernah like
+            if ($cekSuka) {
+                // kasih tau
+                session()->setFlashdata('error', 'Barang sudah pernah disukai.');
+                return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
+            } else {
+                // like brg
+                $sukaBarangModel->save([
+                    'barang_id' => $barang_id,
+                    'users_id' => session()->get('id')
+                ]);
+                session()->setFlashdata('pesan', 'Barang telah disukai.');
+                return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
+            }
         } else {
+            // suruh login
             return redirect()->to('/users');
         }
     }
+
+    // --------------------------------------------------------
 
     public function unsukaBarang($cekSuka_id)
     {

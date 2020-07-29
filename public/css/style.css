@@ -199,15 +199,7 @@ input[name="berat"] {
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=- Pesan Flash -=-=-=-=-=-=-=-=-=-=-=-=- */
-.success-flash {
-  background-color: lightgreen;
-  color: green;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-
 .error-flash {
-  /* background-color: salmon; */
   color: red;
   margin-top: 5px;
 }
@@ -226,7 +218,6 @@ input[name="berat"] {
   width: 500px;
   height: 30px;
   background-color: #ffffff;
-  color: green;
   font-size: 14px;
   border-radius: 5px;
   border: 1px solid azure;
