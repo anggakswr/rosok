@@ -21,7 +21,6 @@
 
             <!-- Kotak Pencarian -->
             <form action="/cari" method="get">
-                <?= csrf_field(); ?>
                 <input type="text" name="rosok" placeholder="Cari barang rosok" />
                 <button type="submit">Cari</button>
             </form>

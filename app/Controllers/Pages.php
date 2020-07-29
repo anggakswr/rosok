@@ -25,11 +25,12 @@ class Pages extends BaseController
     public function cari()
     {
         $barangModel = new BarangModel();
-        $cari = $this->request->getGet('rosok');
+        $keyword = $this->request->getGet('rosok');
+        $hargaMaks = $this->request->getGet('harga-maksimum');
 
-        if ($cari) {
+        if ($keyword) {
             $barang = $barangModel
-                ->searchBarang($cari)
+                ->searchBarang($keyword, $hargaMaks)
                 ->paginate(100, 'barang');
         } else {
             $barang = $barangModel
@@ -37,9 +38,9 @@ class Pages extends BaseController
         }
 
         $data = [
-            'title' => 'Jual ' . $cari,
+            'title' => 'Jual ' . $keyword,
             'barang' => $barang,
-            'cari' => $cari,
+            'cari' => $keyword,
             'pager' => $barangModel->pager
         ];
 
@@ -75,7 +76,7 @@ class Pages extends BaseController
         $barangModel = new BarangModel();
 
         $data = [
-            'title' => 'Jual ' . $kategori,
+            'title' => $kategori,
             'barang' => $barangModel->getBarangKategori($kategori)->paginate(100, 'barang'),
             'pager' => $barangModel->pager
         ];

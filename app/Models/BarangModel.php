@@ -29,8 +29,17 @@ class BarangModel extends Model
         return $this->where('kategori', $kategori)->orderBy('id', 'desc');
     }
 
-    public function searchBarang($keyword)
+    public function searchBarang($keyword = null, $hargaMaks = null, $hargaMin = null)
     {
-        return $this->like('nama', $keyword)->orderBy('id', 'desc');
+        if ($keyword != null) {
+            return $this->like('nama', $keyword)->orderBy('id', 'desc');
+        } elseif ($hargaMaks != null) {
+            return $this->like('nama', $keyword)->orderBy('id', 'desc')
+                ->where('harga', '<= ' . $hargaMaks);
+        } elseif ($hargaMaks != null && $hargaMin != null) {
+            return $this->like('nama', $keyword)->orderBy('id', 'desc')
+                ->where('harga', '<= ' . $hargaMaks)
+                ->where('harga', '>= ' . $hargaMin);
+        }
     }
 }

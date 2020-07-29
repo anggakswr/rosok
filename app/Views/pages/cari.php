@@ -3,9 +3,11 @@
 <div class="flex nav2">
     <!-- Tentukan Harga -->
     <form action="" method="get">
-        <?= csrf_field(); ?>
-        <input type="text" name="harga-maksimum" placeholder="Harga maksimum">
-        <input type="text" name="harga-minimum" placeholder="Harga minimum">
+        <?php $request = \Config\Services::request(); ?>
+        <input type="text" name="rosok" placeholder="Cari barang rosok" value="<?= $request->getGet('rosok'); ?>">
+        <input type="number" name="hargaMaks" placeholder="Harga maksimum" value="<?= $request->getGet('hargaMaks'); ?>">
+        <input type="number" name="hargaMin" placeholder="Harga minimum" value="<?= $request->getGet('hargaMin'); ?>">
+        <button type="submit" class="hidden">Cari</button>
     </form>
     <!-- End Tentukan Harga -->
 
@@ -21,7 +23,15 @@
 
 <!-- Hasil Pencarian-->
 <h2 class="mt5">
-    Hasil pencarian untuk "<?= (isset($cari)) ? $cari : $title; ?>"
+    <?php
+    if (isset($cari)) {
+        echo 'Hasil pencarian untuk ' . $cari;
+    } elseif (isset($title)) {
+        echo 'Menampilkan semua barang dari kategori ' . $title;
+    } else {
+        echo 'Menampilkan semua barang';
+    }
+    ?>
 </h2>
 
 <?php helper('text'); ?>
