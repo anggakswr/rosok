@@ -7,6 +7,7 @@ use App\Models\FotoModel;
 use App\Models\KategoriModel;
 use App\Models\UsersModel;
 use App\Models\SukaBarangModel;
+use App\Models\SukaPenjualModel;
 
 class Barang extends BaseController
 {
@@ -99,6 +100,7 @@ class Barang extends BaseController
     {
         $usersModel = new UsersModel();
         $sukaBarangModel = new SukaBarangModel();
+        $sukaPenjualModel = new SukaPenjualModel();
 
         $data = [
             'title' => 'Detail Barang',
@@ -120,10 +122,14 @@ class Barang extends BaseController
             ->getBarangKategori($data['barang']['kategori'])
             ->findAll(6);
         $data['user'] = $usersModel->find($data['barang']['users_id']);
-        $data['cekSuka'] = $sukaBarangModel
+        $data['cekSukaBarang'] = $sukaBarangModel
             ->where('barang_id', $data['barang']['id'])
             ->where('users_id', session()->get('id'))->first();
-        $data['jumlahSuka'] = $sukaBarangModel->where('barang_id', $data['barang']['id'])->countAllResults();
+        $data['jumlahSukaBarang'] = $sukaBarangModel->where('barang_id', $data['barang']['id'])->countAllResults();
+        $data['cekSukaUser'] = $sukaPenjualModel
+            ->where('penjual_id', $data['user']['id'])
+            ->where('users_id', session()->get('id'))->first();
+        $data['jumlahSukaUser'] = $sukaPenjualModel->where('penjual_id', $data['user']['id'])->countAllResults();
 
         return view('barang/detail', $data);
     }
@@ -222,7 +228,7 @@ class Barang extends BaseController
             // hapus data barang dr db
             $this->barangModel->delete($id);
         } else {
-            session()->setFlashdata('pesan', 'Tidak bisa menghapus barang orang lain.');
+            session()->setFlashdata('error', 'Tidak bisa menghapus barang orang lain.');
             return redirect()->to('/barang');
         }
 
@@ -351,7 +357,7 @@ class Barang extends BaseController
             if ($cekSuka) {
                 // kasih tau
                 session()->setFlashdata('error', 'Barang sudah pernah disukai.');
-                return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
+                return redirect()->to(previous_url());
             } else {
                 // like brg
                 $sukaBarangModel->save([
@@ -359,7 +365,7 @@ class Barang extends BaseController
                     'users_id' => session()->get('id')
                 ]);
                 session()->setFlashdata('pesan', 'Barang telah disukai.');
-                return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
+                return redirect()->to(previous_url());
             }
         } else {
             // suruh login
@@ -374,6 +380,6 @@ class Barang extends BaseController
         $sukaBarangModel = new SukaBarangModel();
         $sukaBarangModel->delete($cekSuka_id);
         session()->setFlashdata('pesan', 'Batal suka barang.');
-        return redirect()->to('/barang' . '/' . $this->request->getPost('slug'));
+        return redirect()->to(previous_url());
     }
 }

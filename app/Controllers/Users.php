@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UsersModel;
 use App\Models\LokasiModel;
+use App\Models\SukaPenjualModel;
 
 class Users extends BaseController
 {
@@ -246,5 +247,48 @@ class Users extends BaseController
     {
         session()->destroy();
         return redirect()->to('/');
+    }
+
+    // --------------------------------------------------------
+
+    public function sukaPenjual($penjual_id)
+    {
+        // jika user sdh login
+        if (session()->get('id') != null) {
+            $sukaPenjualModel = new SukaPenjualModel();
+            // cek apa brg sdh disukai / blm
+            $cekSuka = $sukaPenjualModel
+                ->where('penjual_id', $penjual_id)
+                ->where('users_id', session()->get('id'))->first();
+
+
+            // jika user sdh pernah like
+            if ($cekSuka) {
+                // kasih tau
+                session()->setFlashdata('error', 'Penjual sudah pernah disukai.');
+                return redirect()->to(previous_url());
+            } else {
+                // like brg
+                $sukaPenjualModel->save([
+                    'penjual_id' => $penjual_id,
+                    'users_id' => session()->get('id')
+                ]);
+                session()->setFlashdata('pesan', 'Penjual telah disukai.');
+                return redirect()->to(previous_url());
+            }
+        } else {
+            // suruh login
+            return redirect()->to('/users');
+        }
+    }
+
+    // --------------------------------------------------------
+
+    public function unsukaPenjual($cekSuka_id)
+    {
+        $sukaPenjualModel = new SukaPenjualModel();
+        $sukaPenjualModel->delete($cekSuka_id);
+        session()->setFlashdata('pesan', 'Batal suka penjual.');
+        return redirect()->to(previous_url());
     }
 }

@@ -2,7 +2,7 @@
 <?= $this->section('content'); ?>
 <?php if (session()->getFlashdata('pesan')) : ?>
     <div class="notif">
-        <div><?= session()->getFlashdata('pesan'); ?></div>
+        <div class="green"><?= session()->getFlashdata('pesan'); ?></div>
     </div>
 <?php endif; ?>
 <?php if (session()->getFlashdata('error')) : ?>
@@ -48,20 +48,18 @@
         <div class="tombol">
             <a href="" class="btn-success">Hubungi penjual</a>
             <a class="btn-secondary">Share</a>
-            <?php if (isset($cekSuka)) : ?>
-                <form action="/barang/unsukaBarang/<?= $cekSuka['id']; ?>" method="post" class="inline">
+            <?php if (isset($cekSukaBarang)) : ?>
+                <form action="/barang/unsukaBarang/<?= $cekSukaBarang['id']; ?>" method="post" class="inline">
                     <?= csrf_field(); ?>
-                    <input type="hidden" name="slug" value="<?= $barang['slug']; ?>">
                     <button type="submit" class="btn-danger">Batal suka barang</button>
                 </form>
             <?php else : ?>
                 <form action="/barang/sukaBarang/<?= $barang['id']; ?>" method="post" class="inline">
                     <?= csrf_field(); ?>
-                    <input type="hidden" name="slug" value="<?= $barang['slug']; ?>">
                     <button type="submit" class="btn-danger">Sukai barang</button>
                 </form>
             <?php endif; ?>
-            <span class="maroon"><?= $jumlahSuka; ?> suka</span>
+            <span class="maroon"><?= $jumlahSukaBarang; ?> suka</span>
         </div>
     </div>
 
@@ -75,8 +73,18 @@
             <p class="grey mb1"><?= $user['lokasi']; ?></p>
         </div>
         <a href="/user/<?= $user['username']; ?>" class="btn-danger">Kunjungi penjual</a>
-        <a class="btn-danger">Sukai penjual</a>
-        <p class="maroon">50 suka</p>
+        <?php if (isset($cekSukaUser)) : ?>
+            <form action="/users/unsukaPenjual/<?= $cekSukaUser['id']; ?>" method="post" class="inline">
+                <?= csrf_field(); ?>
+                <button type="submit" class="btn-danger">Batal suka barang</button>
+            </form>
+        <?php else : ?>
+            <form action="/users/sukaPenjual/<?= $user['id']; ?>" method="post" class="inline">
+                <?= csrf_field(); ?>
+                <button type="submit" class="btn-danger">Sukai barang</button>
+            </form>
+        <?php endif; ?>
+        <span class="maroon"><?= $jumlahSukaUser; ?> suka</span>
     </div>
     <!-- End Profil Toko -->
 </div>

@@ -2,7 +2,12 @@
 <?= $this->section('content'); ?>
 <?php if (session()->getFlashdata('pesan')) : ?>
     <div class="notif">
-        <div><?= session()->getFlashdata('pesan'); ?></div>
+        <div class="green"><?= session()->getFlashdata('pesan'); ?></div>
+    </div>
+<?php endif; ?>
+<?php if (session()->getFlashdata('error')) : ?>
+    <div class="notif">
+        <div class="maroon"><?= session()->getFlashdata('error'); ?></div>
     </div>
 <?php endif; ?>
 

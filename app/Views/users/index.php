@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/css/login.css">
 <?php if (session()->getFlashdata('pesan')) : ?>
     <div class="notif">
-        <div><?= session()->getFlashdata('pesan'); ?></div>
+        <div class="green"><?= session()->getFlashdata('pesan'); ?></div>
     </div>
 <?php endif; ?>
 
