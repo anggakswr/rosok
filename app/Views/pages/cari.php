@@ -25,7 +25,7 @@
 <h2 class="mt5">
     <?php
     if (isset($cari)) {
-        echo 'Hasil pencarian untuk ' . $cari;
+        echo $cari;
     } elseif (isset($title)) {
         echo 'Menampilkan semua barang dari kategori ' . $title;
     } else {

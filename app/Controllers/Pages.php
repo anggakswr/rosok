@@ -26,21 +26,17 @@ class Pages extends BaseController
     {
         $barangModel = new BarangModel();
         $keyword = $this->request->getGet('rosok');
-        $hargaMaks = $this->request->getGet('harga-maksimum');
+        $hargaMaks = $this->request->getGet('hargaMaks');
+        $hargaMin = $this->request->getGet('hargaMin');
 
-        if ($keyword) {
-            $barang = $barangModel
-                ->searchBarang($keyword, $hargaMaks)
-                ->paginate(100, 'barang');
-        } else {
-            $barang = $barangModel
-                ->paginate(100, 'barang');
-        }
+        $barang = $barangModel
+            ->searchBarang($keyword, $hargaMaks, $hargaMin)
+            ->paginate(100, 'barang');
 
         $data = [
             'title' => 'Jual ' . $keyword,
             'barang' => $barang,
-            'cari' => $keyword,
+            'cari' => ($keyword) ? "Hasil pencarian untuk '$keyword'" : 'Menampilkan semua barang',
             'pager' => $barangModel->pager
         ];
 
