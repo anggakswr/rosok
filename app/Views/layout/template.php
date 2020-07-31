@@ -1,78 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?= $title; ?> - Rosok.com</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title><?= $title; ?> - Rosok.com | Jual Beli Barang Rosok se-Indonesia</title>
 </head>
 
 <body>
     <!-- Nav -->
-    <div class="nav">
-        <div class="nav-items">
-            <!-- Logo Brand -->
-            <a href="/">
-                <img src="/img/rosok-logo.png" alt="rosok-logo" />
-                <h1>Rosok.com</h1>
-            </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Rosok.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <!-- Kotak Pencarian -->
-            <form action="/cari" method="get">
-                <input type="text" name="rosok" placeholder="Cari barang rosok" />
-                <button type="submit">Cari</button>
-            </form>
-
-            <div>
-                <?php if (session()->get('isLoggedIn')) : ?>
-                    <!-- Tombol Nama Akun -->
-                    <a class="btn-primary tombolnav">
-                        <?php if (session()->get('foto') != null) : ?>
-                            <img src="/img/uploads/user/<?= session()->get('foto'); ?>" alt="<?= session()->get('username'); ?>">
-                        <?php endif; ?>
-                        <?= session()->get('username'); ?>
-                    </a>
-                <?php else : ?>
-                    <!-- Tombol Daftar -->
-                    <a href="/users" class="btn-primary">Login</a>
-                <?php endif; ?>
-                <div class="navmenu hidden">
-                    <a href="/barang/create">Tambah barang</a>
-                    <a href="/barang">Daftar barang</a>
-                    <a href="/users/profile">Edit Profile</a>
-                    <a href="/users/logout">Logout</a>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <?php if (session()->get('isLoggedIn')) : ?>
+                        <!-- Sudah Login -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Jere
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Tambah barang</a>
+                                <a class="dropdown-item" href="#">Daftar barang</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Logout</a>
+                            </div>
+                        </li>
+                        <!-- End Sudah Login -->
+                    <?php else : ?>
+                        <!-- Belum Login -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./daftar.html">Daftar</a>
+                        </li>
+                        <!-- End Belum Login -->
+                    <?php endif; ?>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Cari barang rosok">
+                    <button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Cari</button>
+                </form>
             </div>
         </div>
-    </div>
+    </nav>
     <!-- End Nav -->
 
     <!-- Container -->
     <div class="container">
         <?= $this->renderSection('content'); ?>
     </div>
-    <!-- End Container -->
 
-    <!-- Footer -->
-    <footer class="mt5">
-        <div class="footer-items flex">
-            <p class="grey">Copyright 2020 &copy; Rosok.com</p>
-            <p>
-                <a href="/tentang">Tentang</a>
-                &middot;
-                <a href="/kontak">Kontak</a>
-                &middot;
-                <a href="/bantuan">Bantuan</a>
-            </p>
+    <footer class="d-flex justify-content-between mt-5 p-5">
+        <div>Copyright &copy; Rosok.com 2020. All rights reserved.</div>
+        <div>
+            <a href="#">Tentang</a> &middot;
+            <a href="#">Kontak</a> &middot;
+            <a href="#">Bantuan</a>
         </div>
     </footer>
-    <!-- End Footer -->
+    <!-- End Container -->
 
-    <!-- JS -->
-    <script src="/js/script.js"></script>
-    <!-- End JS -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="/js/bootstrap.min.js"></script>
 </body>
 
 </html>
