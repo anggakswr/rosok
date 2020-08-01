@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/select2.min.css">
 
     <title><?= $title; ?> - Rosok.com | Jual Beli Barang Rosok se-Indonesia</title>
 </head>
@@ -28,23 +29,27 @@
                         <!-- Sudah Login -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Jere
+                                <?php if (session()->get('foto') != null) : ?>
+                                    <img src="/img/uploads/user/<?= session()->get('foto'); ?>" alt="<?= session()->get('username'); ?>" width="15px" class="rounded-circle mr-2">
+                                <?php endif; ?>
+                                <?= session()->get('username'); ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Tambah barang</a>
-                                <a class="dropdown-item" href="#">Daftar barang</a>
+                                <a class="dropdown-item" href="/barang/tambah">Tambah barang</a>
+                                <a class="dropdown-item" href="/barang">Daftar barang</a>
+                                <a class="dropdown-item" href="/users/profile">Edit Profil</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="/users/logout">Logout</a>
                             </div>
                         </li>
                         <!-- End Sudah Login -->
                     <?php else : ?>
                         <!-- Belum Login -->
                         <li class="nav-item">
-                            <a class="nav-link" href="./login.html">Login</a>
+                            <a class="nav-link" href="/users/index">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="./daftar.html">Daftar</a>
+                            <a class="nav-link" href="/users/daftar">Daftar</a>
                         </li>
                         <!-- End Belum Login -->
                     <?php endif; ?>
@@ -60,15 +65,33 @@
 
     <!-- Container -->
     <div class="container">
+        <?php if (session()->getFlashdata('pesan')) : ?>
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <?= session()->getFlashdata('pesan'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('error')) : ?>
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <?= session()->getFlashdata('error'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+
         <?= $this->renderSection('content'); ?>
     </div>
 
-    <footer class="d-flex justify-content-between mt-5 p-5">
+    <footer class="d-flex justify-content-between mt-5 p-2">
         <div>Copyright &copy; Rosok.com 2020. All rights reserved.</div>
         <div>
-            <a href="#">Tentang</a> &middot;
-            <a href="#">Kontak</a> &middot;
-            <a href="#">Bantuan</a>
+            <a href="/tentang">Tentang</a> &middot;
+            <a href="/kontak">Kontak</a> &middot;
+            <a href="/bantuan">Bantuan</a>
         </div>
     </footer>
     <!-- End Container -->
@@ -77,6 +100,23 @@
     <script src="/js/jquery-3.5.1.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <?php if (
+        uri_string() == 'users/daftar'
+        || uri_string() == 'users/profile'
+        || uri_string() == 'barang/tambah'
+        || uri_string() == 'barang/edit'
+    ) : ?>
+        <script src="/js/select2.min.js"></script>
+        <script src="/js/select2.js"></script>
+    <?php endif; ?>
+
+    <?php if (uri_string() == 'users/profile') : ?>
+        <script src="/js/profile.js"></script>
+    <?php endif; ?>
+
+    <?php if (uri_string() == 'barang/tambah' || uri_string() == 'barang/edit') : ?>
+        <script src="/js/tambah.js"></script>
+    <?php endif; ?>
 </body>
 
 </html>

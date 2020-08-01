@@ -1,43 +1,36 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
-<link rel="stylesheet" href="/css/login.css">
-<?php if (session()->getFlashdata('pesan')) : ?>
-    <div class="notif">
-        <div class="green"><?= session()->getFlashdata('pesan'); ?></div>
-    </div>
-<?php endif; ?>
-
 <!-- Login -->
-<form action="" method="post" class="login">
-    <h3>Login</h3>
-    <input type="text" name="email" placeholder="Masukkan email" value="<?= old('email'); ?>" />
-    <?php if ($validation->hasError('email')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('email'); ?>
-        </div>
-    <?php endif; ?>
-    <input type="password" name="password" placeholder="Masukkan password" />
-    <?php if ($validation->hasError('password')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('password'); ?>
-        </div>
-    <?php endif; ?>
+<div class="row justify-content-md-center">
+    <div class="col-lg-4">
+        <h2 class="mt-5 mb-3">Login</h2>
+        <form action="" method="post">
+            <?= csrf_field(); ?>
 
-    <button type="submit">Login</button>
-    <a href="/users/daftar">Buat akun baru</a>
-</form>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control form-control-sm" id="email" name="email" value="<?= old('email'); ?>">
+                <?php if ($validation->hasError('email')) : ?>
+                    <small id="email" class="form-text text-danger">
+                        <?= $validation->getError('email'); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control form-control-sm" id="password" name="password">
+                <?php if ($validation->hasError('password')) : ?>
+                    <small id="password" class="form-text text-danger">
+                        <?= $validation->getError('password'); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <button type="submit" class="btn btn-sm btn-primary mr-2">Login</button>
+            <a href="/users/daftar" class="text-decoration-none">Daftar akun baru</a>
+        </form>
+    </div>
+</div>
 <!-- End Login -->
-
-<!-- Notifikasi -->
-<script>
-    const divMuncul = document.querySelector(".notif");
-    if (divMuncul) {
-        divMuncul.classList.add("muncul");
-
-        setInterval(() => {
-            divMuncul.classList.remove("muncul");
-        }, 5000);
-    }
-</script>
-<!-- End Notifikasi -->
 <?= $this->endSection(); ?>

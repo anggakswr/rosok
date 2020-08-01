@@ -1,87 +1,91 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
-<?php if (session()->getFlashdata('pesan')) : ?>
-    <div class="notif">
-        <div class="green"><?= session()->getFlashdata('pesan'); ?></div>
+<!-- Filter -->
+<form action="" method="post">
+    <?= csrf_field(); ?>
+    <div class="form-row">
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Cari barang dagangan" name="keyword">
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Harga maksimal">
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Harga minimum">
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <select class="custom-select custom-select-sm">
+                <option selected>-- Pilih kategori --</option>
+                <option value="Botol Plastik">Botol Plastik</option>
+                <option value="Besi Kiloan">Besi Kiloan</option>
+                <option value="Kardus">Kardus</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <select class="custom-select custom-select-sm">
+                <option selected>-- Urutkan --</option>
+                <option value="Harga rendah ke tinggi">Harga rendah ke tinggi</option>
+                <option value="Harga tinggi ke rendah">Harga tinggi ke rendah</option>
+                <option value="Paling banyak suka">Paling banyak suka</option>
+                <option value="Terbaru">Terbaru</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <button class="btn btn-sm btn-outline-primary" type="submit">Cari</button>
+        </div>
     </div>
-<?php endif; ?>
-<?php if (session()->getFlashdata('error')) : ?>
-    <div class="notif">
-        <div class="maroon"><?= session()->getFlashdata('error'); ?></div>
-    </div>
-<?php endif; ?>
+</form>
+<!-- End Filter -->
 
-<div class="flex">
-    <!-- Kotak Pencarian -->
-    <form action="" method="post">
-        <?= csrf_field(); ?>
-        <input type="text" placeholder="Cari barang dagangan" name="keyword" />
-        <button>Cari</button>
-    </form>
-    <!-- End Kotak Pencarian -->
-
-    <!-- Tombols -->
-    <div>
-        <button>Kategori &darr;</button>
-        <button>Urutkan &darr;</button>
-        <a href="/barang/create" class="btn-primary">Tambah Barang</a>
-        <a href="" class="btn-danger">Hapus Sekaligus</a>
-    </div>
-    <!-- End Tombols -->
-</div>
-
-<!-- Table -->
-<table class="mt3">
-    <tr>
-        <th>#</th>
-        <th>Foto</th>
-        <th>Nama barang</th>
-        <th>Harga</th>
-        <th>Dilihat</th>
-        <th>Atur</th>
-    </tr>
-    <?php foreach ($barang as $b) : ?>
+<!-- Table Barang -->
+<table class="table table-hover mt-5">
+    <thead>
         <tr>
-            <td><input type="checkbox" name="" id="" /></td>
-            <td>
-                <a href="/barang/<?= $b['slug']; ?>">
-                    <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"></div>
-                </a>
-            </td>
-            <td><?= $b['nama']; ?></td>
-            <td>Rp <?= number_format($b['harga'], 2, ',', '.'); ?>,-</td>
-            <td>205x</td>
-            <td>
-                <a href="/barang/<?= $b['slug']; ?>" class="btn-primary">Lihat</a>
-                <a href="/barang/edit/<?= $b['slug']; ?>" class="btn-secondary">Edit</a>
-                <form action="/barang/<?= $b['id']; ?>" method="post" class="inline">
-                    <?= csrf_field(); ?>
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn-danger">Hapus</button>
-                </form>
-            </td>
+            <th scope="col">#</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Nama</th>
+            <th scope="col" class="nomobile">Harga</th>
+            <th scope="col" class="nomobile">Dilihat</th>
+            <th scope="col" class="nomobile">Suka</th>
+            <th scope="col">Atur</th>
         </tr>
-    <?php endforeach; ?>
+    </thead>
+    <tbody>
+        <?php foreach ($barang as $b) : ?>
+            <tr>
+                <th scope="row">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    </div>
+                </th>
+                <td>
+                    <a href="/barang/<?= $b['slug']; ?>">
+                        <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"></div>
+                    </a>
+                </td>
+                <td><?= $b['nama']; ?></td>
+                <td class="nomobile">Rp <?= number_format($b['harga'], 2, ',', '.'); ?></td>
+                <td class="nomobile">200x</td>
+                <td class="nomobile">20 suka</td>
+                <td>
+                    <a href="/barang/<?= $b['slug']; ?>" class="btn btn-sm btn-primary">Lihat</a>
+                    <a href="/barang/edit/<?= $b['slug']; ?>" class="btn btn-sm btn-secondary">Edit</a>
+                    <form action="/barang/<?= $b['id']; ?>" method="post" class="d-inline">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
 </table>
-<!-- End Table -->
+<!-- End Table Barang -->
 
 <!-- jika users blm menjual barang apapun -->
 <?php if (empty($barang)) : ?>
-    <h3 class="grey text-center mt3">Belum ada barang yang dijual.</h3>
+    <h3 class="text-secondary text-center mt-3">Belum ada barang yang dijual.</h3>
 <?php endif; ?>
 
 <?= $pager->links('barang', 'barang_pagination'); ?>
-
-<!-- Notifikasi -->
-<script>
-    const divMuncul = document.querySelector(".notif");
-    if (divMuncul) {
-        divMuncul.classList.add("muncul");
-
-        setInterval(() => {
-            divMuncul.classList.remove("muncul");
-        }, 5000);
-    }
-</script>
-<!-- End Notifikasi -->
 <?= $this->endSection(); ?>

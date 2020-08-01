@@ -54,7 +54,7 @@ $routes->group('barang', ['filter' => 'auth'], function ($routes) {
 	$routes->match(['get', 'post'], '/', 'Barang');
 	$routes->match(['get', 'post'], 'index', 'Barang::index');
 
-	$routes->get('create', 'Barang::create');
+	$routes->get('tambah', 'Barang::tambah');
 	$routes->get('edit/(:segment)', 'Barang::edit/$1');
 	$routes->delete('(:num)', 'Barang::delete/$1');
 });

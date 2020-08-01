@@ -1,113 +1,86 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
-<link rel="stylesheet" href="/css/select2.min.css">
-<link rel="stylesheet" href="/css/login.css">
-<?php if (session()->getFlashdata('pesan')) : ?>
-    <div class="notif">
-        <div class="green"><?= session()->getFlashdata('pesan'); ?></div>
+<!-- Edit Profil -->
+<div class="row justify-content-md-center">
+    <div class="col-lg-4">
+        <h2 class="mt-5 mb-3">Edit Profil</h2>
+        <form action="" method="post">
+            <?= csrf_field(); ?>
+
+            <div class="form-group foto-kecil foto-profil" style="background-image: url('/img/uploads/user/<?= $user['foto']; ?>');"></div>
+
+            <div class="form-group">
+                <label for="foto">Pilih foto</label>
+                <input type="file" class="form-control-file" id="foto" name="foto">
+                <?php if ($validation->hasError("foto")) : ?>
+                    <small id="foto" class="form-text text-danger">
+                        <?= $validation->getError("foto"); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="email" class="form-control form-control-sm" id="username" name="username" value="<?= old('username', $user['username']); ?>">
+                <?php if ($validation->hasError("username")) : ?>
+                    <small id="username" class="form-text text-danger">
+                        <?= $validation->getError("username"); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label for="lokasi">Lokasi</label>
+                <select class="js-example-basic-multiple" name="lokasi" style="width: 100%">
+                    <option value="<?= old('lokasi', $user['lokasi']); ?>">
+                        <?= old('lokasi', $user['lokasi']); ?>
+                    </option>
+                    <?php foreach ($lokasi as $l) : ?>
+                        <?php if ($user['lokasi'] !== $l['nama']) : ?>
+                            <option value="<?= $l['nama']; ?>"><?= $l['nama']; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+                <?php if ($validation->hasError("lokasi")) : ?>
+                    <small id="lokasi" class="form-text text-danger">
+                        <?= $validation->getError("lokasi"); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control form-control-sm" id="email" disabled readonly value="<?= $user['email']; ?>">
+                <?php if ($validation->hasError("email")) : ?>
+                    <small id=" email" class="form-text text-danger">
+                        <?= $validation->getError("email"); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control form-control-sm" id="password" name="password">
+                <?php if ($validation->hasError("password")) : ?>
+                    <small id="password" class="form-text text-danger">
+                        <?= $validation->getError("password"); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <div class="form-group">
+                <label for="password2">Ulangi password</label>
+                <input type="password2" class="form-control form-control-sm" id="password2" name="password2">
+                <?php if ($validation->hasError("password2")) : ?>
+                    <small id="password2" class="form-text text-danger">
+                        <?= $validation->getError("password2"); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
+
+            <button type="submit" class="btn btn-sm btn-primary mr-2">Edit</button>
+        </form>
     </div>
-<?php endif; ?>
-
-<!-- Daftar -->
-<form action="" method="post" class="login" enctype="multipart/form-data">
-    <?= csrf_field(); ?>
-
-    <h3>Edit Profile</h3>
-
-    <div class="gambar-kecil inline-block" style="background-image: url('/img/uploads/user/<?= $user['foto']; ?>');"></div>
-
-    <input type="file" name="foto">
-    <?php if ($validation->hasError("foto")) : ?>
-        <div class="error-flash">
-            <?= $validation->getError("foto"); ?>
-        </div>
-    <?php endif; ?>
-
-    <input type="text" name="username" placeholder="Masukkan username" autofocus value="<?= old('username', $user['username']); ?>" />
-    <?php if ($validation->hasError('username')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('username'); ?>
-        </div>
-    <?php endif; ?>
-
-    <select class="js-example-basic-multiple" name="lokasi" style="width: 100%">
-        <option value="<?= old('lokasi', $user['lokasi']); ?>"><?= old('lokasi', $user['lokasi']); ?></option>
-        <?php foreach ($lokasi as $l) : ?>
-            <?php if ($user['lokasi'] !== $l['nama']) : ?>
-                <option value="<?= $l['nama']; ?>"><?= $l['nama']; ?></option>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </select>
-    <?php if ($validation->hasError('lokasi')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('lokasi'); ?>
-        </div>
-    <?php endif; ?>
-
-    <input type="text" readonly disabled placeholder="Masukkan email" value="<?= $user['email']; ?>" />
-    <input type="password" name="password" placeholder="Masukkan password" />
-    <?php if ($validation->hasError('password')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('password'); ?>
-        </div>
-    <?php endif; ?>
-
-    <input type="password" name="password2" placeholder="Masukkan password lagi" />
-    <?php if ($validation->hasError('password2')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('password2'); ?>
-        </div>
-    <?php endif; ?>
-
-    <button type="submit">Update</button>
-</form>
-<!-- End Daftar -->
-
-<!-- Notifikasi -->
-<script>
-
-</script>
-<script src="/js/jquery-3.5.1.min.js"></script>
-<script src="/js/select2.min.js"></script>
-<script>
-    // memuncul notifikasi
-    const divMuncul = document.querySelector(".notif");
-    if (divMuncul) {
-        divMuncul.classList.add("muncul");
-
-        setInterval(() => {
-            divMuncul.classList.remove("muncul");
-        }, 5000);
-    }
-
-    // inisialisasi select2
-    $(document).ready(function() {
-        $(".js-example-basic-multiple").select2();
-    });
-
-    // tangkap elemen
-    const imgPreview = document.querySelector('.gambar-kecil');
-    const inputFoto = document.querySelector('input[type=file]');
-
-    // ganti image preview dg image yg mau diupload
-    inputFoto.onchange = function() {
-        const fileFoto = new FileReader();
-
-        // jika file foto di load, maka imgPreview akan berubah
-        fileFoto.onload = function(e) {
-            imgPreview.style.backgroundImage = 'url(' + e.target.result + ')';
-        }
-
-        // ini code dr mozilla
-        if (inputFoto.files[0]) {
-            fileFoto.readAsDataURL(inputFoto.files[0]);
-        }
-    }
-
-    // jika tombol plus diklik, maka gambar akan muncul
-    imgPreview.onclick = function() {
-        inputFoto.click();
-    }
-</script>
-<!-- End Notifikasi -->
+</div>
+<!-- End Edit Profil -->
 <?= $this->endSection(); ?>

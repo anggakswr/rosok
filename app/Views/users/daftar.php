@@ -1,65 +1,71 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
-<link rel="stylesheet" href="/css/select2.min.css">
-<link rel="stylesheet" href="/css/login.css">
-
 <!-- Daftar -->
-<form action="" method="post" class="login">
-    <?= csrf_field(); ?>
+<div class="row justify-content-md-center">
+    <div class="col-lg-4">
+        <h2 class="mt-5 mb-3">Daftar</h2>
+        <form action="" method="post">
+            <?= csrf_field(); ?>
 
-    <h3>Daftar</h3>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control form-control-sm" id="username" name="username" value="<?= old('username'); ?>" autofocus>
+                <?php if ($validation->hasError('username')) : ?>
+                    <small id="username" class="form-text text-danger">
+                        <?= $validation->getError('username'); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
 
-    <input type="text" name="username" placeholder="Masukkan username" autofocus value="<?= old('username'); ?>" />
-    <?php if ($validation->hasError('username')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('username'); ?>
-        </div>
-    <?php endif; ?>
+            <div class="form-group">
+                <label for="lokasi">Lokasi</label>
+                <select class="js-example-basic-multiple" name="lokasi" style="width: 100%" id="lokasi">
+                    <option value="" disabled selected>-- Pilih Lokasi --</option>
+                    <?php foreach ($lokasi as $l) : ?>
+                        <option value="<?= $l['nama']; ?>"><?= $l['nama']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <?php if ($validation->hasError('lokasi')) : ?>
+                    <small id="lokasi" class="form-text text-danger">
+                        <?= $validation->getError('lokasi'); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
 
-    <select class="js-example-basic-multiple" name="lokasi" style="width: 100%">
-        <option value="" disabled selected>-- Pilih Lokasi --</option>
-        <?php foreach ($lokasi as $l) : ?>
-            <option value="<?= $l['nama']; ?>"><?= $l['nama']; ?></option>
-        <?php endforeach; ?>
-    </select>
-    <?php if ($validation->hasError('lokasi')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('lokasi'); ?>
-        </div>
-    <?php endif; ?>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control form-control-sm" id="email" name="email" value="<?= old('email'); ?>">
+                <?php if ($validation->hasError('email')) : ?>
+                    <small id="email" class="form-text text-danger">
+                        <?= $validation->getError('email'); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
 
-    <input type="text" name="email" placeholder="Masukkan email" value="<?= old('email'); ?>" />
-    <?php if ($validation->hasError('email')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('email'); ?>
-        </div>
-    <?php endif; ?>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control form-control-sm" id="password" name="password">
+                <?php if ($validation->hasError('password')) : ?>
+                    <small id="password" class="form-text text-danger">
+                        <?= $validation->getError('password'); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
 
-    <input type="password" name="password" placeholder="Masukkan password" />
-    <?php if ($validation->hasError('password')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('password'); ?>
-        </div>
-    <?php endif; ?>
+            <div class="form-group">
+                <label for="password2">Ulangi password</label>
+                <input type="password2" class="form-control form-control-sm" id="password2" name="password2">
+                <?php if ($validation->hasError('password2')) : ?>
+                    <small id="password2" class="form-text text-danger">
+                        <?= $validation->getError('password2'); ?>
+                    </small>
+                <?php endif; ?>
+            </div>
 
-    <input type="password" name="password2" placeholder="Masukkan password lagi" />
-    <?php if ($validation->hasError('password2')) : ?>
-        <div class="error-flash">
-            <?= $validation->getError('password2'); ?>
-        </div>
-    <?php endif; ?>
-
-    <button type="submit">Daftar</button>
-    <a href="/users">Kembali ke halaman login</a>
-</form>
+            <button type="submit" class="btn btn-sm btn-primary mr-2">Daftar</button>
+            <a href="/users/index" class="text-decoration-none">Ke halaman login</a>
+        </form>
+    </div>
+</div>
 <!-- End Daftar -->
-
-<script src="/js/jquery-3.5.1.min.js"></script>
-<script src="/js/select2.min.js"></script>
-<script>
-    // inisialisasi select2
-    $(document).ready(function() {
-        $(".js-example-basic-multiple").select2();
-    });
-</script>
 <?= $this->endSection(); ?>

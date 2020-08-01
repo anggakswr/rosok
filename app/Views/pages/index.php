@@ -24,69 +24,85 @@
 </div>
 <!-- End Carousel -->
 
-<!-- Barang 1 -->
+<?php helper('text'); ?>
+
+<!-- Kategori 1 -->
 <h2 class="mt-3">Botol Plastik</h2>
 <div class="row">
-    <div class="col-6 col-md-3 col-lg-2 mt-3">
-        <div class="card">
-            <div class="foto-kecil" style="background-image: url('/img/uploads/barang/besi1.png');"></div>
-            <div class="card-body">
-                <p class="card-text">Botol Plastik Murah</p>
-                <p class="card-subtitle text-success">Rp 50.000,00</p>
-                <p class="card-subtitle text-muted">Kota Semarang</p>
-            </div>
+    <?php foreach ($botol as $b) : ?>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <a href="/barang/<?= $b['slug']; ?>" class="card text-decoration-none">
+                <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"></div>
+                <div class="card-body">
+                    <p class="card-text"><?= character_limiter($b['nama'], 10); ?></p>
+                    <p class="card-subtitle text-success">Rp <?= number_format($b['harga'], 2, ',', '.'); ?></p>
+                    <p class="card-subtitle text-muted">
+                        Kota Semarang
+                    </p>
+                </div>
+            </a>
         </div>
-    </div>
-    <div class="col-6 col-md-3 col-lg-2 mt-3">
-        <div class="card">
-            <div class="foto-kecil" style="background-image: url('/img/uploads/barang/besi2.png');"></div>
-            <div class="card-body">
-                <p class="card-text">Botol Plastik Murah</p>
-                <p class="card-subtitle text-success">Rp 50.000,00</p>
-                <p class="card-subtitle text-muted">Kota Semarang</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 col-lg-2 mt-3">
-        <div class="card">
-            <div class="foto-kecil" style="background-image: url('/img/uploads/barang/besi3.png');"></div>
-            <div class="card-body">
-                <p class="card-text">Botol Plastik Murah</p>
-                <p class="card-subtitle text-success">Rp 50.000,00</p>
-                <p class="card-subtitle text-muted">Kota Semarang</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 col-lg-2 mt-3">
-        <div class="card">
-            <div class="foto-kecil" style="background-image: url('/img/uploads/barang/besi4.png');"></div>
-            <div class="card-body">
-                <p class="card-text">Botol Plastik Murah</p>
-                <p class="card-subtitle text-success">Rp 50.000,00</p>
-                <p class="card-subtitle text-muted">Kota Semarang</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 col-lg-2 mt-3">
-        <div class="card">
-            <div class="foto-kecil" style="background-image: url('/img/uploads/barang/besi5.png');"></div>
-            <div class="card-body">
-                <p class="card-text">Botol Plastik Murah</p>
-                <p class="card-subtitle text-success">Rp 50.000,00</p>
-                <p class="card-subtitle text-muted">Kota Semarang</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-md-3 col-lg-2 mt-3">
-        <div class="card">
-            <div class="foto-kecil" style="background-image: url('/img/uploads/barang/panjang1.jpg');"></div>
-            <div class="card-body">
-                <p class="card-text">Botol Plastik Murah</p>
-                <p class="card-subtitle text-success">Rp 50.000,00</p>
-                <p class="card-subtitle text-muted">Kota Semarang</p>
-            </div>
-        </div>
-    </div>
+    <?php endforeach; ?>
 </div>
-<!-- End Barang 1 -->
+<!-- End Kategori 1 -->
+
+<!-- Kategori 2 -->
+<h2 class="mt-3">Kardus Indomie</h2>
+<div class="row">
+    <?php foreach ($kardus as $k) : ?>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <a href="/barang/<?= $k['slug']; ?>" class="card text-decoration-none">
+                <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $k['foto']; ?>');"></div>
+                <div class="card-body">
+                    <p class="card-text"><?= character_limiter($k['nama'], 10); ?></p>
+                    <p class="card-subtitle text-success">Rp <?= number_format($k['harga'], 2, ',', '.'); ?></p>
+                    <p class="card-subtitle text-muted">
+                        Kota Semarang
+                    </p>
+                </div>
+            </a>
+        </div>
+    <?php endforeach; ?>
+</div>
+<!-- End Kategori 2 -->
+
+<!-- Kategori 3 -->
+<h2 class="mt-3">Besi Kiloan</h2>
+<div class="row">
+    <?php foreach ($besi as $be) : ?>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <a href="/barang/<?= $be['slug']; ?>" class="card text-decoration-none">
+                <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $be['foto']; ?>');"></div>
+                <div class="card-body">
+                    <p class="card-text"><?= character_limiter($be['nama'], 10); ?></p>
+                    <p class="card-subtitle text-success">Rp <?= number_format($be['harga'], 2, ',', '.'); ?></p>
+                    <p class="card-subtitle text-muted">
+                        Kota Semarang
+                    </p>
+                </div>
+            </a>
+        </div>
+    <?php endforeach; ?>
+</div>
+<!-- End Kategori 3 -->
+
+<!-- Kategori 4 -->
+<h2 class="mt-3">Kain Perca</h2>
+<div class="row">
+    <?php foreach ($kain as $ka) : ?>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <a href="/barang/<?= $ka['slug']; ?>" class="card text-decoration-none">
+                <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $ka['foto']; ?>');"></div>
+                <div class="card-body">
+                    <p class="card-text"><?= character_limiter($ka['nama'], 10); ?></p>
+                    <p class="card-subtitle text-success">Rp <?= number_format($ka['harga'], 2, ',', '.'); ?></p>
+                    <p class="card-subtitle text-muted">
+                        Kota Semarang
+                    </p>
+                </div>
+            </a>
+        </div>
+    <?php endforeach; ?>
+</div>
+<!-- End Kategori 4 -->
 <?= $this->endSection(); ?>

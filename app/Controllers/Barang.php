@@ -136,7 +136,7 @@ class Barang extends BaseController
 
     // --------------------------------------------------------
 
-    public function create()
+    public function tambah()
     {
         $kategoriModel = new KategoriModel();
 
@@ -146,7 +146,7 @@ class Barang extends BaseController
             'kategori' => $kategoriModel->findAll()
         ];
 
-        return view('barang/create', $data);
+        return view('barang/tambah', $data);
     }
 
     // --------------------------------------------------------
@@ -176,7 +176,7 @@ class Barang extends BaseController
 
         // jika ada input yg melanggar rules
         if (!$this->validate($this->rulesBarang)) {
-            return redirect()->to('/barang/create')->withInput();
+            return redirect()->to('/barang/tambah')->withInput();
         }
 
         // taruh gambar ke folder

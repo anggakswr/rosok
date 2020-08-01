@@ -6,6 +6,10 @@
     cursor: pointer;
 }
 
+.foto-kecil:hover, .foto-besar:hover {
+    opacity: 0.5;
+}
+
 .foto-besar {
     height: 350px;
 }
@@ -35,6 +39,20 @@ td:last-child {
     width: 190px;
 }
 
+.hidden {
+    display: none;
+}
+
+.form-barang .foto-kecil, .table .foto-kecil {
+    height: 60px;
+}
+
+@media (max-width: 991px) {
+    .form-barang .foto-kecil {
+        height: 120px;
+    }
+}
+
 @media (max-width: 768px) {
     .nomobile {
         display: none;
@@ -46,5 +64,9 @@ td:last-child {
 
     td:last-child > * {
         margin: 2px;
+    }
+
+    .form-barang .foto-kecil {
+        height: 60px;
     }
 }
