@@ -1,28 +1,50 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
-<div class="flex nav2">
-    <!-- Tentukan Harga -->
-    <form action="" method="get">
-        <?php $request = \Config\Services::request(); ?>
-        <input type="text" name="rosok" placeholder="Cari barang rosok" value="<?= $request->getGet('rosok'); ?>">
-        <input type="number" name="hargaMaks" placeholder="Harga maksimum" value="<?= $request->getGet('hargaMaks'); ?>">
-        <input type="number" name="hargaMin" placeholder="Harga minimum" value="<?= $request->getGet('hargaMin'); ?>">
-        <button type="submit" class="hidden">Cari</button>
-    </form>
-    <!-- End Tentukan Harga -->
-
-    <!-- Tombols -->
-    <div>
-        <button>Lokasi &darr;</button>
-        <button>Kategori &darr;</button>
-        <button>Urutkan harga &darr;</button>
-        <button>Urutkan popularitas &darr;</button>
+<!-- Filter -->
+<form class="mt-3" action="" method="get">
+    <?php $request = \Config\Services::request(); ?>
+    <div class="form-row">
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Cari barang rosok" name="rosok" value="<?= $request->getGet('rosok'); ?>">
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Harga maksimal" name="hargaMaks" value="<?= $request->getGet('hargaMaks'); ?>">
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Harga minimum" name="hargaMin" value="<?= $request->getGet('hargaMin'); ?>">
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <select class="custom-select custom-select-sm" name="kategori">
+                <option value="<?= ($request->getGet('kategori')) ? $request->getGet('kategori') : ''; ?>">
+                    <?= ($request->getGet('kategori')) ? $request->getGet('kategori') : '-- Kategori --'; ?>
+                </option>
+                <?php foreach ($kategori as $k) : ?>
+                    <?php if ($k['kategori'] != $request->getGet('kategori')) : ?>
+                        <option value="<?= $k['kategori']; ?>"><?= $k['kategori']; ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <select class="custom-select custom-select-sm" name="urutkan">
+                <option value="<?= ($request->getGet('urutkan')) ? $request->getGet('urutkan') : ''; ?>">
+                    <?= ($request->getGet('urutkan')) ? $request->getGet('urutkan') : '-- Urutkan --'; ?>
+                </option>
+                <option value="Harga rendah ke tinggi">Harga rendah ke tinggi</option>
+                <option value="Harga tinggi ke rendah">Harga tinggi ke rendah</option>
+                <option value="Paling banyak suka">Paling banyak suka</option>
+                <option value="">Terbaru</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <button class="btn btn-sm btn-outline-primary" type="submit">Cari</button>
+        </div>
     </div>
-    <!-- End Tombols -->
-</div>
+</form>
+<!-- End Filter -->
 
 <!-- Hasil Pencarian-->
-<h2 class="mt5">
+<h3 class="mt-3">
     <?php
     if (isset($cari)) {
         echo $cari;
@@ -32,18 +54,40 @@
         echo 'Menampilkan semua barang';
     }
     ?>
-</h2>
+</h3>
+
+<!-- Jika Barang Tidak Ada -->
+<?php if (empty($barang)) : ?>
+    <div class="row">
+        <div class="col">
+            <h4 class="text-secondary">Barang tidak ada.</h4>
+        </div>
+    </div>
+<?php endif; ?>
+<!-- End Jika Barang Tidak Ada -->
 
 <?php helper('text'); ?>
 
-<div class="product">
+<div class="row">
     <?php foreach ($barang as $b) : ?>
-        <a class="product-item" href="/barang/<?= $b['slug']; ?>">
-            <div class="gambar-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"></div>
-            <h4><?= character_limiter($b['nama'], 20); ?></h4>
-            <p class="green">Rp <?= number_format($b['harga'], 2, ',', '.'); ?>,-</p>
-            <p class="grey">Kota Semarang</p>
-        </a>
+        <div class="col-6 col-md-3 col-lg-2 mt-3">
+            <a href="/barang/<?= $b['slug']; ?>" class="card text-decoration-none">
+                <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"></div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <strong>
+                            <?= character_limiter($b['nama'], 20); ?>
+                        </strong>
+                    </p>
+                    <p class="card-subtitle text-success">
+                        Rp <?= number_format($b['harga'], 2, ',', '.'); ?>
+                    </p>
+                    <p class="card-subtitle text-muted">
+                        Kota Semarang
+                    </p>
+                </div>
+            </a>
+        </div>
     <?php endforeach; ?>
 </div>
 

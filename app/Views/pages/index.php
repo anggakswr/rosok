@@ -34,8 +34,14 @@
             <a href="/barang/<?= $b['slug']; ?>" class="card text-decoration-none">
                 <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $b['foto']; ?>');"></div>
                 <div class="card-body">
-                    <p class="card-text"><?= character_limiter($b['nama'], 20); ?></p>
-                    <p class="card-subtitle text-success">Rp <?= number_format($b['harga'], 2, ',', '.'); ?></p>
+                    <p class="card-text">
+                        <strong>
+                            <?= character_limiter($b['nama'], 20); ?>
+                        </strong>
+                    </p>
+                    <p class="card-subtitle text-success">
+                        Rp <?= number_format($b['harga'], 2, ',', '.'); ?>
+                    </p>
                     <p class="card-subtitle text-muted">
                         Kota Semarang
                     </p>
@@ -54,8 +60,14 @@
             <a href="/barang/<?= $k['slug']; ?>" class="card text-decoration-none">
                 <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $k['foto']; ?>');"></div>
                 <div class="card-body">
-                    <p class="card-text"><?= character_limiter($k['nama'], 20); ?></p>
-                    <p class="card-subtitle text-success">Rp <?= number_format($k['harga'], 2, ',', '.'); ?></p>
+                    <p class="card-text">
+                        <strong>
+                            <?= character_limiter($k['nama'], 20); ?>
+                        </strong>
+                    </p>
+                    <p class="card-subtitle text-success">
+                        Rp <?= number_format($k['harga'], 2, ',', '.'); ?>
+                    </p>
                     <p class="card-subtitle text-muted">
                         Kota Semarang
                     </p>
@@ -74,8 +86,14 @@
             <a href="/barang/<?= $be['slug']; ?>" class="card text-decoration-none">
                 <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $be['foto']; ?>');"></div>
                 <div class="card-body">
-                    <p class="card-text"><?= character_limiter($be['nama'], 20); ?></p>
-                    <p class="card-subtitle text-success">Rp <?= number_format($be['harga'], 2, ',', '.'); ?></p>
+                    <p class="card-text">
+                        <strong>
+                            <?= character_limiter($be['nama'], 20); ?>
+                        </strong>
+                    </p>
+                    <p class="card-subtitle text-success">
+                        Rp <?= number_format($be['harga'], 2, ',', '.'); ?>
+                    </p>
                     <p class="card-subtitle text-muted">
                         Kota Semarang
                     </p>
@@ -94,8 +112,14 @@
             <a href="/barang/<?= $ka['slug']; ?>" class="card text-decoration-none">
                 <div class="foto-kecil" style="background-image: url('/img/uploads/barang/<?= $ka['foto']; ?>');"></div>
                 <div class="card-body">
-                    <p class="card-text"><?= character_limiter($ka['nama'], 20); ?></p>
-                    <p class="card-subtitle text-success">Rp <?= number_format($ka['harga'], 2, ',', '.'); ?></p>
+                    <p class="card-text">
+                        <strong>
+                            <?= character_limiter($ka['nama'], 20); ?>
+                        </strong>
+                    </p>
+                    <p class="card-subtitle text-success">
+                        Rp <?= number_format($ka['harga'], 2, ',', '.'); ?>
+                    </p>
                     <p class="card-subtitle text-muted">
                         Kota Semarang
                     </p>

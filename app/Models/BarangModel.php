@@ -15,7 +15,7 @@ class BarangModel extends Model
     public function getBarang($slug = false)
     {
         if (!$slug) {
-            return $this->orderBy('id', 'desc')->findAll();
+            return $this->orderBy('id', 'DESC')->findAll();
         }
 
         return $this->where(['slug' => $slug])->first();
@@ -25,34 +25,20 @@ class BarangModel extends Model
 
     public function getBarangUser($users_id)
     {
-        return $this->where('users_id', $users_id)->orderBy('id', 'desc');
+        return $this->where('users_id', $users_id)->orderBy('id', 'DESC');
     }
 
     // ------------------------------------------------
 
     public function getBarangKategori($kategori)
     {
-        return $this->where('kategori', $kategori)->orderBy('id', 'desc');
+        return $this->where('kategori', $kategori)->orderBy('id', 'DESC');
     }
 
     // ------------------------------------------------
 
-    public function searchBarang($keyword = null, $hargaMaks = null, $hargaMin = null)
+    public function searchBarang($keyword = null, $hargaMaks = null, $hargaMin = null, $kategori = null, $urutkan = null)
     {
-        // ------------------------------------------------ percobaan 1
-        // if ($keyword != null) {
-        //     return $this->like('nama', $keyword)->orderBy('id', 'desc');
-        // } elseif ($hargaMaks != null) {
-        //     return $this->like('nama', $keyword)->orderBy('id', 'desc')
-        //         ->where('harga', '<= ' . $hargaMaks);
-        // } elseif ($hargaMaks != null && $hargaMin != null) {
-        //     return $this->like('nama', $keyword)->orderBy('id', 'desc')
-        //         ->where('harga', '<= ' . $hargaMaks)
-        //         ->where('harga', '>= ' . $hargaMin);
-        // }
-        // ------------------------------------------------
-
-        // ------------------------------------------------ percobaan 2
         $query = $this;
 
         if ($keyword) {
@@ -60,36 +46,23 @@ class BarangModel extends Model
         }
 
         if ($hargaMaks) {
-            $query = $query->where('harga <=', "$hargaMaks");
+            $query = $query->where('harga <=', $hargaMaks);
         }
 
         if ($hargaMin) {
-            $query = $query->where('harga >=', "$hargaMin");
+            $query = $query->where('harga >=', $hargaMin);
         }
 
-        return $query->orderBy('id', 'DESC');
-        // ------------------------------------------------
+        if ($kategori) {
+            $query = $query->where('kategori', $kategori);
+        }
 
-        // ------------------------------------------------ percobaan 3
-        // $query = "SELECT * FROM `barang`
-        //     WHERE `nama`
-        //     LIKE '%$keyword%'
-        //     ORDER BY `id` DESC";
-        // return $this->select($query)->get();
-        // ------------------------------------------------
-
-        // ------------------------------------------------ percobaan 4
-        // $query = "SELECT * FROM `barang`";
-
-        // if ($keyword) {
-        //     $query += " WHERE `nama` LIKE '%$keyword%' ESCAPE '!'";
-        // } elseif ($keyword != null && ($hargaMaks != null || $hargaMin != null)) {
-        //     # code...
-        // }
-
-        // if ($hargaMaks) {
-        //     $query += " ";
-        // }
-        // ------------------------------------------------
+        if ($urutkan == 'Harga rendah ke tinggi') {
+            return $query->orderBy('harga', 'ASC');
+        } elseif ($urutkan == 'Harga tinggi ke rendah') {
+            return $query->orderBy('harga', 'DESC');
+        } else {
+            return $query->orderBy('id', 'DESC');
+        }
     }
 }

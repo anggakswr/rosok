@@ -54,8 +54,8 @@
                         <!-- End Belum Login -->
                     <?php endif; ?>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Cari barang rosok">
+                <form class="form-inline my-2 my-lg-0" action="/pages/cari" method="get">
+                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Cari barang rosok" name="rosok">
                     <button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Cari</button>
                 </form>
             </div>
@@ -84,16 +84,17 @@
         <?php endif; ?>
 
         <?= $this->renderSection('content'); ?>
+
+        <footer class="d-flex justify-content-between mt-5 p-2">
+            <div>Copyright &copy; Rosok.com 2020. All rights reserved.</div>
+            <div>
+                <a href="/tentang">Tentang</a> &middot;
+                <a href="/kontak">Kontak</a> &middot;
+                <a href="/bantuan">Bantuan</a>
+            </div>
+        </footer>
     </div>
 
-    <footer class="d-flex justify-content-between mt-5 p-2">
-        <div>Copyright &copy; Rosok.com 2020. All rights reserved.</div>
-        <div>
-            <a href="/tentang">Tentang</a> &middot;
-            <a href="/kontak">Kontak</a> &middot;
-            <a href="/bantuan">Bantuan</a>
-        </div>
-    </footer>
     <!-- End Container -->
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

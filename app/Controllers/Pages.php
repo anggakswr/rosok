@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\BarangModel;
 use App\Models\UsersModel;
+use App\Models\KategoriModel;
 
 class Pages extends BaseController
 {
@@ -24,20 +25,31 @@ class Pages extends BaseController
 
     public function cari()
     {
+        // model yg dibutuhkan
         $barangModel = new BarangModel();
+        $kategoriModel = new KategoriModel();
+
+        // data yg diambil
         $keyword = $this->request->getGet('rosok');
         $hargaMaks = $this->request->getGet('hargaMaks');
         $hargaMin = $this->request->getGet('hargaMin');
+        $kategori = $this->request->getGet('kategori');
+        $urutkan = $this->request->getGet('urutkan');
 
+        // ambil brg dr db
         $barang = $barangModel
-            ->searchBarang($keyword, $hargaMaks, $hargaMin)
+            ->searchBarang($keyword, $hargaMaks, $hargaMin, $kategori, $urutkan)
             ->paginate(100, 'barang');
 
+        // dd($barang);
+
+        // data yg ditampilkan di view
         $data = [
             'title' => 'Jual ' . $keyword,
             'barang' => $barang,
             'cari' => ($keyword) ? "Hasil pencarian untuk '$keyword'" : 'Menampilkan semua barang',
-            'pager' => $barangModel->pager
+            'pager' => $barangModel->pager,
+            'kategori' => $kategoriModel->orderBy('kategori', 'ASC')->findAll()
         ];
 
         return view('pages/cari', $data);
