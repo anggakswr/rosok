@@ -73,23 +73,29 @@ class Barang extends BaseController
 
     public function index()
     {
+        // model yg dibutuhkan
+        $kategoriModel = new KategoriModel();
+
+        // data yg diambil
         $keyword = $this->request->getPost('keyword');
+        $hargaMaks = $this->request->getPost('hargaMaks');
+        $hargaMin = $this->request->getPost('hargaMin');
+        $kategori = $this->request->getPost('kategori');
+        $urutkan = $this->request->getPost('urutkan');
 
-        if ($keyword) {
-            $barang = $this->barangModel
-                ->where('users_id', session()->get('id'))
-                ->searchBarang($keyword)
-                ->paginate(10, 'barang');
-        } else {
-            $barang = $this->barangModel
-                ->getBarangUser(session()->get('id'))
-                ->paginate(10, 'barang');
-        }
+        // ambil brg dr db
+        $barang = $this->barangModel
+            ->searchBarang($keyword, $hargaMaks, $hargaMin, $kategori, $urutkan)
+            ->paginate(10, 'barang');
 
+        // dd($barang);
+
+        // data yg ditampilkan di view
         $data = [
-            'title' => 'Daftar Barang',
+            'title' => ($keyword) ? $keyword : 'Daftar Barang',
             'barang' => $barang,
-            'pager' => $this->barangModel->pager
+            'pager' => $this->barangModel->pager,
+            'kategori' => $kategoriModel->orderBy('kategori', 'ASC')->findAll()
         ];
         return view('barang/index', $data);
     }

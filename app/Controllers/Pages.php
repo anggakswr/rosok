@@ -79,19 +79,6 @@ class Pages extends BaseController
         return view('pages/bantuan', $data);
     }
 
-    public function kategori($kategori)
-    {
-        $barangModel = new BarangModel();
-
-        $data = [
-            'title' => $kategori,
-            'barang' => $barangModel->getBarangKategori($kategori)->paginate(100, 'barang'),
-            'pager' => $barangModel->pager
-        ];
-
-        return view('pages/cari', $data);
-    }
-
     public function user($username)
     {
         $barangModel = new BarangModel();

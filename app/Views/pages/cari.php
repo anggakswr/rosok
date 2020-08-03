@@ -15,9 +15,15 @@
         </div>
         <div class="col-6 col-md-3 col-lg-2 mt-3">
             <select class="custom-select custom-select-sm" name="kategori">
-                <option value="<?= ($request->getGet('kategori')) ? $request->getGet('kategori') : ''; ?>">
-                    <?= ($request->getGet('kategori')) ? $request->getGet('kategori') : '-- Kategori --'; ?>
-                </option>
+                <?php if ($request->getGet('kategori')) : ?>
+                    <option value="<?= $request->getGet('kategori'); ?>">
+                        <?= $request->getGet('kategori'); ?>
+                    </option>
+                    <option value="">-- Kategori --</option>
+                <?php else : ?>
+                    <option value="">-- Kategori --</option>
+                <?php endif; ?>
+
                 <?php foreach ($kategori as $k) : ?>
                     <?php if ($k['kategori'] != $request->getGet('kategori')) : ?>
                         <option value="<?= $k['kategori']; ?>"><?= $k['kategori']; ?></option>
@@ -27,9 +33,14 @@
         </div>
         <div class="col-6 col-md-3 col-lg-2 mt-3">
             <select class="custom-select custom-select-sm" name="urutkan">
-                <option value="<?= ($request->getGet('urutkan')) ? $request->getGet('urutkan') : ''; ?>">
-                    <?= ($request->getGet('urutkan')) ? $request->getGet('urutkan') : '-- Urutkan --'; ?>
-                </option>
+                <?php if ($request->getGet('urutkan')) : ?>
+                    <option value="<?= $request->getGet('urutkan'); ?>">
+                        <?= $request->getGet('urutkan'); ?>
+                    </option>
+                    <option value="">-- Urutkan --</option>
+                <?php else : ?>
+                    <option value="">-- Urutkan --</option>
+                <?php endif; ?>
                 <option value="Harga rendah ke tinggi">Harga rendah ke tinggi</option>
                 <option value="Harga tinggi ke rendah">Harga tinggi ke rendah</option>
                 <option value="Paling banyak suka">Paling banyak suka</option>
@@ -46,12 +57,9 @@
 <!-- Hasil Pencarian-->
 <h3 class="mt-3">
     <?php
+    $kategori = ($request->getGet('kategori')) ? ' dari kategori ' . $request->getGet('kategori') : '';
     if (isset($cari)) {
-        echo $cari;
-    } elseif (isset($title)) {
-        echo 'Menampilkan semua barang dari kategori ' . $title;
-    } else {
-        echo 'Menampilkan semua barang';
+        echo $cari . $kategori;
     }
     ?>
 </h3>

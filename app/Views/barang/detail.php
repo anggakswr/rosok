@@ -3,12 +3,9 @@
 <!-- Link SEO -->
 <div class="row mt-3">
     <div class="col">
-        <a href="/">Rosok</a>
+        <a href="/" class="text-decoration-none">Rosok</a>
         &raquo;
-        <form action="/cari" method="get" class="d-inline">
-            <input type="hidden" name="kategori" value="<?= $barang['kategori']; ?>">
-            <button type="submit"><?= $barang['kategori']; ?></button>
-        </form>
+        <a href="http://localhost:8080/cari?kategori=<?= $barang['kategori']; ?>" class="text-decoration-none"><?= $barang['kategori']; ?></a>
         &raquo;
         <a class="text-muted"><?= $barang['nama']; ?></a>
     </div>
@@ -99,14 +96,14 @@
                     <a class="font-weight-bold"><?= $user['username']; ?></a>
                     <p class="text-muted text-monospace"><?= $user['lokasi']; ?></p>
                 </div>
-                <div class="col">
+                <div class="col mb-2">
                     <a href="/user/<?= $user['username']; ?>" class="btn btn-sm btn-danger">
                         Kunjungi penjual
                     </a>
                     <a href="#" class="btn btn-sm btn-secondary">Ulasan penjual</a>
 
                     <?php if (isset($cekSukaUser)) : ?>
-                        <form action="/user/unsukaUser/<?= $cekSukaUser['id']; ?>" method="post" class="d-inline">
+                        <form action="/users/unsukaPenjual/<?= $cekSukaUser['id']; ?>" method="post" class="d-inline">
                             <?= csrf_field(); ?>
                             <button type="submit" class="btn btn-sm btn-danger">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +113,7 @@
                             </button>
                         </form>
                     <?php else : ?>
-                        <form action="/user/sukaUser/<?= $user['id']; ?>" method="post" class="d-inline">
+                        <form action="/users/sukaPenjual/<?= $user['id']; ?>" method="post" class="d-inline">
                             <?= csrf_field(); ?>
                             <button type="submit" class="btn btn-sm btn-danger">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

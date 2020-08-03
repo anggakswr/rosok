@@ -37,7 +37,6 @@ $routes->get('cari', 'Pages::cari');
 $routes->get('tentang', 'Pages::tentang');
 $routes->get('kontak', 'Pages::kontak');
 $routes->get('bantuan', 'Pages::bantuan');
-$routes->get('kategori/(:segment)', 'Pages::kategori/$1');
 $routes->get('user/(:segment)', 'Pages::user/$1');
 
 // users

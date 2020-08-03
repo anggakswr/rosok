@@ -24,6 +24,24 @@
 </div>
 <!-- End Carousel -->
 
+<!-- Kategori -->
+<h2 class="mt-3">Kategori</h2>
+<div class="row mt-3 mb-5 justify-content-around kategori text-center">
+    <a class="col-2 bg-primary rounded-pill text-light text-decoration-none" href="/cari?kategori=Botol+Plastik">
+        Botol Plastik
+    </a>
+    <a class="col-2 bg-secondary rounded-pill text-light text-decoration-none" href="/cari?kategori=Beso+Kiloan">
+        Besi Kiloan
+    </a>
+    <a class="col-2 bg-success rounded-pill text-light text-decoration-none" href="/cari?kategori=Kardus+Indomie">
+        Kardus Indomie
+    </a>
+    <a class="col-2 bg-danger rounded-pill text-light text-decoration-none" href="/cari?kategori=Kain+Perca">
+        Kain Perca
+    </a>
+</div>
+<!-- End Kategori -->
+
 <?php helper('text'); ?>
 
 <!-- Kategori 1 -->
