@@ -88,7 +88,7 @@
                     <a href="/barang/<?= $b['slug']; ?>" class="btn btn-sm btn-primary">Lihat</a>
                     <a href="/barang/edit/<?= $b['slug']; ?>" class="btn btn-sm btn-secondary">Edit</a>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm btn-danger tombol-hapus" data-toggle="modal" data-target="#exampleModal" data-id="/barang/<?= $b['id']; ?>">
+                    <button type="button" class="btn btn-sm btn-danger tombol-hapus" data-toggle="modal" data-target="#hapusModal" data-id="/barang/<?= $b['id']; ?>">
                         Hapus
                     </button>
                 </td>
@@ -106,14 +106,14 @@
 <?= $pager->links('barang', 'barang_pagination'); ?>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="" method="post" class="form-hapus">
             <?= csrf_field(); ?>
             <input type="hidden" name="_method" value="DELETE">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
+                    <h5 class="modal-title" id="hapusModalLabel">Hapus</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

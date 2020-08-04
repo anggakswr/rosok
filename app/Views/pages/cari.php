@@ -58,8 +58,8 @@
 <h3 class="mt-3">
     <?php
     $kategori = ($request->getGet('kategori')) ? ' dari kategori ' . $request->getGet('kategori') : '';
-    if (isset($cari)) {
-        echo $cari . $kategori;
+    if ($request->getGet('rosok')) {
+        echo 'Menampilkan pencarian ' . $request->getGet('rosok') . $kategori;
     }
     ?>
 </h3>

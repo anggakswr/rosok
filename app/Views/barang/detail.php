@@ -17,7 +17,7 @@
     <!-- Foto Barang -->
     <div class="col-12 col-md-5 col-lg-4 mt-3 foto-detail-barang">
         <div class="row barang-header">
-            <div class="foto-besar" style="background-image: url('/img/uploads/barang/<?= $barang['foto']; ?>');">
+            <div class="foto-besar" style="background-image: url('/img/uploads/barang/<?= $barang['foto']; ?>');" data-toggle="modal" data-target="#zoomModal">
             </div>
         </div>
         <div class="row barang-header">
@@ -179,15 +179,41 @@
 </div>
 <!-- End Barang Footer -->
 
+<!-- Modal -->
+<div class="modal fade" id="zoomModal" tabindex="-1" role="dialog" aria-labelledby="zoomModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="zoomModalLabel"><?= $barang['nama']; ?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="<?= $barang['nama']; ?>">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     // jika foto kecil diklik, jadilah besar
-    const fotoDetail = document.querySelector('.foto-detail-barang');
     const fotoBesar = document.querySelector('.foto-besar');
+    const fotoKecil = document.getElementsByClassName('foto-kecil');
 
-    fotoDetail.addEventListener('click', function(e) {
-        if (e.target.className == 'foto-kecil') {
-            fotoBesar.style.backgroundImage = e.target.style.backgroundImage;
+    for (let i = 0; i < fotoKecil.length; i++) {
+        fotoKecil[i].onclick = function() {
+            fotoBesar.style.backgroundImage = fotoKecil[i].style.backgroundImage;
         }
-    });
+    }
+
+    // jika foto besar diklik, modal tampil
+    const modalImg = document.querySelector('.modal-body img');
+    fotoBesar.onclick = function() {
+        modalImg.src = fotoBesar.style.backgroundImage.slice(5, -2);
+    }
 </script>
 <?= $this->endSection(); ?>

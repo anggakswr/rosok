@@ -47,7 +47,6 @@ class Pages extends BaseController
         $data = [
             'title' => 'Jual ' . $keyword,
             'barang' => $barang,
-            'cari' => ($keyword) ? "Hasil pencarian untuk '$keyword'" : 'Menampilkan semua barang',
             'pager' => $barangModel->pager,
             'kategori' => $kategoriModel->orderBy('kategori', 'ASC')->findAll()
         ];
