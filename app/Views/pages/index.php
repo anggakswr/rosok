@@ -4,13 +4,13 @@
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/img/slide/slide1.jpeg" class="d-block w-100" alt="pengepul-rosok">
+            <img src="/img/slide/template(3).jpg" class="d-block w-100" alt="pengepul-rosok">
         </div>
         <div class="carousel-item">
-            <img src="/img/slide/slide2.jpeg" class="d-block w-100" alt="daur-ulang">
+            <img src="/img/slide/template(2).jpg" class="d-block w-100" alt="daur-ulang">
         </div>
         <div class="carousel-item">
-            <img src="/img/slide/slide3.jpeg" class="d-block w-100" alt="jual-beli-sampah">
+            <img src="/img/slide/template(1).jpg" class="d-block w-100" alt="jual-beli-sampah">
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -27,16 +27,16 @@
 <!-- Kategori -->
 <h2 class="mt-3">Kategori</h2>
 <div class="row mb-5 justify-content-around kategori text-center">
-    <a class="col-6 col-lg-2 mt-3 bg-primary rounded-pill text-light text-decoration-none" href="/cari?kategori=Botol+Plastik">
+    <a class="col-5 col-lg-2 mt-3 bg-primary rounded-pill text-light text-decoration-none" href="/cari?kategori=Botol+Plastik">
         Botol Plastik
     </a>
-    <a class="col-6 col-lg-2 mt-3 bg-secondary rounded-pill text-light text-decoration-none" href="/cari?kategori=Besi+Kiloan">
+    <a class="col-5 col-lg-2 mt-3 bg-secondary rounded-pill text-light text-decoration-none" href="/cari?kategori=Besi+Kiloan">
         Besi Kiloan
     </a>
-    <a class="col-6 col-lg-2 mt-3 bg-success rounded-pill text-light text-decoration-none" href="/cari?kategori=Kardus+Indomie">
+    <a class="col-5 col-lg-2 mt-3 bg-success rounded-pill text-light text-decoration-none" href="/cari?kategori=Kardus+Indomie">
         Kardus Indomie
     </a>
-    <a class="col-6 col-lg-2 mt-3 bg-danger rounded-pill text-light text-decoration-none" href="/cari?kategori=Kain+Perca">
+    <a class="col-5 col-lg-2 mt-3 bg-danger rounded-pill text-light text-decoration-none" href="/cari?kategori=Kain+Perca">
         Kain Perca
     </a>
 </div>

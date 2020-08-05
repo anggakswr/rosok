@@ -6,12 +6,27 @@
     <div class="form-row">
         <div class="col-6 col-md-3 col-lg-2 mt-3">
             <input type="text" class="form-control form-control-sm" placeholder="Cari barang rosok" name="rosok" value="<?= $request->getGet('rosok'); ?>">
+            <?php if ($validation->hasError('rosok')) : ?>
+                <small id="rosok" class="form-text text-danger">
+                    <?= $validation->getError('rosok'); ?>
+                </small>
+            <?php endif; ?>
         </div>
         <div class="col-6 col-md-3 col-lg-2 mt-3">
-            <input type="text" class="form-control form-control-sm" placeholder="Harga maksimal" name="hargaMaks" value="<?= $request->getGet('hargaMaks'); ?>">
+            <input type="number" class="form-control form-control-sm" placeholder="Harga maksimal" name="hargaMaks" value="<?= $request->getGet('hargaMaks'); ?>">
+            <?php if ($validation->hasError('hargaMaks')) : ?>
+                <small id="hargaMaks" class="form-text text-danger">
+                    <?= $validation->getError('hargaMaks'); ?>
+                </small>
+            <?php endif; ?>
         </div>
         <div class="col-6 col-md-3 col-lg-2 mt-3">
-            <input type="text" class="form-control form-control-sm" placeholder="Harga minimum" name="hargaMin" value="<?= $request->getGet('hargaMin'); ?>">
+            <input type="number" class="form-control form-control-sm" placeholder="Harga minimum" name="hargaMin" value="<?= $request->getGet('hargaMin'); ?>">
+            <?php if ($validation->hasError('hargaMin')) : ?>
+                <small id="hargaMin" class="form-text text-danger">
+                    <?= $validation->getError('hargaMin'); ?>
+                </small>
+            <?php endif; ?>
         </div>
         <div class="col-6 col-md-3 col-lg-2 mt-3">
             <select class="custom-select custom-select-sm" name="kategori">
@@ -30,6 +45,11 @@
                     <?php endif; ?>
                 <?php endforeach; ?>
             </select>
+            <?php if ($validation->hasError('kategori')) : ?>
+                <small id="kategori" class="form-text text-danger">
+                    <?= $validation->getError('kategori'); ?>
+                </small>
+            <?php endif; ?>
         </div>
         <div class="col-6 col-md-3 col-lg-2 mt-3">
             <select class="custom-select custom-select-sm" name="urutkan">
@@ -46,6 +66,11 @@
                 <option value="Paling banyak suka">Paling banyak suka</option>
                 <option value="">Terbaru</option>
             </select>
+            <?php if ($validation->hasError('urutkan')) : ?>
+                <small id="urutkan" class="form-text text-danger">
+                    <?= $validation->getError('urutkan'); ?>
+                </small>
+            <?php endif; ?>
         </div>
         <div class="col-6 col-md-3 col-lg-2 mt-3">
             <button class="btn btn-sm btn-outline-primary" type="submit">Cari</button>

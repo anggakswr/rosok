@@ -41,14 +41,12 @@ class Pages extends BaseController
             ->searchBarang($keyword, $hargaMaks, $hargaMin, $kategori, $urutkan)
             ->paginate(100, 'barang');
 
-        // dd($barang);
-
         // data yg ditampilkan di view
         $data = [
             'title' => 'Jual ' . $keyword,
+            'kategori' => $kategoriModel->orderBy('kategori', 'ASC')->findAll(),
             'barang' => $barang,
-            'pager' => $barangModel->pager,
-            'kategori' => $kategoriModel->orderBy('kategori', 'ASC')->findAll()
+            'pager' => $barangModel->pager
         ];
 
         return view('pages/cari', $data);
