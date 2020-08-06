@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 <!-- Carousel -->
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+<div id="carouselExampleControls" class="carousel slide mt-3" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="/img/slide/template(3).jpg" class="d-block w-100" alt="pengepul-rosok">
@@ -147,4 +147,33 @@
     <?php endforeach; ?>
 </div>
 <!-- End Kategori 4 -->
+
+<script>
+    const btnCari = document.querySelector('.btn-cari');
+    const rosokCom = document.querySelector('.rosok-com');
+    const navForm = document.querySelector('.navbar form');
+
+    btnCari.onclick = function() {
+        rosokCom.classList.toggle('d-none');
+        navForm.classList.toggle('d-inline');
+        if (rosokCom.className == 'navbar-brand rosok-com d-none') {
+            btnCari.innerHTML = `
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M5.854 4.646a.5.5 0 0 1 0 .708L3.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z" />
+            <path fill-rule="evenodd" d="M2.5 8a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+        </svg>`;
+        } else {
+            btnCari.innerHTML = `
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+            <path fill-rule="evenodd"
+                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+        </svg>`;
+        }
+    }
+</script>
 <?= $this->endSection(); ?>

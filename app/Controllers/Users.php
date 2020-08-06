@@ -180,8 +180,7 @@ class Users extends BaseController
                 'username' => [
                     'required' => 'Username harus diisi.',
                     'min_length' => 'Username terlalu pendek.',
-                    'max_length' => 'Username terlalu panjang.',
-                    'is_unique' => 'Username sudah ada.'
+                    'max_length' => 'Username terlalu panjang.'
                 ],
                 'lokasi' => [
                     'required' => 'Lokasi harus diisi.',

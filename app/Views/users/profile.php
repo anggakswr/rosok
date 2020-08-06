@@ -4,7 +4,7 @@
 <div class="row justify-content-md-center">
     <div class="col-lg-4">
         <h2 class="mt-5 mb-3">Edit Profil</h2>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>
 
             <div class="form-group foto-kecil foto-profil" style="background-image: url('/img/uploads/user/<?= $user['foto']; ?>');"></div>
@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="email" class="form-control form-control-sm" id="username" name="username" value="<?= old('username', $user['username']); ?>">
+                <input type="text" class="form-control form-control-sm" id="username" name="username" value="<?= old('username', $user['username']); ?>">
                 <?php if ($validation->hasError("username")) : ?>
                     <small id="username" class="form-text text-danger">
                         <?= $validation->getError("username"); ?>

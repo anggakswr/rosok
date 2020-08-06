@@ -16,49 +16,52 @@
 
 <body>
     <!-- Nav -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="/">Rosok.com</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <?php if (session()->get('isLoggedIn')) : ?>
+                <!-- Kalau sudah login -->
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php if (session()->get('foto') != null) : ?>
+                            <!-- jika ad foto, tampilkan -->
+                            <div class="foto-kecil d-inline-block" style="background-image: url('/img/uploads/user/<?= session()->get('foto'); ?>');"></div>
+                        <?php endif; ?>
+                        <?= session()->get('username'); ?>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/barang/tambah">Tambah barang</a>
+                        <a class="dropdown-item" href="/barang">Daftar barang</a>
+                        <a class="dropdown-item" href="/users/profile">Edit Profil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/users/logout">Logout</a>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary btn-cari">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                        </svg>
+                    </button>
+                </div>
+            <?php else : ?>
+                <!-- Kalau belum login -->
+                <div>
+                    <a class="navbar-brand" href="/users">Login</a>
+                    <a class="navbar-brand" href="/users/daftar">Daftar</a>
+                </div>
+            <?php endif; ?>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <?php if (session()->get('isLoggedIn')) : ?>
-                        <!-- Sudah Login -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php if (session()->get('foto') != null) : ?>
-                                    <img src="/img/uploads/user/<?= session()->get('foto'); ?>" alt="<?= session()->get('username'); ?>" width="15px" class="rounded-circle mr-2">
-                                <?php endif; ?>
-                                <?= session()->get('username'); ?>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/barang/tambah">Tambah barang</a>
-                                <a class="dropdown-item" href="/barang">Daftar barang</a>
-                                <a class="dropdown-item" href="/users/profile">Edit Profil</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/users/logout">Logout</a>
-                            </div>
-                        </li>
-                        <!-- End Sudah Login -->
-                    <?php else : ?>
-                        <!-- Belum Login -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users/index">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/users/daftar">Daftar</a>
-                        </li>
-                        <!-- End Belum Login -->
-                    <?php endif; ?>
-                </ul>
-                <form class="form-inline my-2 my-lg-0" action="/pages/cari" method="get">
-                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Cari barang rosok" name="rosok">
-                    <button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Cari</button>
-                </form>
-            </div>
+            <!-- Pencarian -->
+            <form class="form-inline" action="/pages/cari" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" placeholder="Cari rosok" name="rosok">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-outline-primary" type="submit">Cari</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Brand -->
+            <a class="navbar-brand rosok-com" href="/">Rosok.com</a>
         </div>
     </nav>
     <!-- End Nav -->

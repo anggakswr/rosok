@@ -47,6 +47,16 @@ td:last-child {
     height: 60px;
 }
 
+.btn-cari {
+    display: none;
+}
+
+.navbar .foto-kecil {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
 @media (max-width: 991px) {
     .form-barang .foto-kecil {
         height: 120px;
@@ -68,5 +78,17 @@ td:last-child {
 
     .form-barang .foto-kecil {
         height: 60px;
+    }
+
+    .navbar-brand {
+        font-size: 15px;
+    }
+
+    .navbar form {
+        display: none;
+    }
+
+    .btn-cari {
+        display: inline;
     }
 }
